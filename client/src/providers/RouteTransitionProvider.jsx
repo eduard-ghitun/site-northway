@@ -2,6 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef, use
 import { motion } from 'framer-motion'
 import { useLocation, useNavigate } from 'react-router-dom'
 import PageTransition from '../components/PageTransition'
+import useAdaptiveMotion from '../hooks/useAdaptiveMotion'
 
 const RouteTransitionContext = createContext(null)
 
@@ -28,6 +29,7 @@ function isHashOnlyNavigation(currentLocation, to) {
 export function RouteTransitionProvider({ children }) {
   const navigate = useNavigate()
   const location = useLocation()
+  const { useLiteMotion } = useAdaptiveMotion()
   const [isTransitioning, setIsTransitioning] = useState(false)
   const timersRef = useRef([])
 
@@ -77,20 +79,23 @@ export function RouteTransitionProvider({ children }) {
       setIsTransitioning(true)
       clearTimers()
 
+      const navigationDelayMs = useLiteMotion ? 180 : NAVIGATION_DELAY_MS
+      const transitionTotalMs = useLiteMotion ? 420 : TRANSITION_TOTAL_MS
+
       timersRef.current.push(
         window.setTimeout(() => {
           navigate(to, options)
-        }, NAVIGATION_DELAY_MS),
+        }, navigationDelayMs),
       )
 
       timersRef.current.push(
         window.setTimeout(() => {
           setIsTransitioning(false)
           clearTimers()
-        }, TRANSITION_TOTAL_MS),
+        }, transitionTotalMs),
       )
     },
-    [clearTimers, isTransitioning, location, navigate],
+    [clearTimers, isTransitioning, location, navigate, useLiteMotion],
   )
 
   const value = useMemo(
@@ -105,11 +110,11 @@ export function RouteTransitionProvider({ children }) {
     <RouteTransitionContext.Provider value={value}>
       <motion.div
         animate={{
-          opacity: isTransitioning ? 0.8 : 1,
-          scale: isTransitioning ? 0.998 : 1,
-          filter: isTransitioning ? 'blur(1px)' : 'blur(0px)',
+          opacity: isTransitioning ? (useLiteMotion ? 0.94 : 0.8) : 1,
+          scale: isTransitioning ? (useLiteMotion ? 1 : 0.998) : 1,
+          filter: isTransitioning && !useLiteMotion ? 'blur(1px)' : 'blur(0px)',
         }}
-        transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: useLiteMotion ? 0.12 : 0.18, ease: [0.22, 1, 0.36, 1] }}
         className="min-h-screen"
       >
         {children}

@@ -1,40 +1,47 @@
 import { motion } from 'framer-motion'
 import AppImage from './AppImage'
+import useAdaptiveMotion from '../hooks/useAdaptiveMotion'
 
 export default function MemberCard({ member }) {
+  const { canHover, useLiteMotion } = useAdaptiveMotion()
+
   return (
     <motion.article
-      whileHover={{ y: -6 }}
-      transition={{ duration: 0.25, ease: 'easeOut' }}
-      className="panel overflow-hidden"
+      whileHover={canHover && !useLiteMotion ? { y: -6 } : undefined}
+      transition={{ duration: useLiteMotion ? 0.18 : 0.25, ease: 'easeOut' }}
+      className="member-card group"
     >
-      <div className="overflow-hidden border-b border-white/10">
+      <div className="member-card-media">
         <AppImage
           src={member.image}
-          alt={member.imageAlt || member.carModel}
-          wrapperClassName="aspect-[4/3] min-h-[220px] sm:h-56 sm:min-h-0"
-          className="h-full w-full object-cover transition duration-500 hover:scale-[1.04] sm:h-56"
+          alt={member.imageAlt || member.car}
+          wrapperClassName="member-card-media-frame"
+          className={`member-card-media-image ${canHover && !useLiteMotion ? 'member-card-media-image-hover' : ''}`}
+          style={{ objectPosition: member.imagePosition || 'center' }}
         />
       </div>
-      <div className="space-y-4 p-5 sm:p-6">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
-          <div>
-            <h3 className="font-display text-base uppercase tracking-[0.12em] text-white sm:text-lg sm:tracking-[0.14em]">
-              {member.name}
-            </h3>
-            <p className="mt-1 text-sm uppercase tracking-[0.18em] text-gold">{member.nickname}</p>
+      <div className="member-card-content">
+        <div className="member-card-header">
+          <div className="member-card-identity">
+            <AppImage
+              src={member.avatar || member.image}
+              alt={member.avatarAlt || member.imageAlt || member.name}
+              wrapperClassName="member-card-avatar"
+              className="member-card-avatar-image"
+              style={{ objectPosition: member.avatarPosition || member.imagePosition || 'center' }}
+            />
+            <div className="member-card-heading">
+              <h3 className="member-card-name">{member.name}</h3>
+              <p className="member-card-role">{member.role}</p>
+            </div>
           </div>
-          <span className="w-fit rounded-full border border-gold/30 bg-gold/10 px-3 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-gold">
-            {member.badge}
+          <span className="member-card-badge">
+            {member.role}
           </span>
         </div>
-        <div>
-          <p className="text-[0.74rem] uppercase tracking-[0.18em] text-white/[0.45] sm:text-sm sm:tracking-[0.2em]">
-            {member.carModel}
-          </p>
-          <p className="mt-3 max-w-[32rem] text-sm leading-6 text-white/[0.68] sm:text-base sm:leading-7">
-            {member.description}
-          </p>
+        <div className="member-card-copy">
+          <p className="member-card-car">{member.car}</p>
+          <p className="member-card-description">{member.description}</p>
         </div>
       </div>
     </motion.article>

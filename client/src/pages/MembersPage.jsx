@@ -30,9 +30,9 @@ export default function MembersPage() {
             title="Fiecare membru aduce ceva unic, iar fiecare mașină spune o poveste."
             description="De la build-uri impresionante până la mașini de zi cu zi transformate prin pasiune și dedicare, membrii noștri reprezintă esența comunității NorthSideCrew."
           />
-          <div className="mx-auto mt-8 grid max-w-5xl gap-4 md:mt-10 md:grid-cols-2 md:gap-5">
+          <div className="members-grid">
             {members.map((member) => (
-              <Reveal key={member.nickname}>
+              <Reveal key={member.id} className="h-full">
                 <MemberCard member={member} />
               </Reveal>
             ))}
