@@ -27,7 +27,7 @@ export default function ContactForm({ embedded = false }) {
     }))
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
 
     setStatus({
@@ -35,36 +35,43 @@ export default function ContactForm({ embedded = false }) {
       message: 'Mesajul se trimite...',
     })
 
-    fetch(buildApiUrl('/contact'), {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    })
-      .then(async (response) => {
-        const payload = await response.json()
-
-        if (!response.ok) {
-          throw new Error(payload.message || 'A apărut o problemă la trimiterea mesajului.')
-        }
-
-        setFormData({
-          name: '',
-          email: '',
-          message: '',
-        })
-        setStatus({
-          state: 'success',
-          message: payload.message || 'Mesajul a fost trimis cu succes.',
-        })
+    try {
+      const response = await fetch(buildApiUrl('/contact'), {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       })
-      .catch((error) => {
-        setStatus({
-          state: 'error',
-          message: error.message || 'A apărut o problemă neașteptată.',
-        })
+
+      const text = await response.text()
+      let data = {}
+
+      try {
+        data = text ? JSON.parse(text) : {}
+      } catch {
+        throw new Error('Invalid server response')
+      }
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Request failed')
+      }
+
+      setFormData({
+        name: '',
+        email: '',
+        message: '',
       })
+      setStatus({
+        state: 'success',
+        message: data.message || 'Mesajul a fost trimis cu succes.',
+      })
+    } catch (error) {
+      setStatus({
+        state: 'error',
+        message: error.message || 'A apărut o problemă neașteptată.',
+      })
+    }
   }
 
   const formContent = (

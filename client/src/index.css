@@ -24,17 +24,18 @@ html {
   scroll-behavior: smooth;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  overflow-x: clip;
 }
 
 body {
   min-width: 320px;
-  min-height: 100vh;
+  min-height: 100svh;
   margin: 0;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 #root {
-  min-height: 100vh;
+  min-height: 100svh;
 }
 
 html::-webkit-scrollbar,
@@ -52,12 +53,26 @@ body::-webkit-scrollbar {
     @apply border-white/10;
   }
 
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
   body {
     @apply bg-night text-white antialiased;
   }
 
   a {
     @apply text-inherit no-underline;
+  }
+
+  img,
+  video,
+  iframe,
+  canvas,
+  svg {
+    max-width: 100%;
   }
 }
 
@@ -105,4 +120,23 @@ body::-webkit-scrollbar {
     linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
   background-size: 64px 64px;
   mask-image: linear-gradient(to bottom, transparent, black 14%, black 86%, transparent);
+}
+
+.announcement-scroll {
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 768px) {
+  .announcement-container {
+    padding: 16px;
+    font-size: 15px;
+  }
+
+  .announcement-button {
+    width: 100%;
+    min-height: 52px;
+    padding: 14px 18px;
+    font-size: 16px;
+  }
 }

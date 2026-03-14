@@ -40,6 +40,17 @@ export default function EventsPage() {
   )
   const [showAnnouncement, setShowAnnouncement] = useState(false)
 
+  const handleOpenAnnouncement = () => {
+    setShowAnnouncement(true)
+
+    window.setTimeout(() => {
+      const el = document.getElementById('announcement-full')
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+    }, 100)
+  }
+
   useEffect(() => {
     if (location.hash === '#completed-events') {
       setActiveTab('completed')
@@ -343,8 +354,8 @@ export default function EventsPage() {
                         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
                           <button
                             type="button"
-                            onClick={() => setShowAnnouncement(true)}
-                            className="button-primary w-full sm:w-auto"
+                            onClick={handleOpenAnnouncement}
+                            className="announcement-button button-primary w-full sm:w-auto"
                           >
                             Vezi anuntul complet
                             <ArrowUpRight size={16} />

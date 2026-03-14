@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { AlertTriangle, CalendarDays, Clock3, MapPin, ShieldCheck, Trophy, X } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
 
@@ -31,8 +31,14 @@ function ModalSection({ title, eyebrow, children, icon: Icon }) {
 }
 
 export default function EventAnnouncementModal({ open, onClose, announcement }) {
+  const scrollContainerRef = useRef(null)
+  const announcementTopRef = useRef(null)
+
   useEffect(() => {
     if (!open) return undefined
+
+    const previousBodyOverflow = document.body.style.overflow
+    const previousHtmlOverflow = document.documentElement.style.overflow
 
     const handleKeyDown = (event) => {
       if (event.key === 'Escape') {
@@ -40,9 +46,21 @@ export default function EventAnnouncementModal({ open, onClose, announcement }) 
       }
     }
 
+    document.body.style.overflow = 'hidden'
+    document.documentElement.style.overflow = 'hidden'
     window.addEventListener('keydown', handleKeyDown)
 
-    return () => window.removeEventListener('keydown', handleKeyDown)
+    const timeoutId = window.setTimeout(() => {
+      scrollContainerRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
+      announcementTopRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }, 100)
+
+    return () => {
+      document.body.style.overflow = previousBodyOverflow
+      document.documentElement.style.overflow = previousHtmlOverflow
+      window.clearTimeout(timeoutId)
+      window.removeEventListener('keydown', handleKeyDown)
+    }
   }, [onClose, open])
 
   return (
@@ -53,7 +71,7 @@ export default function EventAnnouncementModal({ open, onClose, announcement }) 
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
-          className="fixed inset-0 z-[130] flex items-start justify-center bg-black/78 px-3 py-3 backdrop-blur-md sm:px-6 sm:py-6"
+          className="fixed inset-0 z-[130] flex min-h-[100svh] items-start justify-center bg-black/78 px-2 py-2 backdrop-blur-md sm:px-4 sm:py-4 md:px-6 md:py-6"
         >
           <motion.button
             type="button"
@@ -67,20 +85,22 @@ export default function EventAnnouncementModal({ open, onClose, announcement }) 
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.985 }}
             transition={{ duration: 0.34, ease: [0.22, 1, 0.36, 1] }}
-            className="relative z-10 flex max-h-[calc(100svh-1.5rem)] w-full max-w-6xl flex-col overflow-hidden rounded-[26px] border border-white/10 bg-[#060606] shadow-[0_30px_90px_rgba(0,0,0,0.48)] sm:max-h-[92vh] sm:rounded-[34px]"
+            id="announcement-full"
+            ref={announcementTopRef}
+            className="relative z-10 flex h-auto max-h-[calc(100svh-1rem)] w-full max-w-6xl flex-col overflow-hidden rounded-[24px] border border-white/10 bg-[#060606] shadow-[0_30px_90px_rgba(0,0,0,0.48)] sm:max-h-[calc(100svh-2rem)] sm:rounded-[30px] md:rounded-[34px]"
           >
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(245,196,0,0.08),transparent_26%),linear-gradient(180deg,rgba(255,255,255,0.02),transparent_26%)]" />
             <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
 
-            <div className="relative z-10 flex items-start justify-between gap-4 border-b border-white/10 px-4 py-4 sm:px-7 sm:py-6">
+            <div className="relative z-10 flex items-start justify-between gap-3 border-b border-white/10 bg-[#060606]/95 px-4 py-4 backdrop-blur-md sm:gap-4 sm:px-6 sm:py-5 md:px-7 md:py-6">
               <div className="max-w-3xl">
                 <p className="text-[0.68rem] font-semibold uppercase tracking-[0.4em] text-gold/80">
                   Anunț oficial eveniment
                 </p>
-                <h2 className="mt-3 font-display text-[1.8rem] uppercase tracking-[0.1em] text-white sm:text-4xl sm:tracking-[0.14em]">
+                <h2 className="mt-3 pr-2 font-display text-[1.45rem] uppercase tracking-[0.08em] text-white sm:text-[2rem] sm:tracking-[0.1em] md:text-4xl md:tracking-[0.14em]">
                   {announcement.title}
                 </h2>
-                <p className="mt-4 max-w-2xl text-sm leading-6 text-white/[0.68] sm:text-lg sm:leading-7">
+                <p className="mt-3 max-w-2xl text-sm leading-6 text-white/[0.68] sm:mt-4 sm:text-base sm:leading-7 md:text-lg">
                   {announcement.subtitle}
                 </p>
               </div>
@@ -88,14 +108,17 @@ export default function EventAnnouncementModal({ open, onClose, announcement }) 
               <button
                 type="button"
                 onClick={onClose}
-                className="inline-flex min-h-[3rem] min-w-[3rem] items-center justify-center rounded-full border border-white/12 bg-white/[0.04] p-3 text-white transition hover:border-gold/45 hover:text-gold"
+                className="inline-flex min-h-[3rem] min-w-[3rem] shrink-0 items-center justify-center rounded-full border border-white/12 bg-white/[0.04] p-3 text-white transition hover:border-gold/45 hover:text-gold"
                 aria-label="Închide anunțul"
               >
                 <X size={18} />
               </button>
             </div>
 
-            <div className="relative z-10 overflow-y-auto px-4 py-4 sm:px-7 sm:py-7">
+            <div
+              ref={scrollContainerRef}
+              className="announcement-container announcement-scroll relative z-10 overflow-y-auto px-4 py-4 sm:px-6 sm:py-6 md:px-7 md:py-7"
+            >
               <div className="grid gap-5 xl:grid-cols-[1.05fr_0.95fr]">
                 <div className="space-y-5">
                   <ModalSection title="Lansare eveniment" eyebrow="NORTHway launch" icon={CalendarDays}>
