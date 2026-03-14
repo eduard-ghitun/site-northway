@@ -12,8 +12,8 @@ export default function MemberCard({ member }) {
         <AppImage
           src={member.image}
           alt={member.imageAlt || member.carModel}
-          wrapperClassName="h-52 sm:h-56"
-          className="h-52 w-full object-cover transition duration-500 hover:scale-[1.04] sm:h-56"
+          wrapperClassName="aspect-[4/3] min-h-[220px] sm:h-56 sm:min-h-0"
+          className="h-full w-full object-cover transition duration-500 hover:scale-[1.04] sm:h-56"
         />
       </div>
       <div className="space-y-4 p-5 sm:p-6">
@@ -32,7 +32,7 @@ export default function MemberCard({ member }) {
           <p className="text-[0.74rem] uppercase tracking-[0.18em] text-white/[0.45] sm:text-sm sm:tracking-[0.2em]">
             {member.carModel}
           </p>
-          <p className="mt-3 text-sm leading-6 text-white/[0.68] sm:text-base sm:leading-7">
+          <p className="mt-3 max-w-[32rem] text-sm leading-6 text-white/[0.68] sm:text-base sm:leading-7">
             {member.description}
           </p>
         </div>

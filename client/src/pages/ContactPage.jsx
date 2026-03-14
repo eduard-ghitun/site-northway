@@ -31,10 +31,10 @@ export default function ContactPage() {
 
       <section className="section-space">
         <div className="container-shell">
-          <Reveal className="panel overflow-hidden p-5 sm:p-8 lg:p-10">
-            <div className="grid gap-8 sm:gap-10 lg:grid-cols-[1.06fr_0.94fr]">
+          <Reveal className="panel overflow-hidden p-5 sm:p-7 lg:p-10">
+            <div className="grid gap-8 sm:gap-9 lg:grid-cols-[1.06fr_0.94fr]">
               <div className="border-b border-white/10 pb-8 lg:border-b-0 lg:border-r lg:pb-0 lg:pr-10">
-                <div className="mb-8">
+                <div className="mb-7 sm:mb-8">
                   <span className="eyebrow">Formular Contact</span>
                   <h2 className="title-lg">Scrie-ne direct din NorthSideCrew</h2>
                   <p className="mt-4 max-w-2xl text-base leading-7 text-white/[0.64] sm:text-lg sm:leading-8">
@@ -46,8 +46,8 @@ export default function ContactPage() {
                 <ContactForm embedded />
               </div>
 
-              <div className="space-y-6">
-                <div className="rounded-[24px] border border-white/10 bg-white/[0.02] p-5 sm:rounded-[28px] sm:p-7">
+              <div className="space-y-5 sm:space-y-6">
+                <div className="rounded-[24px] border border-white/10 bg-white/[0.02] p-5 sm:rounded-[28px] sm:p-6">
                   <div className="mb-4 inline-flex rounded-2xl border border-gold/30 bg-gold/10 p-3 text-gold">
                     <Mail size={24} />
                   </div>
@@ -85,13 +85,13 @@ export default function ContactPage() {
                         src={contactLocationEmbedUrl}
                         loading="lazy"
                         referrerPolicy="no-referrer-when-downgrade"
-                        className="h-44 w-full border-0 sm:h-48"
+                        className="h-40 w-full border-0 sm:h-48"
                       />
                     </div>
                   </div>
                 </div>
 
-                <div className="rounded-[24px] border border-white/10 bg-white/[0.02] p-5 sm:rounded-[28px] sm:p-7">
+                <div className="rounded-[24px] border border-white/10 bg-white/[0.02] p-5 sm:rounded-[28px] sm:p-6">
                   <div className="mb-4 inline-flex rounded-2xl border border-gold/30 bg-gold/10 p-3 text-gold">
                     <Mail size={24} />
                   </div>
@@ -103,13 +103,13 @@ export default function ContactPage() {
                   </p>
                   <TransitionLink
                     to="/events#event-registration-form"
-                    className="button-primary mt-5 w-full sm:w-auto"
+                    className="button-primary mt-5 w-full"
                   >
                     Mergi la formular
                   </TransitionLink>
                 </div>
 
-                <div className="rounded-[24px] border border-white/10 bg-white/[0.02] p-5 sm:rounded-[28px] sm:p-7">
+                <div className="rounded-[24px] border border-white/10 bg-white/[0.02] p-5 sm:rounded-[28px] sm:p-6">
                   <div className="mb-4 inline-flex rounded-2xl border border-gold/30 bg-gold/10 p-3 text-gold">
                     <Instagram size={24} />
                   </div>
@@ -134,7 +134,7 @@ export default function ContactPage() {
             </div>
           </Reveal>
 
-          <div className="mt-8">
+          <div className="mt-6 sm:mt-8">
             <p className="max-w-3xl text-base leading-7 text-white/[0.64] sm:text-lg sm:leading-8">
               Suntem mereu deschiși să cunoaștem oameni noi care împărtășesc aceeași pasiune pentru
               mașini.

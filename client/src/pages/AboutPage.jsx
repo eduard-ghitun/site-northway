@@ -24,7 +24,7 @@ export default function AboutPage() {
       />
 
       <section className="section-space">
-        <div className="container-shell grid items-center gap-8 sm:gap-10 lg:grid-cols-[1fr_1fr]">
+        <div className="container-shell grid items-center gap-7 sm:gap-10 lg:grid-cols-[1fr_1fr]">
           <Reveal>
             <SectionTitle
               eyebrow={aboutStory.eyebrow}
@@ -43,7 +43,7 @@ export default function AboutPage() {
               <AppImage
                 src={aboutStory.media.image}
                 alt={aboutStory.media.alt}
-                wrapperClassName="aspect-[16/11] rounded-[24px] sm:aspect-[5/4]"
+                wrapperClassName="aspect-[6/5] rounded-[20px] sm:aspect-[5/4] sm:rounded-[24px]"
                 className="h-full w-full rounded-[24px] object-cover object-center"
               />
             </div>
@@ -58,9 +58,9 @@ export default function AboutPage() {
             title="Principiile care definesc NorthSideCrew."
             description="Construim o comunitate bazată pe pasiune, respect și o identitate auto asumată."
           />
-          <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+          <div className="mt-8 grid gap-4 md:mt-10 md:grid-cols-2 md:gap-5 xl:grid-cols-4">
             {aboutValues.map((value, index) => (
-              <Reveal key={value.title} delay={index * 0.08} className="panel h-full p-5 sm:p-7">
+              <Reveal key={value.title} delay={index * 0.08} className="panel h-full p-5 sm:p-6">
                 <h3 className="font-display text-base uppercase tracking-[0.12em] text-white sm:text-lg sm:tracking-[0.14em]">
                   {value.title}
                 </h3>
@@ -73,13 +73,13 @@ export default function AboutPage() {
 
       <section className="section-space pt-0">
         <div className="container-shell">
-          <Reveal className="panel overflow-hidden px-5 py-8 sm:px-10 sm:py-10 lg:px-14 lg:py-14">
+          <Reveal className="panel overflow-hidden px-5 py-8 sm:px-8 sm:py-10 lg:px-14 lg:py-14">
             <SectionTitle
               eyebrow={aboutMission.eyebrow}
               title={aboutMission.title}
               description={aboutMission.description}
             />
-            <div className="mt-8 grid gap-4 md:grid-cols-3 md:gap-5">
+            <div className="mt-7 grid gap-4 md:mt-8 md:grid-cols-3 md:gap-5">
               {aboutMission.points.map((point) => (
                 <div key={point} className="rounded-[24px] border border-white/10 bg-white/[0.03] p-5 text-sm leading-6 text-white/[0.68] sm:text-base sm:leading-7">
                   {point}

@@ -7,9 +7,9 @@ import { navigation } from '../data/navigation'
 export default function Footer() {
   return (
     <footer className="border-t border-white/10 bg-black/40">
-      <div className="container-shell grid gap-8 py-10 sm:gap-10 lg:grid-cols-[1.2fr_0.8fr_0.8fr]">
+      <div className="container-shell grid gap-8 py-8 sm:gap-10 sm:py-10 lg:grid-cols-[1.2fr_0.8fr_0.8fr]">
         <div className="max-w-md">
-          <TransitionLink to="/" className="font-display text-xl uppercase tracking-[0.14em] text-white sm:text-2xl sm:tracking-[0.18em]">
+          <TransitionLink to="/" className="font-display text-lg uppercase tracking-[0.12em] text-white sm:text-2xl sm:tracking-[0.18em]">
             NorthSideCrew
           </TransitionLink>
           <p className="mt-4 text-sm leading-7 text-white/[0.62] sm:text-base">
@@ -24,7 +24,7 @@ export default function Footer() {
           </h3>
           <div className="mt-4 space-y-3 text-sm leading-6 text-white/[0.68] sm:text-base">
             {navigation.map((item) => (
-              <TransitionLink key={item.path} to={item.path} className="block transition hover:text-gold">
+              <TransitionLink key={item.path} to={item.path} className="block py-0.5 transition hover:text-gold">
                 {item.label}
               </TransitionLink>
             ))}
@@ -36,7 +36,7 @@ export default function Footer() {
           <div className="mt-4 space-y-3 text-sm leading-6 text-white/[0.68] sm:text-base">
             <a
               href={`mailto:${contactEmail}`}
-              className="flex items-start gap-3 break-all transition hover:text-gold"
+              className="flex items-start gap-3 break-all py-0.5 transition hover:text-gold"
             >
               <Mail size={16} className="mt-1 shrink-0 text-gold" />
               <span>{contactEmail}</span>
@@ -45,7 +45,7 @@ export default function Footer() {
               href={socialLinks.instagram}
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-3 transition hover:text-gold"
+              className="flex min-h-10 items-center gap-3 transition hover:text-gold"
             >
               <Instagram size={16} className="text-gold" />
               Instagram
@@ -54,7 +54,7 @@ export default function Footer() {
               href={socialLinks.facebook}
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-3 transition hover:text-gold"
+              className="flex min-h-10 items-center gap-3 transition hover:text-gold"
             >
               <Facebook size={16} className="text-gold" />
               Facebook
@@ -63,7 +63,7 @@ export default function Footer() {
               href={socialLinks.tiktok}
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-3 transition hover:text-gold"
+              className="flex min-h-10 items-center gap-3 transition hover:text-gold"
             >
               <TikTokIcon size={16} className="text-gold" />
               TikTok

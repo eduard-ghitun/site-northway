@@ -27,10 +27,10 @@ export default function HomePage() {
       <SloganPuzzle />
 
       <section id="home-intro" className="section-space">
-        <div className="container-shell grid items-center gap-8 sm:gap-10 lg:grid-cols-[0.92fr_1.08fr]">
+        <div className="container-shell grid items-center gap-7 sm:gap-10 lg:grid-cols-[0.92fr_1.08fr]">
           <Reveal>
             <SectionTitle eyebrow="Comunitatea" title={homeIntro.title} description={homeIntro.description} />
-            <p className="mt-5 max-w-xl text-base leading-7 text-white/[0.62] sm:text-lg sm:leading-8">
+            <p className="mt-4 max-w-xl text-base leading-7 text-white/[0.62] sm:mt-5 sm:text-lg sm:leading-8">
               {homeIntro.secondary}
             </p>
           </Reveal>
@@ -40,7 +40,7 @@ export default function HomePage() {
               <AppImage
                 src={homeIntro.media.image}
                 alt={homeIntro.media.alt}
-                wrapperClassName="aspect-[16/11] max-h-[620px] rounded-[24px] sm:aspect-[5/4]"
+                wrapperClassName="aspect-[6/5] rounded-[20px] sm:aspect-[5/4] sm:rounded-[24px]"
                 className="h-full w-full rounded-[24px] object-cover object-center"
               />
             </div>
@@ -55,7 +55,7 @@ export default function HomePage() {
             title="Pasiune, comunitate, mașini și experiențe care rămân în memorie."
             description="Fiecare parte din NorthSideCrew este construită în jurul pasiunii pentru mașini și al unei atmosfere autentice."
           />
-          <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+          <div className="mt-8 grid gap-4 md:mt-10 md:grid-cols-2 md:gap-5 xl:grid-cols-4">
             {highlights.map((item, index) => (
               <HighlightCard key={item.title} item={item} index={index} />
             ))}
@@ -71,14 +71,14 @@ export default function HomePage() {
                 <AppImage
                   src={featuredEvent.image}
                   alt={featuredEvent.imageAlt || featuredEvent.title}
-                  wrapperClassName="aspect-[16/11] min-h-[280px] rounded-[24px] sm:aspect-[4/5] sm:min-h-[360px] lg:min-h-[520px]"
+                  wrapperClassName="aspect-[6/5] min-h-[240px] rounded-[20px] sm:aspect-[4/5] sm:min-h-[360px] sm:rounded-[24px] lg:min-h-[520px]"
                   className="h-full w-full rounded-[24px] object-cover object-center"
                 />
               </div>
               <div className="p-5 sm:p-8 lg:p-10">
                 <span className="eyebrow">Eveniment principal</span>
                 <h2 className="title-lg">{homeFeaturedEvent.title}</h2>
-                <p className="mt-5 text-base leading-7 text-white/[0.68] sm:text-lg sm:leading-8">{homeFeaturedEvent.description}</p>
+                <p className="mt-4 text-base leading-7 text-white/[0.68] sm:mt-5 sm:text-lg sm:leading-8">{homeFeaturedEvent.description}</p>
                 <div className="mt-6 space-y-3 text-[0.76rem] font-semibold uppercase tracking-[0.16em] text-white/60 sm:text-sm sm:tracking-[0.18em]">
                   <div className="flex items-center gap-3">
                     <CalendarDays size={16} className="text-gold" />
@@ -91,7 +91,7 @@ export default function HomePage() {
                 </div>
                 <p className="mt-6 text-sm leading-6 text-white/[0.58] sm:text-base sm:leading-7">{homeFeaturedEvent.secondary}</p>
                 <p className="mt-4 text-sm leading-6 text-white/[0.58] sm:text-base sm:leading-7">{homeFeaturedEvent.tertiary}</p>
-                <TransitionLink to="/events#completed-events" className="button-primary mt-8 w-full sm:w-auto">
+                <TransitionLink to="/events#completed-events" className="button-primary mt-7 w-full sm:mt-8 sm:w-auto">
                   Vezi Evenimentul
                   <ArrowUpRight size={16} />
                 </TransitionLink>

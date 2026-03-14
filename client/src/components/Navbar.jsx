@@ -41,19 +41,19 @@ export default function Navbar() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
-      <div className="container-shell pt-3 sm:pt-4">
+      <div className="container-shell pt-2.5 sm:pt-4">
         <div
           className={clsx(
-            'rounded-[26px] border px-3 py-3 transition duration-300 sm:rounded-full sm:px-6',
+            'rounded-[22px] border px-3 py-2.5 transition duration-300 sm:rounded-full sm:px-6 sm:py-3',
             scrolled
               ? 'border-white/[0.12] bg-black/[0.65] shadow-panel backdrop-blur-xl'
               : 'border-white/10 bg-black/30 backdrop-blur-md',
           )}
         >
-          <div className="flex items-center justify-between gap-4 sm:gap-6">
+          <div className="flex items-center justify-between gap-3 sm:gap-6">
             <TransitionLink
               to="/"
-              className="max-w-[11rem] font-display text-sm uppercase tracking-[0.18em] text-white sm:max-w-none sm:text-lg sm:tracking-[0.24em]"
+              className="max-w-[10.5rem] font-display text-[0.82rem] uppercase tracking-[0.16em] text-white sm:max-w-none sm:text-lg sm:tracking-[0.24em]"
             >
               NorthSideCrew
             </TransitionLink>
@@ -89,7 +89,7 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => setOpen((value) => !value)}
-              className="inline-flex min-h-[3rem] min-w-[3rem] items-center justify-center rounded-full border border-white/[0.12] bg-white/5 p-3 text-white transition hover:border-gold/[0.45] hover:text-gold lg:hidden"
+              className="inline-flex min-h-12 min-w-12 items-center justify-center rounded-full border border-white/[0.12] bg-white/5 p-3 text-white transition active:scale-[0.98] hover:border-gold/[0.45] hover:text-gold lg:hidden"
               aria-label="Toggle menu"
             >
               {open ? <X size={20} /> : <Menu size={20} />}
@@ -105,14 +105,14 @@ export default function Navbar() {
                 transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
                 className="overflow-hidden lg:hidden"
               >
-                <div className="mt-4 max-h-[calc(100svh-7rem)] space-y-3 overflow-y-auto border-t border-white/10 pt-4 pb-1">
+                <div className="mt-4 max-h-[calc(100svh-6.5rem)] space-y-2.5 overflow-y-auto border-t border-white/10 pt-4 pb-1">
                   {navigation.map((item) => (
                     <TransitionNavLink
                       key={item.path}
                       to={item.path}
                       className={() =>
                         clsx(
-                          'block rounded-2xl px-4 py-3.5 text-sm font-semibold uppercase tracking-[0.18em] transition sm:tracking-[0.24em]',
+                          'block min-h-12 rounded-2xl px-4 py-3.5 text-sm font-semibold uppercase tracking-[0.16em] transition active:scale-[0.98] sm:tracking-[0.24em]',
                           currentPath === item.path ||
                             (item.path === '/' && location.pathname === '/' && !location.hash)
                             ? 'bg-gold/[0.12] text-gold'
