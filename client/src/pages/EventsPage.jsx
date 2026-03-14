@@ -13,16 +13,16 @@ import { completedEventHighlight, nextEventHighlight, upcomingEventAnnouncement 
 
 const tabs = [
   {
-    id: 'completed',
-    label: 'Evenimente Finalizate',
-    eyebrow: 'Evenimente finalizate',
-    icon: History,
-  },
-  {
     id: 'upcoming',
     label: 'Evenimente Viitoare',
     eyebrow: 'Evenimente viitoare',
     icon: Sparkles,
+  },
+  {
+    id: 'completed',
+    label: 'Evenimente Finalizate',
+    eyebrow: 'Evenimente finalizate',
+    icon: History,
   },
 ]
 
@@ -72,13 +72,19 @@ export default function EventsPage() {
         ogDescription="Vezi evenimentele auto NorthSideCrew, galeria editiei finalizate si inscrierile pentru urmatorul eveniment."
         image="https://northsidecrew.ro/events/northway-edition-1-completed-card.jpg"
       />
+      <section className="relative overflow-hidden pb-10 pt-24 sm:pb-14 sm:pt-28 md:pb-16 md:pt-32 lg:pb-24">
+        <div className="container-shell">
+          <EventRegistrationForm />
+        </div>
+      </section>
+
       <PageHero
         eyebrow="Evenimente"
         title="Evenimente"
         description="Descoperă evenimentele NorthSideCrew într-o structură mai clară, mai premium și mai ușor de parcurs, cu separare vizuală între edițiile finalizate și următorul moment important al comunității."
       />
 
-      <section className="section-space">
+      <section className="section-space pt-0">
         <div className="container-shell">
           <Reveal>
             <SectionTitle
@@ -301,7 +307,7 @@ export default function EventsPage() {
                   </div>
                 </motion.div>
               ) : (
-                <motion.div key="upcoming" id="upcoming-events" {...panelMotion} className="space-y-6">
+                <motion.div key="upcoming" id="upcoming-events" {...panelMotion}>
                   <div className="panel overflow-hidden">
                     <div className="grid gap-0 xl:grid-cols-[1.02fr_0.98fr]">
                       <div className="overflow-hidden border-b border-white/10 xl:border-b-0 xl:border-r">
@@ -367,8 +373,6 @@ export default function EventsPage() {
                       </div>
                     </div>
                   </div>
-
-                  <EventRegistrationForm />
                 </motion.div>
               )}
             </AnimatePresence>

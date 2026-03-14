@@ -3,8 +3,6 @@ import {
   CalendarRange,
   CarFront,
   CheckCircle2,
-  Instagram,
-  Mail,
   Phone,
   Send,
   UserRound,
@@ -17,14 +15,10 @@ import Reveal from './Reveal'
 
 const initialFormData = {
   fullName: '',
-  email: '',
   phone: '',
   plateNumber: '',
-  instagramUsername: '',
   carModifications: '',
 }
-
-const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 const formFields = [
   {
@@ -33,13 +27,6 @@ const formFields = [
     placeholder: 'Ex: Andrei Popescu',
     icon: UserRound,
     type: 'text',
-  },
-  {
-    name: 'email',
-    label: 'Email',
-    placeholder: 'nume@email.com',
-    icon: Mail,
-    type: 'email',
   },
   {
     name: 'phone',
@@ -53,13 +40,6 @@ const formFields = [
     label: 'Număr înmatriculare',
     placeholder: 'BT 00 NSC',
     icon: CalendarRange,
-    type: 'text',
-  },
-  {
-    name: 'instagramUsername',
-    label: 'Username Instagram',
-    placeholder: '@username',
-    icon: Instagram,
     type: 'text',
   },
 ]
@@ -103,13 +83,8 @@ export default function EventRegistrationForm() {
     const nextErrors = {}
 
     if (!formData.fullName.trim()) nextErrors.fullName = 'Completează numele complet.'
-    if (!formData.email.trim()) nextErrors.email = 'Completează adresa de email.'
-    else if (!emailPattern.test(formData.email)) nextErrors.email = 'Introdu un email valid.'
     if (!formData.phone.trim()) nextErrors.phone = 'Completează numărul de telefon.'
     if (!formData.plateNumber.trim()) nextErrors.plateNumber = 'Completează numărul de înmatriculare.'
-    if (!formData.instagramUsername.trim()) {
-      nextErrors.instagramUsername = 'Completează username-ul de Instagram.'
-    }
     if (!formData.carModifications.trim()) {
       nextErrors.carModifications = 'Descrie modificările aduse mașinii.'
     }
@@ -168,8 +143,8 @@ export default function EventRegistrationForm() {
           <span className="eyebrow">Formular de înscriere</span>
           <h2 className="title-lg">Aplică pentru NorthWay - Edition II</h2>
           <p className="mt-4 max-w-2xl text-base leading-7 text-white/[0.66] sm:text-lg sm:leading-8">
-            Completează datele tale, adaugă username-ul de Instagram, descrie mașina și pregătește
-            pozele pe care le vei trimite ulterior pe WhatsApp pentru selecția de participare.
+            Completează datele tale, descrie mașina și pregătește pozele pe care le vei trimite
+            ulterior pe WhatsApp pentru selecția de participare.
           </p>
         </div>
       </div>

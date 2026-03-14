@@ -1,3 +1,4 @@
+import { Instagram } from 'lucide-react'
 import { motion } from 'framer-motion'
 import AppImage from './AppImage'
 import useAdaptiveMotion from '../hooks/useAdaptiveMotion'
@@ -35,9 +36,22 @@ export default function MemberCard({ member }) {
               <p className="member-card-role">{member.role}</p>
             </div>
           </div>
-          <span className="member-card-badge">
-            {member.role}
-          </span>
+          <div className="member-card-actions">
+            {member.instagram ? (
+              <a
+                href={member.instagram}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`Instagram ${member.name}`}
+                className="member-card-instagram"
+              >
+                <Instagram size={16} />
+              </a>
+            ) : null}
+            <span className="member-card-badge">
+              {member.role}
+            </span>
+          </div>
         </div>
         <div className="member-card-copy">
           <p className="member-card-car">{member.car}</p>
