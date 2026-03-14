@@ -111,4 +111,19 @@ export const members = [
     imageAlt: 'Mercedes-ul lui Tase',
     avatarAlt: 'Avatar Tase',
   },
+  {
+    id: 'member-09',
+    name: 'Puiu',
+    role: 'Membru',
+    car: 'BMW E34 FL 2.5 TDS',
+    description:
+      'BMW E34 FL din 1994, motorizare 2.5 TDS, cu evacuare inox, suspensie AirRide, jante din aliaj si sistem audio Alpine. Proiectul a fost restaurat recent atat la interior, cat si la exterior, intr-o configuratie care pastreaza caracterul clasic al platformei.',
+    image: '/members/puiu-e34.jpg',
+    avatar: '/members/puiu-e34.jpg',
+    instagram: 'https://www.instagram.com/cldpui?igsh=eGx1bGVhdDdpNGpi',
+    imagePosition: 'center 58%',
+    avatarPosition: 'center 42%',
+    imageAlt: 'BMW-ul lui Puiu',
+    avatarAlt: 'Avatar Puiu',
+  },
 ]
