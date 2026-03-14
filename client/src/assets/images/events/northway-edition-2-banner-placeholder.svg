@@ -1,0 +1,13 @@
+<svg width="960" height="720" viewBox="0 0 960 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="720" rx="36" fill="#090A0D"/>
+  <rect x="80" y="80" width="800" height="560" rx="28" fill="#101217" stroke="rgba(255,255,255,0.08)"/>
+  <path d="M166 564C296.667 470 419.333 423 534 423H664C730.667 423 789.333 403.333 840 364V560H166V564Z" fill="#F5C400"/>
+  <path d="M198 362H762" stroke="white" stroke-opacity="0.18" stroke-width="2"/>
+  <path d="M198 310H700" stroke="white" stroke-opacity="0.12" stroke-width="2"/>
+  <path d="M206 253H540" stroke="#F5C400" stroke-width="8" stroke-linecap="round"/>
+  <path d="M182 516C252 448 331.333 414 420 414H671C724.333 414 777.333 396 830 360" stroke="#050505" stroke-opacity="0.75" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="360" cy="564" r="42" fill="#090A0D" stroke="#050505" stroke-width="12"/>
+  <circle cx="712" cy="564" r="42" fill="#090A0D" stroke="#050505" stroke-width="12"/>
+  <text x="200" y="190" fill="white" font-family="Arial, sans-serif" font-size="58" font-weight="700" letter-spacing="12">NORTHWAY</text>
+  <text x="202" y="238" fill="#F5C400" font-family="Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="8">EDITION 01</text>
+</svg>

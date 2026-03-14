@@ -1,0 +1,19 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="800" rx="36" fill="#050505"/>
+  <rect x="38" y="38" width="1124" height="724" rx="28" stroke="rgba(245,196,0,0.22)" stroke-width="2"/>
+  <circle cx="246" cy="596" r="88" stroke="#F5C400" stroke-width="12"/>
+  <circle cx="938" cy="596" r="88" stroke="#F5C400" stroke-width="12"/>
+  <path d="M162 598H270L354 430C386 366 446 330 526 330H748C828 330 892 352 944 402L1042 496H1094C1124 496 1148 520 1148 550V566H1032" stroke="#F5C400" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M430 430H742C790 430 826 444 860 474L914 520H336L388 458C400 442 414 430 430 430Z" fill="#F5C400" fill-opacity="0.08" stroke="#F5C400" stroke-width="8"/>
+  <path d="M1022 520L1088 530" stroke="#F5C400" stroke-width="12" stroke-linecap="round"/>
+  <path d="M120 166H1080" stroke="url(#paint0_linear_785_16)" stroke-width="2"/>
+  <text x="600" y="186" fill="#F5C400" fill-opacity="0.85" font-family="Arial, sans-serif" font-size="36" letter-spacing="10" text-anchor="middle">NORTHSIDECREW PLACEHOLDER</text>
+  <text x="600" y="700" fill="white" fill-opacity="0.45" font-family="Arial, sans-serif" font-size="24" letter-spacing="6" text-anchor="middle">REPLACE THIS IMAGE FROM src/assets/images OR YOUR DATA FILES</text>
+  <defs>
+    <linearGradient id="paint0_linear_785_16" x1="120" y1="167" x2="1080" y2="167" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#050505"/>
+      <stop offset="0.5" stop-color="#F5C400"/>
+      <stop offset="1" stop-color="#050505"/>
+    </linearGradient>
+  </defs>
+</svg>
