@@ -8,7 +8,7 @@ const projectRoot = path.resolve(__dirname, '..')
 const publicDir = path.join(projectRoot, 'public')
 const sitemapPath = path.join(publicDir, 'sitemap.xml')
 
-const siteUrl = 'https://northsidecrew.ro'
+const siteUrl = 'https://northside.ro'
 const routes = [
   { path: '/', changefreq: 'weekly', priority: '1.0' },
   { path: '/events', changefreq: 'weekly', priority: '0.9' },
