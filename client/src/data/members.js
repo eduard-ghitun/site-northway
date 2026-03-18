@@ -39,7 +39,7 @@ export const members = [
     avatarAlt: 'Avatar Andy',
   },
   {
-    id: 'member-audi-classic',
+    id: 'member-new',
     name: 'Sezo',
     role: 'Organizator',
     car: 'Audi A8 (D2)',
@@ -49,10 +49,8 @@ export const members = [
     avatar: '/members/member-audi-classic.jpg',
     badgeIcon: 'incognito',
     badgeLabel: 'Incognito Sezo',
-    imagePosition: 'center 62%',
-    avatarPosition: 'center 52%',
-    imageAlt: 'Audi A8 D2 negru',
-    avatarAlt: 'Avatar membru nou',
+    imageAlt: 'Audi A8 D2 placeholder',
+    avatarAlt: 'Avatar Sezo',
   },
   {
     id: 'member-04',
