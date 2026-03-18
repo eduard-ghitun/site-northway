@@ -39,6 +39,22 @@ export const members = [
     avatarAlt: 'Avatar Andy',
   },
   {
+    id: 'member-audi-classic',
+    name: 'Sezo',
+    role: 'Organizator',
+    car: 'Audi A8 (D2)',
+    description:
+      'Cum ar zice lumea “ mașină de mafioți “ . Dar nu e doar atât , e prima generație a modelului de lux A8 , produsă în anul 2002. Este apreciată pentru eleganța , confort și prezență. In configurația actuală mașina a fost păstrată cât mai OEM posibil , a beneficiat doar de un set de jante pe 20” de pe Audi S8',
+    image: '/members/member-audi-classic.jpg',
+    avatar: '/members/member-audi-classic.jpg',
+    badgeIcon: 'incognito',
+    badgeLabel: 'Incognito Sezo',
+    imagePosition: 'center 62%',
+    avatarPosition: 'center 52%',
+    imageAlt: 'Audi A8 D2 negru',
+    avatarAlt: 'Avatar membru nou',
+  },
+  {
     id: 'member-04',
     name: 'Sparkle',
     role: 'Tiktok Holder',

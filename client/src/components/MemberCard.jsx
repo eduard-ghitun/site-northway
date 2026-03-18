@@ -1,10 +1,11 @@
-import { Instagram } from 'lucide-react'
+import { Instagram, VenetianMask } from 'lucide-react'
 import { motion } from 'framer-motion'
 import AppImage from './AppImage'
 import useAdaptiveMotion from '../hooks/useAdaptiveMotion'
 
 export default function MemberCard({ member }) {
   const { canHover, useLiteMotion } = useAdaptiveMotion()
+  const MemberBadgeIcon = member.badgeIcon === 'incognito' ? VenetianMask : Instagram
 
   return (
     <motion.article
@@ -42,11 +43,20 @@ export default function MemberCard({ member }) {
             href={member.instagram}
             target="_blank"
             rel="noreferrer"
-            aria-label={`Instagram ${member.name}`}
+            aria-label={member.badgeLabel || `Instagram ${member.name}`}
             className="member-card-instagram"
           >
-            <Instagram size={16} />
+            <MemberBadgeIcon size={16} />
           </a>
+        ) : member.badgeIcon ? (
+          <span
+            role="img"
+            aria-label={member.badgeLabel || member.name}
+            title={member.badgeLabel || member.name}
+            className="member-card-instagram"
+          >
+            <MemberBadgeIcon size={16} />
+          </span>
         ) : null}
         <div className="member-card-copy">
           <p className="member-card-car">{member.car}</p>
