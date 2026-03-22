@@ -170,4 +170,19 @@ export const members = [
     imageAlt: 'BMW-ul lui Vlad',
     avatarAlt: 'Avatar Vlad',
   },
+  {
+    id: 'fanu',
+    name: 'Fanu',
+    role: 'Membru',
+    car: 'BMW Seria 1 E81 (2010)',
+    description:
+      'BMW Seria 1 E81 din 2010, echipat cu pachet M de fabrica, completat de o bara fata/spate M Look 1 si un kit complet Maxton. Setup-ul este definit de jante Arceo pe 18 inch, suspensie sport reglabila si o evacuare full inox cu 4 iesiri, pentru un aspect mai agresiv si bine conturat.',
+    image: '/members/fanu-bmw-e81.jpg',
+    avatar: '/members/fanu-bmw-e81.jpg',
+    instagram: 'https://www.instagram.com/hantascu_stefan',
+    imagePosition: 'center 64%',
+    avatarPosition: 'center 70%',
+    imageAlt: 'BMW-ul lui Fanu',
+    avatarAlt: 'Avatar Fanu',
+  },
 ]
