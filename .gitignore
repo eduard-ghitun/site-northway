@@ -1,4 +1,9 @@
 node_modules
 dist
 .env
-.vercel
+.vercelserver/.env.local
+server/.env.local
+.env.local
+.vercel/
+server/.vercel/
+server/.env.local
