@@ -1,6 +1,12 @@
 import { useEffect } from 'react'
 
-const SITE_URL = 'https://northsidecrew.ro'
+function normalizeBaseUrl(value) {
+  return value?.trim().replace(/\/+$/, '') || ''
+}
+
+const SITE_URL =
+  normalizeBaseUrl(import.meta.env.VITE_SITE_URL) ||
+  (typeof window !== 'undefined' ? normalizeBaseUrl(window.location.origin) : 'https://northsidecrew.ro')
 const DEFAULT_TITLE = 'NorthSideCrew – Evenimente Auto, Car Meets si Comunitate Auto Romania'
 const DEFAULT_DESCRIPTION =
   'NorthSideCrew este o comunitate dedicata pasionatilor auto. Descopera evenimente auto, car meets si proiecte speciale organizate in Romania.'

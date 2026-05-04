@@ -1,4 +1,5 @@
 import aboutCommunityPlaceholder from './about/about-community-placeholder.svg'
+import dashboardConnectImage from './dashboard/introducereconnect.png'
 import northwayEdition2BannerPlaceholder from './events/northway-edition-2-banner-placeholder.svg'
 import homeCommunityPlaceholder from './home/home-community-placeholder.svg'
 import homeHeroPlaceholder from './home/home-hero-placeholder.svg'
@@ -33,6 +34,10 @@ export const homeImages = {
 
 export const aboutImages = {
   community: aboutCommunityPlaceholder,
+}
+
+export const dashboardImages = {
+  connect: dashboardConnectImage,
 }
 
 export const eventImages = {

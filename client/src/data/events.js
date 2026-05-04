@@ -86,7 +86,7 @@ export const upcomingEventAnnouncement = {
     title: 'Taxe pentru vizitatori',
     items: [
       'Taxa de acces pentru vizitatori va fi în valoare de 10 lei / zi, accesul fiind permis în intervalul orar 10:00 - 20:00.',
-      'Taxa de acces Pool Party va fi în valoare de 30 lei / persoană, accesul fiind permis în intervalul orar 21:00 - 05:00.',
+      'Taxa de acces Pool Party va fi în valoare de 50 lei / persoană, accesul fiind permis în intervalul orar 21:00 - 05:00.',
       'În cadrul evenimentului vor avea acces în locație doar participanții și spectatorii care dețin brățară la mână.',
     ],
   },

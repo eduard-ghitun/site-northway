@@ -1,13 +1,64 @@
-<svg width="960" height="720" viewBox="0 0 960 720" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="960" height="720" rx="36" fill="#090A0D"/>
-  <rect x="80" y="80" width="800" height="560" rx="28" fill="#101217" stroke="rgba(255,255,255,0.08)"/>
-  <path d="M166 564C296.667 470 419.333 423 534 423H664C730.667 423 789.333 403.333 840 364V560H166V564Z" fill="#F5C400"/>
-  <path d="M198 362H762" stroke="white" stroke-opacity="0.18" stroke-width="2"/>
-  <path d="M198 310H700" stroke="white" stroke-opacity="0.12" stroke-width="2"/>
-  <path d="M206 253H540" stroke="#F5C400" stroke-width="8" stroke-linecap="round"/>
-  <path d="M182 516C252 448 331.333 414 420 414H671C724.333 414 777.333 396 830 360" stroke="#050505" stroke-opacity="0.75" stroke-width="4" stroke-linecap="round"/>
-  <circle cx="360" cy="564" r="42" fill="#090A0D" stroke="#050505" stroke-width="12"/>
-  <circle cx="712" cy="564" r="42" fill="#090A0D" stroke="#050505" stroke-width="12"/>
-  <text x="200" y="190" fill="white" font-family="Arial, sans-serif" font-size="58" font-weight="700" letter-spacing="12">NORTHWAY</text>
-  <text x="202" y="238" fill="#F5C400" font-family="Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="8">EDITION 01</text>
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="180" y1="120" x2="1410" y2="760" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#141414"/>
+      <stop offset="1" stop-color="#050505"/>
+    </linearGradient>
+    <filter id="shadow" x="0" y="0" width="1600" height="900" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#000000" flood-opacity="0.38"/>
+    </filter>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="1.1"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="900" rx="44" fill="#090909"/>
+  <rect x="86" y="110" width="1428" height="680" rx="34" fill="#F3F0EA"/>
+
+  <g filter="url(#shadow)">
+    <path d="M190 146H1422L1372 338H1046L1014 372H738L714 412H266L246 500L212 412H154L190 146Z" fill="#1A1A1A"/>
+    <path d="M208 128H1438L1390 164H196L208 128Z" fill="#F3C400"/>
+    <path d="M286 418H742L714 452H258L286 418Z" fill="#F3C400"/>
+    <path d="M1044 340H1372L1334 376H1012L1044 340Z" fill="#F3C400"/>
+  </g>
+
+  <g opacity="0.22" filter="url(#soft)" fill="#F3C400">
+    <circle cx="350" cy="198" r="2.6"/>
+    <circle cx="412" cy="248" r="2.4"/>
+    <circle cx="544" cy="180" r="2.8"/>
+    <circle cx="636" cy="228" r="2.5"/>
+    <circle cx="790" cy="190" r="2.9"/>
+    <circle cx="946" cy="214" r="2.2"/>
+    <circle cx="1082" cy="174" r="2.8"/>
+    <circle cx="1188" cy="236" r="2.6"/>
+    <circle cx="1286" cy="202" r="2.4"/>
+    <circle cx="300" cy="286" r="2.4"/>
+    <circle cx="484" cy="304" r="2.8"/>
+    <circle cx="692" cy="284" r="2.5"/>
+    <circle cx="836" cy="318" r="2.7"/>
+    <circle cx="1164" cy="300" r="2.3"/>
+    <circle cx="1328" cy="276" r="2.6"/>
+  </g>
+
+  <text x="235" y="320" fill="#F3C400" font-family="'Brush Script MT', 'Segoe Script', cursive" font-size="190" font-style="italic" font-weight="700" letter-spacing="3">
+    NORTHWAY II
+  </text>
+
+  <g filter="url(#shadow)">
+    <rect x="618" y="348" width="364" height="122" rx="8" fill="url(#bg)"/>
+    <rect x="618" y="348" width="364" height="122" rx="8" stroke="#2D2D2D" stroke-width="4"/>
+  </g>
+
+  <text x="800" y="434" text-anchor="middle" fill="#F3F0EA" font-family="'Arial Black', Arial, sans-serif" font-size="86" font-weight="900" letter-spacing="4">
+    2026
+  </text>
+
+  <text x="800" y="598" text-anchor="middle" fill="#111111" font-family="Arial, sans-serif" font-size="78" font-weight="800" letter-spacing="4">
+    IMPERIA • BOTOSANI
+  </text>
+  <text x="800" y="694" text-anchor="middle" fill="#111111" font-family="Arial, sans-serif" font-size="72" font-weight="800" letter-spacing="5">
+    20-21 JUNE
+  </text>
+
+  <rect x="86" y="110" width="1428" height="680" rx="34" stroke="#FFFFFF" stroke-opacity="0.08" stroke-width="2"/>
 </svg>
