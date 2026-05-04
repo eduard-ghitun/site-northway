@@ -11,6 +11,7 @@ export default function AppImage({
   fallbackSrc = sharedImages.fallback,
   loading = 'lazy',
   decoding = 'async',
+  sizes,
   ...props
 }) {
   const resolvedSrc = src || fallbackSrc
@@ -27,6 +28,8 @@ export default function AppImage({
         alt={alt || 'Imagine NorthSideCrew'}
         loading={loading}
         decoding={decoding}
+        sizes={sizes}
+        draggable="false"
         onError={() => {
           if (currentSrc !== fallbackSrc) {
             setCurrentSrc(fallbackSrc)

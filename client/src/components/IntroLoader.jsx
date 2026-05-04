@@ -1,8 +1,9 @@
 import { animate, motion, useMotionValue, useTransform } from 'framer-motion'
 import { useEffect, useState } from 'react'
+import useAdaptiveMotion from '../hooks/useAdaptiveMotion'
 
-const introDuration = 3.8
-const exitStart = 3.32
+const introDuration = 2.6
+const exitStart = 2.14
 const easing = [0.22, 1, 0.36, 1]
 
 const drawSegments = [
@@ -311,6 +312,7 @@ function CarSilhouette() {
 }
 
 export default function IntroLoader({ onComplete }) {
+  const { useLiteMotion } = useAdaptiveMotion()
   const [isExiting, setIsExiting] = useState(false)
 
   useEffect(() => {
@@ -341,29 +343,33 @@ export default function IntroLoader({ onComplete }) {
           ? { opacity: 0, scale: 0.988, filter: 'blur(10px)' }
           : { opacity: 1, scale: 1, filter: 'blur(0px)' }
       }
-      transition={{ duration: 0.58, ease: easing }}
+      transition={{ duration: useLiteMotion ? 0.2 : 0.48, ease: easing }}
       className="fixed inset-0 z-[120] flex items-center justify-center overflow-hidden bg-[#020202]"
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(245,196,0,0.08),transparent_28%),radial-gradient(circle_at_50%_65%,rgba(245,196,0,0.06),transparent_32%),linear-gradient(180deg,#020202_0%,#050505_100%)]" />
-      <div className="absolute inset-0 ambient-grid opacity-20" />
-      <motion.div
-        animate={{ opacity: [0.18, 0.3, 0.16, 0.24], scale: [0.96, 1.02, 0.98, 1] }}
-        transition={{ duration: introDuration, ease: 'easeInOut' }}
-        className="absolute left-1/2 top-[16%] h-40 w-40 -translate-x-1/2 rounded-full bg-gold/12 blur-[120px] sm:h-56 sm:w-56"
-      />
-      <motion.div
-        animate={{ opacity: [0.04, 0.12, 0.04, 0.16], scale: [1, 1.06, 0.98, 1.08] }}
-        transition={{ duration: introDuration, ease: 'easeInOut' }}
-        className="absolute inset-x-0 bottom-[12%] mx-auto h-28 w-[46vw] max-w-xl rounded-full bg-gold/10 blur-[130px]"
-      />
+      {!useLiteMotion ? <div className="absolute inset-0 ambient-grid opacity-20" /> : null}
+      {!useLiteMotion ? (
+        <>
+          <motion.div
+            animate={{ opacity: [0.18, 0.3, 0.16, 0.24], scale: [0.96, 1.02, 0.98, 1] }}
+            transition={{ duration: introDuration, ease: 'easeInOut' }}
+            className="absolute left-1/2 top-[16%] h-40 w-40 -translate-x-1/2 rounded-full bg-gold/12 blur-[120px] sm:h-56 sm:w-56"
+          />
+          <motion.div
+            animate={{ opacity: [0.04, 0.12, 0.04, 0.16], scale: [1, 1.06, 0.98, 1.08] }}
+            transition={{ duration: introDuration, ease: 'easeInOut' }}
+            className="absolute inset-x-0 bottom-[12%] mx-auto h-28 w-[46vw] max-w-xl rounded-full bg-gold/10 blur-[130px]"
+          />
 
-      <motion.div
-        animate={{
-          opacity: [0, 0.08, 0.04, 0.14, 0],
-        }}
-        transition={{ duration: introDuration, ease: 'easeInOut' }}
-        className="absolute inset-0 bg-[linear-gradient(115deg,transparent_28%,rgba(245,196,0,0.08)_50%,transparent_72%)]"
-      />
+          <motion.div
+            animate={{
+              opacity: [0, 0.08, 0.04, 0.14, 0],
+            }}
+            transition={{ duration: introDuration, ease: 'easeInOut' }}
+            className="absolute inset-0 bg-[linear-gradient(115deg,transparent_28%,rgba(245,196,0,0.08)_50%,transparent_72%)]"
+          />
+        </>
+      ) : null}
 
       <div className="relative z-10 flex w-full max-w-5xl flex-col items-center px-4 sm:px-8">
         <motion.p
@@ -379,14 +385,16 @@ export default function IntroLoader({ onComplete }) {
         <LoadingBar />
       </div>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{
-          opacity: isExiting ? [0, 0.12, 0.18] : [0, 0, 0, 0.16, 0],
-        }}
-        transition={{ duration: isExiting ? 0.36 : introDuration, ease: 'easeOut', times: isExiting ? undefined : [0, 0.76, 0.84, 0.9, 1] }}
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(245,196,0,0.18),transparent_34%)]"
-      />
+      {!useLiteMotion ? (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{
+            opacity: isExiting ? [0, 0.12, 0.18] : [0, 0, 0, 0.16, 0],
+          }}
+          transition={{ duration: isExiting ? 0.36 : introDuration, ease: 'easeOut', times: isExiting ? undefined : [0, 0.76, 0.84, 0.9, 1] }}
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(245,196,0,0.18),transparent_34%)]"
+        />
+      ) : null}
     </motion.div>
   )
 }

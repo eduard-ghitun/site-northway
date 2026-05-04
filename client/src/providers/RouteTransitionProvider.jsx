@@ -6,8 +6,8 @@ import useAdaptiveMotion from '../hooks/useAdaptiveMotion'
 
 const RouteTransitionContext = createContext(null)
 
-const NAVIGATION_DELAY_MS = 420
-const TRANSITION_TOTAL_MS = 980
+const NAVIGATION_DELAY_MS = 220
+const TRANSITION_TOTAL_MS = 520
 
 function isHashOnlyNavigation(currentLocation, to) {
   if (typeof to !== 'string') return false
@@ -79,8 +79,8 @@ export function RouteTransitionProvider({ children }) {
       setIsTransitioning(true)
       clearTimers()
 
-      const navigationDelayMs = useLiteMotion ? 180 : NAVIGATION_DELAY_MS
-      const transitionTotalMs = useLiteMotion ? 420 : TRANSITION_TOTAL_MS
+      const navigationDelayMs = useLiteMotion ? 0 : NAVIGATION_DELAY_MS
+      const transitionTotalMs = useLiteMotion ? 180 : TRANSITION_TOTAL_MS
 
       timersRef.current.push(
         window.setTimeout(() => {
@@ -110,11 +110,11 @@ export function RouteTransitionProvider({ children }) {
     <RouteTransitionContext.Provider value={value}>
       <motion.div
         animate={{
-          opacity: isTransitioning ? (useLiteMotion ? 0.94 : 0.8) : 1,
+          opacity: isTransitioning ? (useLiteMotion ? 0.98 : 0.88) : 1,
           scale: isTransitioning ? (useLiteMotion ? 1 : 0.998) : 1,
-          filter: isTransitioning && !useLiteMotion ? 'blur(1px)' : 'blur(0px)',
+          filter: isTransitioning && !useLiteMotion ? 'blur(0.5px)' : 'blur(0px)',
         }}
-        transition={{ duration: useLiteMotion ? 0.12 : 0.18, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: useLiteMotion ? 0.08 : 0.14, ease: [0.22, 1, 0.36, 1] }}
         className="min-h-screen"
       >
         {children}

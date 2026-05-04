@@ -1,4 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion'
+import useAdaptiveMotion from '../hooks/useAdaptiveMotion'
 
 function WheelRim() {
   return (
@@ -86,6 +87,8 @@ function WheelRim() {
 }
 
 export default function PageTransitionLoader({ active }) {
+  const { useLiteMotion } = useAdaptiveMotion()
+
   return (
     <AnimatePresence>
       {active ? (
@@ -94,25 +97,31 @@ export default function PageTransitionLoader({ active }) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
-          className="pointer-events-none fixed inset-0 z-[110] flex items-center justify-center overflow-hidden bg-[#030303]/96 backdrop-blur-md"
+          transition={{ duration: useLiteMotion ? 0.16 : 0.24, ease: [0.22, 1, 0.36, 1] }}
+          className="pointer-events-none fixed inset-0 z-[110] flex items-center justify-center overflow-hidden bg-[#030303]/96 backdrop-blur-sm"
         >
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(245,196,0,0.08),transparent_26%),linear-gradient(180deg,#030303_0%,#050505_100%)]" />
-          <div className="absolute inset-0 ambient-grid opacity-20" />
-          <motion.div
-            animate={{ opacity: [0.08, 0.16, 0.08], scale: [0.96, 1.02, 0.98] }}
-            transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
-            className="absolute left-1/2 top-1/2 h-52 w-52 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/10 blur-[120px] sm:h-72 sm:w-72"
-          />
+          {!useLiteMotion ? <div className="absolute inset-0 ambient-grid opacity-20" /> : null}
+          {!useLiteMotion ? (
+            <motion.div
+              animate={{ opacity: [0.08, 0.16, 0.08], scale: [0.96, 1.02, 0.98] }}
+              transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+              className="absolute left-1/2 top-1/2 h-52 w-52 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/10 blur-[120px] sm:h-72 sm:w-72"
+            />
+          ) : null}
 
           <div className="relative z-10 flex flex-col items-center px-6 text-center">
-            <WheelRim />
+            {!useLiteMotion ? <WheelRim /> : <div className="h-28 w-28 rounded-full border border-gold/30 bg-gold/10" />}
             <motion.p
               initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: [0.42, 0.74, 0.42], y: 0 }}
+              animate={useLiteMotion ? { opacity: 0.72, y: 0 } : { opacity: [0.42, 0.74, 0.42], y: 0 }}
               exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
-              className="mt-8 text-[0.7rem] font-semibold uppercase tracking-[0.42em] text-white/52"
+              transition={{
+                duration: useLiteMotion ? 0.16 : 1.4,
+                repeat: useLiteMotion ? 0 : Infinity,
+                ease: 'easeInOut',
+              }}
+              className="mt-8 text-[0.7rem] font-semibold uppercase tracking-[0.32em] text-white/52 sm:tracking-[0.42em]"
             >
               Loading Next Experience
             </motion.p>

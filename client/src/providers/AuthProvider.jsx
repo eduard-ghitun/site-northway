@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { hasSupabaseConfig, supabase } from '../lib/supabase'
+import { authStorageKey, hasSupabaseConfig, legacyAuthStorageKeys, supabase } from '../lib/supabase'
 
 const AuthContext = createContext(null)
 const ADMIN_EMAIL = 'eduard.ghitun@yahoo.com'
@@ -234,6 +234,14 @@ export function AuthProvider({ children }) {
       }
 
       try {
+        if (typeof window !== 'undefined') {
+          legacyAuthStorageKeys.forEach((storageKey) => {
+            if (storageKey !== authStorageKey) {
+              window.localStorage.removeItem(storageKey)
+            }
+          })
+        }
+
         const { data, error } = await supabase.auth.getSession()
 
         if (error) {

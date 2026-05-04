@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import clsx from 'clsx'
 import { useAuth } from '../providers/AuthProvider'
+import useAdaptiveMotion from '../hooks/useAdaptiveMotion'
 import TransitionLink from './TransitionLink'
 import TransitionNavLink from './TransitionNavLink'
 import { navigation } from '../data/navigation'
@@ -78,6 +79,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [profileMenuOpen, setProfileMenuOpen] = useState(false)
   const location = useLocation()
+  const { useLiteMotion } = useAdaptiveMotion()
   const { user, profile, isAdmin, logout } = useAuth()
   const currentPath = `${location.pathname}${location.hash}`
   const desktopProfileMenuRef = useRef(null)
@@ -90,7 +92,7 @@ export default function Navbar() {
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 18)
     onScroll()
-    window.addEventListener('scroll', onScroll)
+    window.addEventListener('scroll', onScroll, { passive: true })
 
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
@@ -212,13 +214,13 @@ export default function Navbar() {
             <AnimatePresence>
               {open ? (
                 <motion.nav
-                  initial={{ opacity: 0, height: 0, y: -8 }}
-                  animate={{ opacity: 1, height: 'auto', y: 0 }}
-                  exit={{ opacity: 0, height: 0, y: -8 }}
-                  transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+                  initial={useLiteMotion ? { opacity: 0, height: 0 } : { opacity: 0, height: 0, y: -8 }}
+                  animate={useLiteMotion ? { opacity: 1, height: 'auto' } : { opacity: 1, height: 'auto', y: 0 }}
+                  exit={useLiteMotion ? { opacity: 0, height: 0 } : { opacity: 0, height: 0, y: -8 }}
+                  transition={{ duration: useLiteMotion ? 0.16 : 0.24, ease: [0.22, 1, 0.36, 1] }}
                   className="overflow-hidden lg:hidden"
                 >
-                  <div className="mt-4 max-h-[calc(100svh-6.5rem)] space-y-2.5 overflow-y-auto border-t border-white/10 pt-4 pb-1">
+                  <div className="mt-4 max-h-[calc(100svh-6.5rem)] space-y-2.5 overflow-y-auto border-t border-white/10 pt-4 pb-1 pr-1">
                     {navigation.map((item) => (
                       <TransitionNavLink
                         key={item.path}
@@ -278,7 +280,7 @@ export default function Navbar() {
                                 initial={{ opacity: 0, height: 0 }}
                                 animate={{ opacity: 1, height: 'auto' }}
                                 exit={{ opacity: 0, height: 0 }}
-                                transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+                                transition={{ duration: useLiteMotion ? 0.12 : 0.18, ease: [0.22, 1, 0.36, 1] }}
                                 className="overflow-hidden"
                               >
                                 <div className="space-y-1 px-1 pt-1">
@@ -358,10 +360,10 @@ export default function Navbar() {
                 <AnimatePresence>
                   {profileMenuOpen ? (
                     <motion.div
-                      initial={{ opacity: 0, y: -8, scale: 0.98 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: -8, scale: 0.98 }}
-                      transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+                      initial={useLiteMotion ? { opacity: 0 } : { opacity: 0, y: -8, scale: 0.98 }}
+                      animate={useLiteMotion ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
+                      exit={useLiteMotion ? { opacity: 0 } : { opacity: 0, y: -8, scale: 0.98 }}
+                      transition={{ duration: useLiteMotion ? 0.12 : 0.18, ease: [0.22, 1, 0.36, 1] }}
                     >
                       <ProfileDropdown
                         isAdmin={isAdmin}

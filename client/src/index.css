@@ -22,6 +22,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 6.5rem;
   scrollbar-width: none;
   -ms-overflow-style: none;
   overflow-x: clip;
@@ -62,6 +63,7 @@ body::-webkit-scrollbar {
 
   body {
     @apply bg-night text-white antialiased;
+    text-rendering: optimizeLegibility;
   }
 
   a {
@@ -85,11 +87,25 @@ body::-webkit-scrollbar {
   svg {
     max-width: 100%;
   }
+
+  img {
+    display: block;
+  }
+
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 2px solid rgba(245, 196, 0, 0.7);
+    outline-offset: 2px;
+  }
 }
 
 @layer components {
   .container-shell {
     @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+    width: min(100%, 100vw);
   }
 
   .panel {
@@ -98,6 +114,8 @@ body::-webkit-scrollbar {
 
   .section-space {
     @apply py-9 sm:py-14 md:py-16 lg:py-24;
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 900px;
   }
 
   .eyebrow {
@@ -114,10 +132,12 @@ body::-webkit-scrollbar {
 
   .title-xl {
     @apply font-display text-[clamp(2rem,8vw,4rem)] uppercase tracking-[0.05em] text-white [overflow-wrap:anywhere] sm:tracking-[0.1em] lg:text-6xl;
+    text-wrap: balance;
   }
 
   .title-lg {
     @apply font-display text-[clamp(1.6rem,6vw,2.7rem)] uppercase tracking-[0.07em] text-white [overflow-wrap:anywhere] sm:tracking-[0.14em];
+    text-wrap: balance;
   }
 
   .text-muted {

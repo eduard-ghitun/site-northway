@@ -17,7 +17,7 @@ export default function PageHero({ eyebrow, title, description }) {
           className="panel relative overflow-hidden px-4 py-7 text-center sm:px-6 sm:py-9 md:text-left lg:px-14 lg:py-16"
         >
           <div className="absolute inset-y-0 right-0 hidden w-1/2 bg-gradient-to-l from-gold/10 to-transparent sm:block" />
-          <span className="eyebrow">{eyebrow}</span>
+          <span className="eyebrow mx-auto md:mx-0">{eyebrow}</span>
           <h1 className="title-xl mx-auto max-w-4xl md:mx-0">{title}</h1>
           <p className="mx-auto mt-4 max-w-3xl text-[0.98rem] leading-7 text-white/[0.68] sm:mt-5 sm:text-lg sm:leading-8 md:mx-0 md:mt-6">
             {description}
