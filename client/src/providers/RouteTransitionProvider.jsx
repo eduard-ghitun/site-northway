@@ -6,7 +6,6 @@ import useAdaptiveMotion from '../hooks/useAdaptiveMotion'
 
 const RouteTransitionContext = createContext(null)
 
-const NAVIGATION_DELAY_MS = 220
 const TRANSITION_TOTAL_MS = 520
 
 function isHashOnlyNavigation(currentLocation, to) {
@@ -79,14 +78,9 @@ export function RouteTransitionProvider({ children }) {
       setIsTransitioning(true)
       clearTimers()
 
-      const navigationDelayMs = useLiteMotion ? 0 : NAVIGATION_DELAY_MS
       const transitionTotalMs = useLiteMotion ? 180 : TRANSITION_TOTAL_MS
 
-      timersRef.current.push(
-        window.setTimeout(() => {
-          navigate(to, options)
-        }, navigationDelayMs),
-      )
+      navigate(to, options)
 
       timersRef.current.push(
         window.setTimeout(() => {
