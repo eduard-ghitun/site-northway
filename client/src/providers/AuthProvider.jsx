@@ -133,9 +133,10 @@ async function ensureProfile(user) {
   }
 
   const profilePayload = buildProfilePayload(user)
-  const { error: upsertError } = await supabase.from('profiles').upsert(profilePayload, {
-    onConflict: 'id',
-  })
+  const { error: upsertError } = await supabase
+  .from('profiles')
+  .upsert(profilePayload, { onConflict: 'id' })
+  .select()
 
   if (upsertError) {
     if (isProfilesTableMissing(upsertError)) {
@@ -147,7 +148,7 @@ async function ensureProfile(user) {
 
   const { data, error } = await supabase
     .from('profiles')
-    .select('id, email, full_name, avatar_url, role, status, created_at, updated_at')
+    .select('*')
     .eq('id', user.id)
     .maybeSingle()
 
