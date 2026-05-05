@@ -126,7 +126,6 @@ export default function RegisterPage() {
       <PageHero
         eyebrow="Create Account"
         title="Creeaza contul tau NorthSideCrew"
-        description="Formularul de inregistrare foloseste Supabase Auth pentru email si parola, iar profilul public este sincronizat separat pentru username si rol."
       />
 
       <section className="section-space">
@@ -226,19 +225,18 @@ export default function RegisterPage() {
           <Reveal delay={0.08} className="panel overflow-hidden p-5 sm:p-7 lg:p-8">
             <div className="rounded-[26px] border border-white/10 bg-[linear-gradient(180deg,rgba(245,196,0,0.16),rgba(255,255,255,0.04))] p-5 sm:p-6">
               <span className="eyebrow">Auth Flow</span>
-              <h2 className="title-lg max-w-2xl">Username in profil, parola in Supabase Auth.</h2>
+              <h2 className="title-lg max-w-2xl">Cum iti creezi contul pe site.</h2>
               <p className="mt-4 max-w-2xl text-base leading-7 text-white/[0.68] sm:text-lg sm:leading-8">
-                Parolele nu sunt salvate manual in baza de date. Supabase Auth gestioneaza
-                credentialele, iar tabelul <code>public.profiles</code> pastreaza doar datele de
-                profil de care avem nevoie in aplicatie.
+                Completezi formularul de inregistrare in cateva secunde, iar dupa confirmare poti
+                intra direct in contul tau NorthSideCrew.
               </p>
             </div>
 
             <div className="mt-6 grid gap-4">
               {[
-                'Username-ul este trimis in metadata la sign up prin options.data.username.',
-                'Profilul public este sincronizat cu id, email, username si role.',
-                'Fluxul este pregatit pentru dashboard si roluri viitoare.',
+                '1. Alege un username si introdu o adresa de email valida.',
+                '2. Seteaza o parola de minimum 6 caractere si confirma parola.',
+                '3. Apasa pe "Create Account" pentru a-ti crea contul pe site.',
               ].map((item) => (
                 <div
                   key={item}
