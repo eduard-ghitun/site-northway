@@ -16,6 +16,7 @@ import PageHero from '../components/PageHero'
 import Reveal from '../components/Reveal'
 import Seo from '../components/Seo'
 import { fetchApiWithFallback } from '../config/api'
+import { supabase } from '../lib/supabase'
 import { useAuth } from '../providers/AuthProvider'
 
 const initialCreateForm = {
@@ -104,15 +105,24 @@ export default function AdminDashboardPage() {
   }
 
   async function loadUsers() {
-    const payload = await adminRequest('/admin/dashboard')
-    setUsers(payload.users ?? [])
-    setTickets(payload.tickets ?? [])
-    return payload.users ?? []
+    if (!supabase) {
+      console.error('Error loading users: Supabase client is not configured.')
+      return []
+    }
+
+    const { data, error } = await supabase.from('profiles').select('*')
+
+    if (error) {
+      console.error('Error loading users:', error)
+      return []
+    }
+
+    setUsers(data || [])
+    return data || []
   }
 
   async function loadTickets() {
     const payload = await adminRequest('/admin/dashboard')
-    setUsers(payload.users ?? [])
     setTickets(payload.tickets ?? [])
     return payload.tickets ?? []
   }
@@ -128,9 +138,7 @@ export default function AdminDashboardPage() {
     setLoading(true)
 
     try {
-      const payload = await adminRequest('/admin/dashboard')
-      setUsers(payload.users ?? [])
-      setTickets(payload.tickets ?? [])
+      await Promise.all([loadUsers(), loadTickets()])
       await refreshProfile()
       setStatusTone('idle')
       setStatusMessage('')
