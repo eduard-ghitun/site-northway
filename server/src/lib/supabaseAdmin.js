@@ -150,6 +150,14 @@ function normalizeAuthAdminUser(user) {
   }
 }
 
+async function listAuthAdminUsers() {
+  const data = await supabaseFetch('/auth/v1/admin/users?page=1&per_page=1000', {
+    useServiceRole: true,
+  })
+
+  return (data?.users || []).map(normalizeAuthAdminUser)
+}
+
 export async function listAdminUsers() {
   try {
     const data = await supabaseFetch(
@@ -157,17 +165,19 @@ export async function listAdminUsers() {
       { useServiceRole: true },
     )
 
-    return (Array.isArray(data) ? data : []).map(normalizeProfile)
+    const profiles = (Array.isArray(data) ? data : []).map(normalizeProfile)
+
+    if (profiles.length > 0) {
+      return profiles
+    }
+
+    return listAuthAdminUsers()
   } catch (error) {
     if (!isProfilesTableMissing(error)) {
       throw error
     }
 
-    const data = await supabaseFetch('/auth/v1/admin/users?page=1&per_page=1000', {
-      useServiceRole: true,
-    })
-
-    return (data?.users || []).map(normalizeAuthAdminUser)
+    return listAuthAdminUsers()
   }
 }
 

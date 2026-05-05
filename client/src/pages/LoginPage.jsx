@@ -198,19 +198,20 @@ export default function LoginPage() {
 
           <Reveal delay={0.08} className="panel overflow-hidden p-5 sm:p-7 lg:p-8">
             <div className="rounded-[26px] border border-white/10 bg-[linear-gradient(180deg,rgba(245,196,0,0.16),rgba(255,255,255,0.04))] p-5 sm:p-6">
-              <span className="eyebrow">Supabase Auth</span>
-              <h2 className="title-lg max-w-2xl">Email si parola sunt gestionate exclusiv de Supabase.</h2>
+              <span className="eyebrow">Cum ajungi la bilete</span>
+              <h2 className="title-lg max-w-2xl">Biletele devin disponibile doar dupa ce iti creezi cont si intri in dashboard.</h2>
               <p className="mt-4 max-w-2xl text-base leading-7 text-white/[0.68] sm:text-lg sm:leading-8">
-                Dupa autentificare, aplicatia incarca sesiunea curenta, sincronizeaza profilul public
-                si deschide dashboard-ul privat fara sa stocheze parole in baza de date proprie.
+                Accesul la zona de bilete nu este public. Mai intai iti faci cont, apoi te
+                autentifici, iar aplicatia iti deschide dashboard-ul privat unde iti este incarcat
+                profilul si poti continua spre bilete.
               </p>
             </div>
 
             <div className="mt-6 grid gap-4">
               {[
-                'Login-ul foloseste supabase.auth.signInWithPassword.',
-                'Ruta /dashboard este protejata pentru userii autentificati.',
-                'Profilul este citit din public.profiles dupa autentificare.',
+                'Mai intai iti faci cont, ca sa iti rezervi accesul in zona privata a platformei.',
+                'Apoi te loghezi si intri in contul tau, unde se deschide dashboard-ul personal.',
+                'Biletele le vezi abia dupa acesti pasi, direct din zona ta privata.',
               ].map((item) => (
                 <div
                   key={item}
@@ -226,8 +227,8 @@ export default function LoginPage() {
 
       <CTASection
         eyebrow="Esti nou aici?"
-        title="Creeaza rapid un cont si intra in dashboard."
-        description="Username-ul se salveaza in profilul public, iar autentificarea ramane complet gestionata de Supabase."
+        title="Creeaza-ti contul ca sa deblochezi accesul la dashboard si bilete."
+        description="Fara cont nu poti intra in zona privata. Dupa inscriere si autentificare, iti este incarcat profilul si poti merge spre bilete."
         primaryLabel="Create Account"
         primaryTo="/register"
         secondaryLabel="Mergi Acasa"
