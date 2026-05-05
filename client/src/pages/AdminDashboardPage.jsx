@@ -105,21 +105,26 @@ export default function AdminDashboardPage() {
   }
 
   async function loadUsers() {
-    if (!supabase) {
-      console.error('Error loading users: Supabase client is not configured.')
-      return []
-    }
-
-    const { data, error } = await supabase.from('profiles').select('*')
-
-    if (error) {
-      console.error('Error loading users:', error)
-      return []
-    }
-
-    setUsers(data || [])
-    return data || []
+  if (!supabase) {
+    console.error('Supabase missing')
+    return []
   }
+
+  const { data, error } = await supabase
+    .from('profiles')
+    .select('*')
+
+  console.log('🔥 USERS FROM DB:', data)
+  console.log('❌ ERROR:', error)
+
+  if (error) {
+    setUsers([])
+    return []
+  }
+
+  setUsers(data || [])
+  return data || []
+}
 
   async function loadTickets() {
     const payload = await adminRequest('/admin/dashboard')
@@ -152,8 +157,9 @@ export default function AdminDashboardPage() {
   }
 
   useEffect(() => {
-    void loadAdminData()
-  }, [session?.access_token])
+  if (!session) return
+  loadAdminData()
+  }, [session])
 
   const stats = useMemo(() => {
     const totalUsers = users.length
