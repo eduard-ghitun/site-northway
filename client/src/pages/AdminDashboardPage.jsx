@@ -15,7 +15,6 @@ import CTASection from '../components/CTASection'
 import PageHero from '../components/PageHero'
 import Reveal from '../components/Reveal'
 import Seo from '../components/Seo'
-import { fetchApiWithFallback } from '../config/api'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../providers/AuthProvider'
 
@@ -72,7 +71,6 @@ function formatDate(value) {
 export default function AdminDashboardPage() {
   const { user, profile, session, refreshProfile, logout } = useAuth()
   const [users, setUsers] = useState([])
-  const [tickets, setTickets] = useState([])
   const [editingId, setEditingId] = useState(null)
   const [draft, setDraft] = useState({})
   const [createForm, setCreateForm] = useState(initialCreateForm)
@@ -82,58 +80,26 @@ export default function AdminDashboardPage() {
 
   const userId = user?.id
 
-  async function adminRequest(path, options = {}) {
-    const { payload } = await fetchApiWithFallback(path, {
-      method: options.method || 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${session?.access_token || ''}`,
-      },
-      body: options.body ? JSON.stringify(options.body) : undefined,
-    })
-
-    return payload
-  }
-
-  async function callAdminApi(path, targetUserId) {
-    await adminRequest(path, {
-      method: 'POST',
-      body: {
-        userId: targetUserId,
-      },
-    })
-  }
-
   async function loadUsers() {
-  if (!supabase) {
-    console.error('Supabase missing')
-    return []
-  }
+    if (!supabase) {
+      console.error('Error loading users: Supabase client is not configured.')
+      return []
+    }
 
-  const { data, error } = await supabase
-    .from('profiles')
-    .select('*')
+    const { data, error } = await supabase.from('profiles').select('*')
 
-  console.log('🔥 USERS FROM DB:', data)
-  console.log('❌ ERROR:', error)
+    if (error) {
+      console.error('Error loading users:', error)
+      setUsers([])
+      return []
+    }
 
-  if (error) {
-    setUsers([])
-    return []
-  }
-
-  setUsers(data || [])
-  return data || []
-}
-
-  async function loadTickets() {
-    const payload = await adminRequest('/admin/dashboard')
-    setTickets(payload.tickets ?? [])
-    return payload.tickets ?? []
+    setUsers(data || [])
+    return data || []
   }
 
   async function loadAdminData() {
-    if (!session?.access_token) {
+    if (!session) {
       setLoading(false)
       setStatusTone('error')
       setStatusMessage('Sesiunea de admin nu este disponibila.')
@@ -143,7 +109,7 @@ export default function AdminDashboardPage() {
     setLoading(true)
 
     try {
-      await Promise.all([loadUsers(), loadTickets()])
+      await loadUsers()
       await refreshProfile()
       setStatusTone('idle')
       setStatusMessage('')
@@ -157,8 +123,8 @@ export default function AdminDashboardPage() {
   }
 
   useEffect(() => {
-  if (!session) return
-  loadAdminData()
+    if (!session) return
+    void loadAdminData()
   }, [session])
 
   const stats = useMemo(() => {
@@ -171,7 +137,7 @@ export default function AdminDashboardPage() {
       totalAdmins,
       totalBanned,
     }
-  }, [tickets, users])
+  }, [users])
 
   function startEdit(targetUser) {
     setEditingId(targetUser.id)
@@ -187,25 +153,22 @@ export default function AdminDashboardPage() {
     setDraft({})
   }
 
-  function updateUserRoleInState(targetUserId, nextRole) {
-    setUsers((current) =>
-      current.map((entry) => (entry.id === targetUserId ? { ...entry, role: nextRole } : entry)),
-    )
-  }
-
   async function saveEdit(targetUserId) {
     try {
-      await adminRequest('/admin/users/sync', {
-        method: 'POST',
-        body: {
-          id: targetUserId,
+      const { error } = await supabase
+        .from('profiles')
+        .update({
           full_name: draft.full_name?.trim() || null,
           role: draft.role,
           status: draft.status || 'active',
-        },
-      })
+        })
+        .eq('id', targetUserId)
 
-      await loadAdminData()
+      if (error) {
+        throw error
+      }
+
+      await loadUsers()
       cancelEdit()
       setStatusTone('success')
       setStatusMessage('Profilul utilizatorului a fost actualizat.')
@@ -223,22 +186,33 @@ export default function AdminDashboardPage() {
       return
     }
 
-    if (targetUser.status === 'banned') {
-      setStatusTone('error')
-      setStatusMessage('Utilizatorul selectat este deja banat.')
-      return
-    }
+    const nextStatus = targetUser.status === 'banned' ? 'active' : 'banned'
+    const confirmationMessage =
+      nextStatus === 'banned'
+        ? `Confirmi banarea contului ${targetUser.email}?`
+        : `Confirmi reactivarea contului ${targetUser.email}?`
 
-    if (!window.confirm(`Confirmi banarea contului ${targetUser.email}?`)) {
+    if (!window.confirm(confirmationMessage)) {
       return
     }
 
     try {
-      await callAdminApi('/admin/ban-user', targetUser.id)
+      const { error } = await supabase
+        .from('profiles')
+        .update({ status: nextStatus })
+        .eq('id', targetUser.id)
 
-      await loadAdminData()
+      if (error) {
+        throw error
+      }
+
+      await loadUsers()
       setStatusTone('success')
-      setStatusMessage('Contul a fost suspendat si login-ul a fost blocat.')
+      setStatusMessage(
+        nextStatus === 'banned'
+          ? 'Contul a fost suspendat si login-ul a fost blocat.'
+          : 'Contul a fost reactivat.',
+      )
     } catch (error) {
       console.error('Failed to toggle ban:', error)
       setStatusTone('error')
@@ -258,10 +232,16 @@ export default function AdminDashboardPage() {
     }
 
     try {
-      await callAdminApi('/admin/make-admin', targetUser.id)
+      const { error } = await supabase
+        .from('profiles')
+        .update({ role: 'admin' })
+        .eq('id', targetUser.id)
 
-      updateUserRoleInState(targetUser.id, 'admin')
-      await loadAdminData()
+      if (error) {
+        throw error
+      }
+
+      await loadUsers()
       setStatusTone('success')
       setStatusMessage('Utilizatorul a fost promovat la admin.')
     } catch (error) {
@@ -289,10 +269,16 @@ export default function AdminDashboardPage() {
     }
 
     try {
-      await callAdminApi('/admin/remove-admin', targetUser.id)
+      const { error } = await supabase
+        .from('profiles')
+        .update({ role: 'user' })
+        .eq('id', targetUser.id)
 
-      updateUserRoleInState(targetUser.id, 'user')
-      await loadAdminData()
+      if (error) {
+        throw error
+      }
+
+      await loadUsers()
       setStatusTone('success')
       setStatusMessage('Rolul de admin a fost eliminat cu succes.')
     } catch (error) {
@@ -314,14 +300,13 @@ export default function AdminDashboardPage() {
     }
 
     try {
-      await adminRequest('/admin/users', {
-        method: 'DELETE',
-        body: {
-          id: targetUser.id,
-        },
-      })
+      const { error } = await supabase.from('profiles').delete().eq('id', targetUser.id)
 
-      await loadAdminData()
+      if (error) {
+        throw error
+      }
+
+      await loadUsers()
       setStatusTone('success')
       setStatusMessage('Profilul utilizatorului a fost sters.')
     } catch (error) {
@@ -335,18 +320,25 @@ export default function AdminDashboardPage() {
     event.preventDefault()
 
     try {
-      await adminRequest('/admin/users/sync', {
-        method: 'POST',
-        body: {
+      const { error } = await supabase.from('profiles').upsert(
+        {
           id: createForm.id.trim(),
           email: createForm.email.trim(),
           full_name: createForm.full_name.trim() || null,
           role: createForm.role,
+          status: 'active',
         },
-      })
+        {
+          onConflict: 'id',
+        },
+      )
+
+      if (error) {
+        throw error
+      }
 
       setCreateForm(initialCreateForm)
-      await loadAdminData()
+      await loadUsers()
       setStatusTone('success')
       setStatusMessage('Profilul a fost creat sau sincronizat cu succes.')
     } catch (error) {
@@ -354,7 +346,7 @@ export default function AdminDashboardPage() {
       setStatusTone('error')
       setStatusMessage(
         error.message ||
-          'Crearea profilului a esuat. UUID-ul trebuie sa corespunda unui utilizator existent in auth.users.',
+          'Crearea profilului a esuat. Verifica UUID-ul si datele introduse.',
       )
     }
   }
@@ -492,12 +484,12 @@ export default function AdminDashboardPage() {
                                 )}
                                 <button
                                   type="button"
-                                  disabled={isSelf || entry.status === 'banned'}
+                                  disabled={isSelf}
                                   onClick={() => void toggleBan(entry)}
                                   className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-white/[0.78] transition hover:border-gold/35 hover:text-gold disabled:cursor-not-allowed disabled:opacity-50"
                                 >
                                   <Ban size={14} />
-                                  {entry.status === 'banned' ? 'Banned' : 'Ban'}
+                                  {entry.status === 'banned' ? 'Unban' : 'Ban'}
                                 </button>
                                 <button
                                   type="button"
@@ -703,11 +695,11 @@ export default function AdminDashboardPage() {
                         )}
                         <button
                           type="button"
-                          disabled={isSelf || entry.status === 'banned'}
+                          disabled={isSelf}
                           onClick={() => void toggleBan(entry)}
                           className="button-secondary disabled:cursor-not-allowed disabled:opacity-50"
                         >
-                          {entry.status === 'banned' ? 'Banned' : 'Ban'}
+                          {entry.status === 'banned' ? 'Unban' : 'Ban'}
                           <Ban size={16} />
                         </button>
                         <button
@@ -730,8 +722,8 @@ export default function AdminDashboardPage() {
               <span className="eyebrow">Create / Sync</span>
               <h2 className="title-lg">Profil manual</h2>
               <p className="mt-4 text-sm leading-6 text-white/[0.68] sm:text-base sm:leading-7">
-                Poti crea sau sincroniza manual un profil doar pentru un utilizator existent deja in
-                <code> auth.users</code>. UUID-ul trebuie sa fie valid.
+                Poti crea sau sincroniza manual un profil direct in
+                <code> profiles</code>. UUID-ul trebuie sa fie valid.
               </p>
 
               <form className="mt-6 space-y-4" onSubmit={createProfile}>
