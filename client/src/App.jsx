@@ -3,7 +3,6 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import IntroLoader from './components/IntroLoader'
 import AdminRoute from './components/AdminRoute'
-import PageTransitionLoader from './components/PageTransitionLoader'
 import ProtectedRoute from './components/ProtectedRoute'
 import SiteLayout from './layout/SiteLayout'
 import useAdaptiveMotion from './hooks/useAdaptiveMotion'
@@ -92,7 +91,7 @@ export default function App() {
       <AuthProvider>
         <RouteTransitionProvider>
           <SiteLayout>
-            <Suspense fallback={<PageTransitionLoader active />}>
+            <Suspense fallback={null}>
               <AnimatePresence mode="wait">
                 <motion.div key={location.key} {...pageTransition}>
                   <Routes location={location}>
