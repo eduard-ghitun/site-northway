@@ -1,8 +1,9 @@
-import { Check, LoaderCircle, Ticket } from 'lucide-react'
+import { Check, Clock3, LoaderCircle, MailCheck, Ticket } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { fetchApiWithFallback } from '../config/api'
 import { ticketProducts } from '../data/ticketProducts'
 import { useAuth } from '../providers/AuthProvider'
+import LegalConsentCheckbox from './legal/LegalConsentCheckbox'
 import Reveal from './Reveal'
 
 function formatDate(value) {
@@ -16,7 +17,14 @@ function formatDate(value) {
   }).format(new Date(value))
 }
 
-function TicketProductCard({ product, quantity, onQuantityChange, onPurchase, loading }) {
+function TicketProductCard({
+  product,
+  quantity,
+  onQuantityChange,
+  onPurchase,
+  loading,
+  disabled = false,
+}) {
   const priceBadge = (
     <div className="rounded-full border border-gold/30 bg-gold/10 px-4 py-2 text-sm font-semibold uppercase tracking-[0.18em] text-gold">
       {product.price} RON
@@ -76,8 +84,9 @@ function TicketProductCard({ product, quantity, onQuantityChange, onPurchase, lo
           <button
             type="button"
             onClick={() => onPurchase(product)}
-            disabled={loading}
+            disabled={loading || disabled}
             className="button-primary w-full disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
+            title={disabled ? 'Confirma termenii legali pentru a continua' : undefined}
           >
             {loading ? (
               <>
@@ -106,6 +115,10 @@ export default function TicketPurchaseSection() {
   const [loadingProductId, setLoadingProductId] = useState(null)
   const [status, setStatus] = useState({ tone: 'idle', message: '' })
   const [initialLoading, setInitialLoading] = useState(true)
+  const [acceptedLegal, setAcceptedLegal] = useState(false)
+  const [legalError, setLegalError] = useState('')
+  const [acceptedIssuanceDelay, setAcceptedIssuanceDelay] = useState(false)
+  const [issuanceError, setIssuanceError] = useState('')
   const revolutUrl = 'https://revolut.me/unchiubenz'
 
   async function fetchTickets() {
@@ -151,8 +164,32 @@ export default function TicketPurchaseSection() {
       return
     }
 
+    if (!acceptedLegal) {
+      setLegalError(
+        'Trebuie sa confirmi acordul cu Termenii si Conditiile si Politica de Confidentialitate inainte de checkout.',
+      )
+      setStatus({
+        tone: 'error',
+        message: 'Bifeaza acordul legal pentru a continua catre plata.',
+      })
+      return
+    }
+
+    if (!acceptedIssuanceDelay) {
+      setIssuanceError(
+        'Trebuie sa confirmati acordul privind termenul de emitere al biletului.',
+      )
+      setStatus({
+        tone: 'error',
+        message: 'Trebuie sa confirmati acordul privind termenul de emitere al biletului.',
+      })
+      return
+    }
+
     const quantity = quantities[product.id] || 1
     setLoadingProductId(product.id)
+    setLegalError('')
+    setIssuanceError('')
     setStatus({ tone: 'idle', message: '' })
     const paymentUrl = product.checkoutUrl || revolutUrl
 
@@ -200,6 +237,75 @@ export default function TicketPurchaseSection() {
             </div>
           </div>
 
+          <div className="mt-6 rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.045),rgba(255,255,255,0.02))] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.18)] backdrop-blur-xl sm:p-6">
+            <div className="flex items-start gap-4">
+              <div className="rounded-2xl border border-gold/25 bg-gold/10 p-3 text-gold shadow-[0_0_24px_rgba(245,196,0,0.1)]">
+                <MailCheck size={18} />
+              </div>
+              <div className="min-w-0">
+                <div className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-gold/80">
+                  Pasul 4
+                </div>
+                <h3 className="mt-2 text-lg font-semibold uppercase tracking-[0.08em] text-white sm:text-xl">
+                  Emiterea biletului
+                </h3>
+                <p className="mt-3 text-sm leading-7 text-white/[0.7] sm:text-base">
+                  Dupa confirmarea platii, biletul dumneavoastra va fi procesat si emis in maximum
+                  24 de ore. Biletul va fi transmis pe adresa de email utilizata la achizitie.
+                </p>
+                <p className="mt-3 text-sm leading-7 text-white/[0.58] sm:text-base">
+                  Va rugam sa verificati atat Inbox-ul, cat si sectiunea Spam/Junk inainte de a
+                  contacta echipa NorthWay.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-5">
+              <LegalConsentCheckbox
+                id="ticket-issuance-consent"
+                checked={acceptedIssuanceDelay}
+                onChange={(event) => {
+                  setAcceptedIssuanceDelay(event.target.checked)
+                  if (event.target.checked) {
+                    setIssuanceError('')
+                    setStatus((current) =>
+                      current.message ===
+                      'Trebuie sa confirmati acordul privind termenul de emitere al biletului.'
+                        ? { tone: 'idle', message: '' }
+                        : current,
+                    )
+                  }
+                }}
+                required
+                error={issuanceError}
+                hint="Emiterea si transmiterea pe email se fac dupa confirmarea platii."
+                icon={Clock3}
+              >
+                Am luat la cunostinta faptul ca emiterea biletului poate dura pana la 24 de ore.
+              </LegalConsentCheckbox>
+            </div>
+
+            <div className="mt-4">
+              <LegalConsentCheckbox
+                id="tickets-legal-consent"
+                checked={acceptedLegal}
+                onChange={(event) => {
+                  setAcceptedLegal(event.target.checked)
+                  if (event.target.checked) {
+                    setLegalError('')
+                    setStatus((current) =>
+                      current.message === 'Bifeaza acordul legal pentru a continua catre plata.'
+                        ? { tone: 'idle', message: '' }
+                        : current,
+                    )
+                  }
+                }}
+                required
+                error={legalError}
+              />
+            </div>
+          </div>
+
           <div className="mt-6 grid gap-6 xl:grid-cols-2">
             {ticketProducts.map((product) => (
               <TicketProductCard
@@ -209,6 +315,7 @@ export default function TicketPurchaseSection() {
                 onQuantityChange={handleQuantityChange}
                 onPurchase={handlePurchase}
                 loading={loadingProductId === product.id}
+                disabled={!acceptedLegal || !acceptedIssuanceDelay}
               />
             ))}
           </div>

@@ -5,6 +5,7 @@ import PageHero from '../components/PageHero'
 import Reveal from '../components/Reveal'
 import Seo from '../components/Seo'
 import TransitionLink from '../components/TransitionLink'
+import LegalConsentCheckbox from '../components/legal/LegalConsentCheckbox'
 import { useAuth } from '../providers/AuthProvider'
 
 const initialFormData = {
@@ -50,6 +51,8 @@ function AuthField({
 export default function RegisterPage() {
   const { register, hasSupabaseConfig } = useAuth()
   const [formData, setFormData] = useState(initialFormData)
+  const [acceptedLegal, setAcceptedLegal] = useState(false)
+  const [legalError, setLegalError] = useState('')
   const [status, setStatus] = useState({
     state: 'idle',
     message: hasSupabaseConfig
@@ -92,6 +95,19 @@ export default function RegisterPage() {
       return
     }
 
+    if (!acceptedLegal) {
+      setLegalError(
+        'Trebuie sa confirmi ca ai citit Termenii si Conditiile si Politica de Confidentialitate.',
+      )
+      setStatus({
+        state: 'error',
+        message: 'Bifeaza acordul legal inainte de crearea contului.',
+      })
+      return
+    }
+
+    setLegalError('')
+
     setStatus({
       state: 'loading',
       message: 'Se creeaza contul tau NorthSideCrew...',
@@ -117,7 +133,7 @@ export default function RegisterPage() {
     <div>
       <Seo
         title="Register NorthSideCrew | Creeaza cont"
-        description="Inregistrare NorthSideCrew cu username, email si parola folosind Supabase Auth."
+        description="Inregistrare NorthSideCrew ."
         path="/register"
         ogTitle="Register NorthSideCrew | Creeaza cont"
         ogDescription="Creeaza un cont NorthSideCrew cu email si parola."
@@ -126,6 +142,7 @@ export default function RegisterPage() {
       <PageHero
         eyebrow="Create Account"
         title="Creeaza contul tau NorthSideCrew"
+        description="Formularul de inregistrare foloseste Supabase Auth pentru email si parola, iar profilul public este sincronizat separat pentru username si rol."
       />
 
       <section className="section-space">
@@ -185,6 +202,18 @@ export default function RegisterPage() {
                 autoComplete="new-password"
                 icon={LockKeyhole}
                 required
+              />
+              <LegalConsentCheckbox
+                id="register-legal-consent"
+                checked={acceptedLegal}
+                onChange={(event) => {
+                  setAcceptedLegal(event.target.checked)
+                  if (event.target.checked) {
+                    setLegalError('')
+                  }
+                }}
+                required
+                error={legalError}
               />
 
               <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">

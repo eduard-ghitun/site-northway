@@ -1,4 +1,4 @@
-import { Gauge, LogOut, ShieldCheck } from 'lucide-react'
+import { Clock3, Gauge, LogOut, MailCheck, ShieldCheck } from 'lucide-react'
 import { dashboardImages } from '../assets/images'
 import CTASection from '../components/CTASection'
 import PageHero from '../components/PageHero'
@@ -136,7 +136,7 @@ export default function DashboardPage() {
               Urmeaza acesti pasi simpli pentru a finaliza rapid comanda.
             </p>
 
-            <div className="mt-6 grid gap-4 lg:grid-cols-3">
+            <div className="mt-6 grid gap-4 xl:grid-cols-4">
               <div className="rounded-[24px] border border-white/10 bg-white/[0.03] p-5">
                 <div className="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-gold/80">
                   Pasul 1
@@ -166,6 +166,29 @@ export default function DashboardPage() {
                   In descrierea platii Revolut treci: tipul de bilet, nume, prenume si emailul
                   unde vrei sa primesti biletele.
                 </p>
+              </div>
+
+              <div className="rounded-[24px] border border-gold/20 bg-[linear-gradient(180deg,rgba(245,196,0,0.08),rgba(255,255,255,0.02))] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.18)] backdrop-blur-xl">
+                <div className="flex items-center justify-between gap-3">
+                  <div className="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-gold/80">
+                    Pasul 4
+                  </div>
+                  <div className="rounded-xl border border-gold/20 bg-gold/10 p-2 text-gold">
+                    <MailCheck size={15} />
+                  </div>
+                </div>
+                <div className="mt-3 text-lg font-semibold text-white">Emiterea biletului</div>
+                <p className="mt-3 text-sm leading-6 text-white/[0.68] sm:text-base sm:leading-7">
+                  Dupa confirmarea platii, biletul dumneavoastra va fi procesat si emis in maximum
+                  24 de ore. Biletul va fi transmis pe adresa de email utilizata la achizitie.
+                </p>
+                <div className="mt-4 flex items-start gap-2 rounded-[18px] border border-white/10 bg-black/20 px-3 py-3 text-sm leading-6 text-white/[0.58]">
+                  <Clock3 size={15} className="mt-1 shrink-0 text-gold" />
+                  <span>
+                    Verificati atat Inbox-ul, cat si sectiunea Spam/Junk inainte de a contacta
+                    echipa NorthWay.
+                  </span>
+                </div>
               </div>
             </div>
           </Reveal>

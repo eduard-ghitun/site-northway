@@ -6,6 +6,7 @@ import PageHero from '../components/PageHero'
 import Reveal from '../components/Reveal'
 import Seo from '../components/Seo'
 import TransitionLink from '../components/TransitionLink'
+import LegalConsentCheckbox from '../components/legal/LegalConsentCheckbox'
 import { useAuth } from '../providers/AuthProvider'
 
 const initialFormData = {
@@ -50,6 +51,8 @@ export default function LoginPage() {
   const { login, hasSupabaseConfig, loading, user, defaultDashboardPath } = useAuth()
   const bannedFlag = searchParams.get('banned') === '1'
   const [formData, setFormData] = useState(initialFormData)
+  const [acceptedLegal, setAcceptedLegal] = useState(false)
+  const [legalError, setLegalError] = useState('')
   const [status, setStatus] = useState({
     state: 'idle',
     message: bannedFlag
@@ -90,6 +93,19 @@ export default function LoginPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
+
+    if (!acceptedLegal) {
+      setLegalError(
+        'Trebuie sa confirmi ca ai citit Termenii si Conditiile si Politica de Confidentialitate.',
+      )
+      setStatus({
+        state: 'error',
+        message: 'Bifeaza acordul legal inainte de autentificare.',
+      })
+      return
+    }
+
+    setLegalError('')
 
     setStatus({
       state: 'loading',
@@ -159,6 +175,18 @@ export default function LoginPage() {
                 placeholder="Introdu parola"
                 autoComplete="current-password"
                 icon={LockKeyhole}
+              />
+              <LegalConsentCheckbox
+                id="login-legal-consent"
+                checked={acceptedLegal}
+                onChange={(event) => {
+                  setAcceptedLegal(event.target.checked)
+                  if (event.target.checked) {
+                    setLegalError('')
+                  }
+                }}
+                required
+                error={legalError}
               />
 
               <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">

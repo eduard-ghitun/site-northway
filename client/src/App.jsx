@@ -18,6 +18,9 @@ const LoginPage = lazy(() => import('./pages/LoginPage'))
 const RegisterPage = lazy(() => import('./pages/RegisterPage'))
 const DashboardPage = lazy(() => import('./pages/DashboardPage'))
 const AdminDashboardPage = lazy(() => import('./pages/AdminDashboardPage'))
+const TermsPage = lazy(() => import('./pages/Terms'))
+const PrivacyPage = lazy(() => import('./pages/Privacy'))
+const CookiesPage = lazy(() => import('./pages/Cookies'))
 
 const pages = [
   { path: '/', element: <HomePage /> },
@@ -27,6 +30,9 @@ const pages = [
   { path: '/contact', element: <ContactPage /> },
   { path: '/login', element: <LoginPage /> },
   { path: '/register', element: <RegisterPage /> },
+  { path: '/terms', element: <TermsPage /> },
+  { path: '/privacy', element: <PrivacyPage /> },
+  { path: '/cookies', element: <CookiesPage /> },
   {
     path: '/dashboard',
     element: (

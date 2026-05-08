@@ -44,8 +44,14 @@ export const ticketProducts = [
     priceBelowTitle: true,
     image: partyTicketImage,
     badge: 'Acces Party',
-    description: 'Taxa de participare in cadrul petrecerii ',
-    perks: ['Acces participant', 'Participare in cadrul evenimentului', 'Prezenta in zona dedicata'],
+    description: 'ACCES EXCLUSIV in cadrul Northway Pool Party incepand cu ora 21:00',
+    perks: [
+      'Acces pool party',
+      'Atmosfera de festival',
+      'Show lumini',
+      'Spectacol artificii',
+      'Multiple surprize',
+    ],
     checkoutUrl: 'https://revolut.me/unchiubenz',
   },
 ]

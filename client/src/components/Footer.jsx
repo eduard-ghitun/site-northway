@@ -3,11 +3,12 @@ import TikTokIcon from './TikTokIcon'
 import TransitionLink from './TransitionLink'
 import { contactEmail, contactLocation, socialLinks } from '../data/contactDetails'
 import { navigation } from '../data/navigation'
+import { legalLinks } from '../data/legalLinks'
 
 export default function Footer() {
   return (
     <footer className="border-t border-white/10 bg-black/40">
-      <div className="container-shell grid gap-8 py-8 sm:gap-10 sm:py-10 lg:grid-cols-[1.2fr_0.8fr_0.8fr]">
+      <div className="container-shell grid gap-8 py-8 sm:gap-10 sm:py-10 lg:grid-cols-[1.1fr_0.75fr_0.9fr_0.95fr]">
         <div className="max-w-md">
           <TransitionLink to="/" className="font-display text-lg uppercase tracking-[0.12em] text-white sm:text-2xl sm:tracking-[0.18em]">
             NorthSideCrew
@@ -25,6 +26,23 @@ export default function Footer() {
           <div className="mt-4 space-y-3 text-sm leading-6 text-white/[0.68] sm:text-base">
             {navigation.map((item) => (
               <TransitionLink key={item.path} to={item.path} className="block py-0.5 transition hover:text-gold">
+                {item.label}
+              </TransitionLink>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <h3 className="text-sm font-semibold uppercase tracking-[0.28em] text-gold">
+            Conditii
+          </h3>
+          <div className="mt-4 space-y-3 text-sm leading-6 text-white/[0.68] sm:text-base">
+            {legalLinks.map((item) => (
+              <TransitionLink
+                key={item.path}
+                to={item.path}
+                className="block py-0.5 transition hover:text-gold"
+              >
                 {item.label}
               </TransitionLink>
             ))}
