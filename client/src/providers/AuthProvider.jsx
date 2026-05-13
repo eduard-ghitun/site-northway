@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useMemo, useState } from 'react'
+import { createContext, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { authStorageKey, hasSupabaseConfig, legacyAuthStorageKeys, supabase } from '../lib/supabase'
 
@@ -169,6 +169,33 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
   const [profile, setProfile] = useState(null)
   const [loading, setLoading] = useState(true)
+  const profileRequestRef = useRef(null)
+
+  async function loadProfile(currentUser) {
+    if (!currentUser) {
+      return null
+    }
+
+    if (
+      profileRequestRef.current?.userId === currentUser.id &&
+      profileRequestRef.current?.promise
+    ) {
+      return profileRequestRef.current.promise
+    }
+
+    const profilePromise = ensureProfile(currentUser).finally(() => {
+      if (profileRequestRef.current?.userId === currentUser.id) {
+        profileRequestRef.current = null
+      }
+    })
+
+    profileRequestRef.current = {
+      userId: currentUser.id,
+      promise: profilePromise,
+    }
+
+    return profilePromise
+  }
 
   async function signOutAndReset(redirectTo = '/', query = '') {
     if (supabase) {
@@ -192,7 +219,7 @@ export function AuthProvider({ children }) {
     }
 
     try {
-      const nextProfile = await ensureProfile(currentUser)
+      const nextProfile = await loadProfile(currentUser)
       setProfile(nextProfile)
 
       if (nextProfile?.status === BANNED_STATUS) {
@@ -260,7 +287,7 @@ export function AuthProvider({ children }) {
         setUser(nextUser)
 
         if (nextUser) {
-          const nextProfile = await ensureProfile(nextUser)
+          const nextProfile = await loadProfile(nextUser)
           applyResolvedProfile(nextProfile)
         } else {
           setProfile(null)
@@ -304,7 +331,7 @@ export function AuthProvider({ children }) {
       if (nextUser) {
         queueMicrotask(async () => {
           try {
-            const nextProfile = await ensureProfile(nextUser)
+            const nextProfile = await loadProfile(nextUser)
             applyResolvedProfile(nextProfile)
           } catch (error) {
             console.error('Failed to load profile after auth state change:', error)
@@ -423,8 +450,10 @@ export function AuthProvider({ children }) {
       }
     }
 
+    const normalizedEmail = email.trim().toLowerCase()
+
     const { data, error } = await supabase.auth.signInWithPassword({
-      email,
+      email: normalizedEmail,
       password,
     })
 

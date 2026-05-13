@@ -61,7 +61,7 @@ const pages = [
 
 export default function App() {
   const location = useLocation()
-  const { useLiteMotion } = useAdaptiveMotion()
+  const { useLiteMotion, useReducedEffects, isIOS } = useAdaptiveMotion()
   const [showIntro, setShowIntro] = useState(() => {
     if (typeof window === 'undefined') {
       return false
@@ -82,7 +82,7 @@ export default function App() {
     [useLiteMotion],
   )
 
-  const shouldShowIntro = showIntro && !useLiteMotion
+  const shouldShowIntro = showIntro && !useReducedEffects && !isIOS
 
   const handleIntroComplete = () => {
     if (typeof window !== 'undefined') {
@@ -98,15 +98,23 @@ export default function App() {
         <RouteTransitionProvider>
           <SiteLayout>
             <Suspense fallback={null}>
-              <AnimatePresence mode="wait">
-                <motion.div key={location.key} {...pageTransition}>
-                  <Routes location={location}>
-                    {pages.map((page) => (
-                      <Route key={page.path} path={page.path} element={page.element} />
-                    ))}
-                  </Routes>
-                </motion.div>
-              </AnimatePresence>
+              {useReducedEffects ? (
+                <Routes location={location}>
+                  {pages.map((page) => (
+                    <Route key={page.path} path={page.path} element={page.element} />
+                  ))}
+                </Routes>
+              ) : (
+                <AnimatePresence mode="wait">
+                  <motion.div key={location.key} {...pageTransition}>
+                    <Routes location={location}>
+                      {pages.map((page) => (
+                        <Route key={page.path} path={page.path} element={page.element} />
+                      ))}
+                    </Routes>
+                  </motion.div>
+                </AnimatePresence>
+              )}
             </Suspense>
           </SiteLayout>
         </RouteTransitionProvider>

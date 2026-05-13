@@ -119,11 +119,12 @@ export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [profileMenuOpen, setProfileMenuOpen] = useState(false)
   const location = useLocation()
-  const { useLiteMotion } = useAdaptiveMotion()
+  const { useLiteMotion, useReducedEffects, isIOS } = useAdaptiveMotion()
   const { user, profile, isAdmin, logout } = useAuth()
   const currentPath = `${location.pathname}${location.hash}`
   const desktopProfileMenuRef = useRef(null)
   const mobileProfileMenuRef = useRef(null)
+  const lockedScrollYRef = useRef(0)
   const { avatarUrl, displayName } = useMemo(
     () => getProfileIdentity(profile, user),
     [profile, user],
@@ -144,17 +145,43 @@ export default function Navbar() {
 
   useEffect(() => {
     const previousOverflow = document.body.style.overflow
+    const previousTouchAction = document.body.style.touchAction
+    const previousPosition = document.body.style.position
+    const previousWidth = document.body.style.width
+    const previousTop = document.body.style.top
 
     if (open) {
+      lockedScrollYRef.current = window.scrollY
       document.body.style.overflow = 'hidden'
+      document.body.style.touchAction = 'none'
+
+      if (isIOS) {
+        document.body.style.position = 'fixed'
+        document.body.style.width = '100%'
+        document.body.style.top = `-${lockedScrollYRef.current}px`
+      }
     } else {
       document.body.style.overflow = previousOverflow
+      document.body.style.touchAction = previousTouchAction
+
+      if (isIOS) {
+        document.body.style.position = previousPosition
+        document.body.style.width = previousWidth
+        document.body.style.top = previousTop
+        if (lockedScrollYRef.current) {
+          window.scrollTo(0, lockedScrollYRef.current)
+        }
+      }
     }
 
     return () => {
       document.body.style.overflow = previousOverflow
+      document.body.style.touchAction = previousTouchAction
+      document.body.style.position = previousPosition
+      document.body.style.width = previousWidth
+      document.body.style.top = previousTop
     }
-  }, [open])
+  }, [isIOS, open])
 
   useEffect(() => {
     function handlePointerDown(event) {
@@ -189,8 +216,12 @@ export default function Navbar() {
   const shellClass = clsx(
     'relative overflow-visible rounded-[24px] border px-3 py-2.5 transition duration-300 sm:rounded-full sm:px-4 sm:py-2.5 lg:px-5',
     scrolled
-      ? 'border-white/[0.12] bg-black/[0.68] shadow-[0_20px_70px_rgba(0,0,0,0.34)] backdrop-blur-2xl'
-      : 'border-white/10 bg-black/[0.58] shadow-[0_12px_50px_rgba(0,0,0,0.2)] backdrop-blur-xl',
+      ? useReducedEffects
+        ? 'border-white/[0.12] bg-black/[0.92] shadow-[0_14px_40px_rgba(0,0,0,0.26)]'
+        : 'border-white/[0.12] bg-black/[0.68] shadow-[0_20px_70px_rgba(0,0,0,0.34)] backdrop-blur-2xl'
+      : useReducedEffects
+        ? 'border-white/10 bg-[#080808]/95 shadow-[0_10px_28px_rgba(0,0,0,0.18)]'
+        : 'border-white/10 bg-black/[0.58] shadow-[0_12px_50px_rgba(0,0,0,0.2)] backdrop-blur-xl',
   )
 
   const profileButtonClass = clsx(
@@ -299,13 +330,31 @@ export default function Navbar() {
             <AnimatePresence>
               {open ? (
                 <motion.nav
-                  initial={useLiteMotion ? { opacity: 0, height: 0 } : { opacity: 0, height: 0, y: -8 }}
-                  animate={useLiteMotion ? { opacity: 1, height: 'auto' } : { opacity: 1, height: 'auto', y: 0 }}
-                  exit={useLiteMotion ? { opacity: 0, height: 0 } : { opacity: 0, height: 0, y: -8 }}
-                  transition={{ duration: useLiteMotion ? 0.16 : 0.24, ease: [0.22, 1, 0.36, 1] }}
+                  initial={
+                    useReducedEffects
+                      ? { opacity: 0 }
+                      : useLiteMotion
+                        ? { opacity: 0, height: 0 }
+                        : { opacity: 0, height: 0, y: -8 }
+                  }
+                  animate={
+                    useReducedEffects
+                      ? { opacity: 1 }
+                      : useLiteMotion
+                        ? { opacity: 1, height: 'auto' }
+                        : { opacity: 1, height: 'auto', y: 0 }
+                  }
+                  exit={
+                    useReducedEffects
+                      ? { opacity: 0 }
+                      : useLiteMotion
+                        ? { opacity: 0, height: 0 }
+                        : { opacity: 0, height: 0, y: -8 }
+                  }
+                  transition={{ duration: useReducedEffects ? 0.08 : useLiteMotion ? 0.16 : 0.24, ease: [0.22, 1, 0.36, 1] }}
                   className="relative overflow-hidden lg:hidden"
                 >
-                  <div className="mt-4 max-h-[calc(100svh-6.5rem)] space-y-3 overflow-y-auto border-t border-white/10 pt-4 pb-1">
+                  <div className="mt-4 max-h-[calc(100dvh-6.5rem)] space-y-3 overflow-y-auto overscroll-contain border-t border-white/10 pt-4 pb-[max(0.25rem,env(safe-area-inset-bottom))]">
                     <div className="rounded-[24px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.02))] p-2">
                       {navigation.map((item) => {
                         const isActive =

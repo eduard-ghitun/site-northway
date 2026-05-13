@@ -28,7 +28,7 @@ function isHashOnlyNavigation(currentLocation, to) {
 export function RouteTransitionProvider({ children }) {
   const navigate = useNavigate()
   const location = useLocation()
-  const { useLiteMotion } = useAdaptiveMotion()
+  const { useLiteMotion, useReducedEffects, isIOS } = useAdaptiveMotion()
   const [isTransitioning, setIsTransitioning] = useState(false)
   const timersRef = useRef([])
 
@@ -75,6 +75,11 @@ export function RouteTransitionProvider({ children }) {
         return
       }
 
+      if (useReducedEffects || isIOS) {
+        navigate(to, options)
+        return
+      }
+
       setIsTransitioning(true)
       clearTimers()
 
@@ -89,7 +94,7 @@ export function RouteTransitionProvider({ children }) {
         }, transitionTotalMs),
       )
     },
-    [clearTimers, isTransitioning, location, navigate, useLiteMotion],
+    [clearTimers, isIOS, isTransitioning, location, navigate, useLiteMotion, useReducedEffects],
   )
 
   const value = useMemo(
@@ -113,7 +118,7 @@ export function RouteTransitionProvider({ children }) {
       >
         {children}
       </motion.div>
-      <PageTransition active={isTransitioning} />
+      {!useReducedEffects && !isIOS ? <PageTransition active={isTransitioning} /> : null}
     </RouteTransitionContext.Provider>
   )
 }

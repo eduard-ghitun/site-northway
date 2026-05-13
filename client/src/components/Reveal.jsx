@@ -3,7 +3,15 @@ import clsx from 'clsx'
 import useAdaptiveMotion from '../hooks/useAdaptiveMotion'
 
 export default function Reveal({ children, className, delay = 0, y = 28, ...props }) {
-  const { useLiteMotion } = useAdaptiveMotion()
+  const { useLiteMotion, useReducedEffects } = useAdaptiveMotion()
+
+  if (useReducedEffects) {
+    return (
+      <div className={clsx(className)} {...props}>
+        {children}
+      </div>
+    )
+  }
 
   return (
     <motion.div

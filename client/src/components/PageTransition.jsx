@@ -45,7 +45,11 @@ function PanelWord({ word, side }) {
 }
 
 export default function PageTransition({ active }) {
-  const { useLiteMotion, isMobileViewport } = useAdaptiveMotion()
+  const { useLiteMotion, isMobileViewport, useReducedEffects } = useAdaptiveMotion()
+
+  if (useReducedEffects) {
+    return null
+  }
 
   return (
     <AnimatePresence>

@@ -2,27 +2,36 @@ import { motion } from 'framer-motion'
 import useAdaptiveMotion from '../hooks/useAdaptiveMotion'
 
 export default function PageHero({ eyebrow, title, description }) {
-  const { useLiteMotion } = useAdaptiveMotion()
+  const { useLiteMotion, useReducedEffects } = useAdaptiveMotion()
+
+  const content = (
+    <div className="panel relative overflow-hidden px-4 py-6 text-center sm:px-6 sm:py-8 md:text-left lg:px-14 lg:py-14">
+      <div className="absolute inset-y-0 right-0 hidden w-1/2 bg-gradient-to-l from-gold/10 to-transparent sm:block" />
+      <span className="eyebrow mx-auto md:mx-0">{eyebrow}</span>
+      <h1 className="title-xl mx-auto max-w-4xl md:mx-0">{title}</h1>
+      <p className="mx-auto mt-4 max-w-3xl text-[0.98rem] leading-7 text-white/[0.68] sm:mt-5 sm:text-lg sm:leading-8 md:mx-0 md:mt-6">
+        {description}
+      </p>
+    </div>
+  )
 
   return (
     <section className="relative overflow-hidden pt-20 sm:pt-24 md:pt-28 lg:pt-32">
       <div className="container-shell">
-        <motion.div
-          initial={useLiteMotion ? { opacity: 0 } : { opacity: 0, y: 22 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: useLiteMotion ? 0.36 : 0.7,
-            ease: useLiteMotion ? 'easeOut' : [0.22, 1, 0.36, 1],
-          }}
-          className="panel relative overflow-hidden px-4 py-7 text-center sm:px-6 sm:py-9 md:text-left lg:px-14 lg:py-16"
-        >
-          <div className="absolute inset-y-0 right-0 hidden w-1/2 bg-gradient-to-l from-gold/10 to-transparent sm:block" />
-          <span className="eyebrow mx-auto md:mx-0">{eyebrow}</span>
-          <h1 className="title-xl mx-auto max-w-4xl md:mx-0">{title}</h1>
-          <p className="mx-auto mt-4 max-w-3xl text-[0.98rem] leading-7 text-white/[0.68] sm:mt-5 sm:text-lg sm:leading-8 md:mx-0 md:mt-6">
-            {description}
-          </p>
-        </motion.div>
+        {useReducedEffects ? (
+          content
+        ) : (
+          <motion.div
+            initial={useLiteMotion ? { opacity: 0 } : { opacity: 0, y: 22 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: useLiteMotion ? 0.36 : 0.7,
+              ease: useLiteMotion ? 'easeOut' : [0.22, 1, 0.36, 1],
+            }}
+          >
+            {content}
+          </motion.div>
+        )}
       </div>
     </section>
   )

@@ -22,6 +22,7 @@ function AuthField({
   value,
   onChange,
   autoComplete,
+  inputMode,
   icon: Icon,
 }) {
   return (
@@ -38,6 +39,10 @@ function AuthField({
           onChange={onChange}
           placeholder={placeholder}
           autoComplete={autoComplete}
+          inputMode={inputMode}
+          autoCapitalize="none"
+          autoCorrect="off"
+          spellCheck={false}
           className="w-full bg-transparent text-base text-white outline-none placeholder:text-white/[0.32]"
         />
       </div>
@@ -164,6 +169,7 @@ export default function LoginPage() {
                 onChange={handleChange}
                 placeholder="nume@email.com"
                 autoComplete="email"
+                inputMode="email"
                 icon={Mail}
               />
               <AuthField

@@ -6,10 +6,10 @@ import AppImage from './AppImage'
 import TransitionLink from './TransitionLink'
 
 export default function HeroSection() {
-  const { useLiteMotion } = useAdaptiveMotion()
+  const { useLiteMotion, useReducedEffects } = useAdaptiveMotion()
 
   return (
-    <section className="relative flex min-h-[100svh] items-center overflow-hidden pt-24 pb-10 sm:pt-28 sm:pb-14 lg:pt-24 lg:pb-10">
+    <section className="relative flex min-h-[100dvh] items-center overflow-hidden pt-24 pb-10 sm:pt-28 sm:pb-14 lg:pt-24 lg:pb-10">
       <div className="container-shell grid items-center gap-8 sm:gap-10 lg:grid-cols-[minmax(0,0.68fr)_minmax(0,1.04fr)] lg:gap-16 xl:grid-cols-[minmax(0,0.64fr)_minmax(0,1.08fr)] xl:gap-24">
         <div className="relative z-10 mx-auto max-w-[34rem] text-center lg:-translate-y-8 lg:mx-0 lg:pr-4 lg:text-left xl:max-w-[31rem] xl:pr-8">
           <motion.div
@@ -55,7 +55,7 @@ export default function HeroSection() {
           transition={{ duration: useLiteMotion ? 0.32 : 0.95, ease: [0.22, 1, 0.36, 1] }}
           className="relative mx-auto w-full max-w-[38rem] lg:ml-auto lg:max-w-[46rem]"
         >
-          {!useLiteMotion ? (
+          {!useReducedEffects ? (
             <div className="absolute inset-4 rounded-[28px] bg-gold/10 blur-3xl sm:inset-6 sm:rounded-[32px]" />
           ) : null}
           <div className="panel relative overflow-hidden p-2.5 sm:p-3">
@@ -72,7 +72,7 @@ export default function HeroSection() {
         </motion.div>
       </div>
 
-      {!useLiteMotion ? (
+      {!useReducedEffects ? (
         <motion.a
           href="#home-intro"
           initial={{ opacity: 0 }}
