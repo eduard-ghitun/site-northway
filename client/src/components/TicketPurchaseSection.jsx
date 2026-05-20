@@ -51,6 +51,12 @@ function TicketProductCard({
           {product.description}
         </p>
 
+        {product.infoNote ? (
+          <div className="mt-4 rounded-[18px] border border-gold/35 bg-gold/10 px-4 py-3 text-sm font-semibold uppercase leading-6 tracking-[0.08em] text-gold sm:text-base">
+            {product.infoNote}
+          </div>
+        ) : null}
+
         <div className="mt-5 grid gap-3 sm:grid-cols-3">
           {product.perks.map((perk) => (
             <div

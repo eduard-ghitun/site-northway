@@ -34,6 +34,8 @@ export const ticketProducts = [
     badge: 'Acces VIP',
     description:
       'Achizitie disponibila pana pe data de 01.06.2026, cu acces pentru 2 zile pe 20-21 iunie si NORTHWAY Goodiebag inclus.',
+    infoNote:
+      '⚠️⚠️⚠️ TURBOLIDER VINE CU O SUPER REDUCERE DE 150 LEI LA RECONDITIONARE TURBO',
     perks: ['Achizitie pana la 01.06.2026', 'Acces 2 zile / 20-21 iunie', 'NORTHWAY Goodiebag'],
     checkoutUrl: 'https://revolut.me/unchiubenz',
   },
