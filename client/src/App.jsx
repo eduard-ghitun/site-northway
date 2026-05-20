@@ -2,9 +2,11 @@ import { lazy, Suspense, useMemo, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import IntroLoader from './components/IntroLoader'
+import WelcomePopup from './components/WelcomePopup'
 import AdminRoute from './components/AdminRoute'
 import ProtectedRoute from './components/ProtectedRoute'
 import SiteLayout from './layout/SiteLayout'
+import { dashboardImages } from './assets/images'
 import useAdaptiveMotion from './hooks/useAdaptiveMotion'
 import { AuthProvider } from './providers/AuthProvider'
 import { RouteTransitionProvider } from './providers/RouteTransitionProvider'
@@ -119,6 +121,11 @@ export default function App() {
           </SiteLayout>
         </RouteTransitionProvider>
       </AuthProvider>
+      <WelcomePopup
+        imageSrc={dashboardImages.ticketAccountPopup}
+        imageAlt="Biletele devin disponibile doar dupa ce iti creezi cont si intri in dashboard"
+        openDelay={3000}
+      />
       {shouldShowIntro ? <IntroLoader onComplete={handleIntroComplete} /> : null}
     </>
   )

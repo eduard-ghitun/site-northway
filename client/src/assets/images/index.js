@@ -1,4 +1,5 @@
 import aboutCommunityPlaceholder from './about/about-community-placeholder.svg'
+import dashboardTicketAccountPopupImage from './dashboard/bilete-cont-dashboard-popup.svg'
 import dashboardConnectImage from './dashboard/introducereconnect.png'
 import northwayEdition2BannerPlaceholder from './events/northway-edition-2-banner-placeholder.svg'
 import homeCommunityPlaceholder from './home/home-community-placeholder.svg'
@@ -38,6 +39,7 @@ export const aboutImages = {
 
 export const dashboardImages = {
   connect: dashboardConnectImage,
+  ticketAccountPopup: dashboardTicketAccountPopupImage,
 }
 
 export const eventImages = {
