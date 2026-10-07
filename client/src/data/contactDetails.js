@@ -1,6 +1,4 @@
 export const contactEmail = 'northsideautomotivecrew@gmail.com'
-export const registrationEmail = 'northwaytuning@gmail.com'
-export const registrationWhatsAppNumber = '40772120902'
 
 export const contactLocation = 'Botoșani, România'
 export const contactLocationMapUrl = 'https://www.google.com/maps?q=Botosani,Romania'

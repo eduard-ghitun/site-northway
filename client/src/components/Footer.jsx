@@ -94,7 +94,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="border-t border-white/10">
-        <div className="container-shell flex flex-col gap-2 py-4 text-sm text-white/[0.45] sm:flex-row sm:items-center sm:justify-between">
+        <div className="container-shell safe-bottom flex flex-col gap-2 pt-4 text-sm text-white/[0.45] sm:flex-row sm:items-center sm:justify-between sm:py-4">
           <p>© 2026 NorthSideCrew. Toate drepturile rezervate.</p>
           <p>Creat pentru experiențe auto premium.</p>
         </div>

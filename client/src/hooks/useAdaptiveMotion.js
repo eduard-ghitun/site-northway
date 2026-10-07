@@ -10,6 +10,7 @@ function getAdaptiveMotionState() {
       isTouchDevice: false,
       isIOS: false,
       saveDataEnabled: false,
+      slowNetwork: false,
       prefersReducedMotion: false,
       useLiteMotion: false,
       useReducedEffects: false,
@@ -28,9 +29,11 @@ function getAdaptiveMotionState() {
     typeof navigator !== 'undefined' &&
     /iPad|iPhone|iPod/.test(navigator.userAgent || '') &&
     !window.MSStream
-  const saveDataEnabled = Boolean(navigator?.connection?.saveData)
+  const connection = navigator?.connection
+  const saveDataEnabled = Boolean(connection?.saveData)
+  const slowNetwork = ['slow-2g', '2g'].includes(connection?.effectiveType)
   const useReducedEffects =
-    prefersReducedMotion || saveDataEnabled || isMobileViewport || isTabletViewport || isTouchDevice
+    prefersReducedMotion || saveDataEnabled || slowNetwork || isMobileViewport || isTabletViewport || isTouchDevice
 
   return {
     canHover,
@@ -40,6 +43,7 @@ function getAdaptiveMotionState() {
     isTouchDevice,
     isIOS,
     saveDataEnabled,
+    slowNetwork,
     prefersReducedMotion,
     useLiteMotion: useReducedEffects || !canHover,
     useReducedEffects,

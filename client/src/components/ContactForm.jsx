@@ -87,7 +87,9 @@ export default function ContactForm({ embedded = false }) {
             value={formData[field.name]}
             onChange={handleChange}
             placeholder={field.placeholder}
-            className="w-full rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-4 text-base text-white outline-none transition placeholder:text-white/[0.32] focus:border-gold/[0.55] focus:bg-white/[0.05] focus:shadow-[0_0_0_4px_rgba(245,196,0,0.08)] sm:px-5"
+            autoComplete={field.name === 'name' ? 'name' : 'email'}
+            inputMode={field.name === 'email' ? 'email' : 'text'}
+            className="min-h-[52px] w-full rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-4 text-base text-white outline-none transition placeholder:text-white/[0.32] focus:border-gold/[0.55] focus:bg-white/[0.05] focus:shadow-[0_0_0_4px_rgba(245,196,0,0.08)] sm:px-5"
           />
         </label>
       ))}
@@ -102,7 +104,8 @@ export default function ContactForm({ embedded = false }) {
           onChange={handleChange}
           placeholder="Scrie-ne despre mașina ta, despre interesul tău pentru evenimente sau orice întrebare ai."
           rows="6"
-          className="w-full rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-4 text-base text-white outline-none transition placeholder:text-white/[0.32] focus:border-gold/[0.55] focus:bg-white/[0.05] focus:shadow-[0_0_0_4px_rgba(245,196,0,0.08)] sm:px-5"
+          autoComplete="off"
+          className="min-h-[10rem] w-full rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-4 text-base text-white outline-none transition placeholder:text-white/[0.32] focus:border-gold/[0.55] focus:bg-white/[0.05] focus:shadow-[0_0_0_4px_rgba(245,196,0,0.08)] sm:px-5"
         />
       </label>
 
@@ -127,6 +130,7 @@ export default function ContactForm({ embedded = false }) {
 
         {status.message ? (
           <p
+            aria-live="polite"
             className={`max-w-md text-sm leading-6 break-words sm:text-[0.95rem] ${
               status.state === 'success'
                 ? 'text-gold'

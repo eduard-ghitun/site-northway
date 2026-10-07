@@ -21,22 +21,20 @@ function DropdownItem({ item, onNavigate, mobile = false }) {
       to={item.path}
       onClick={onNavigate}
       className={clsx(
-        'group flex items-start gap-3 rounded-[18px] border border-transparent px-4 py-3 text-left transition duration-300',
+        'group flex items-start gap-3 border-l-2 border-transparent px-3 py-2.5 text-left transition duration-200',
         mobile
-          ? 'bg-white/[0.03] hover:border-gold/20 hover:bg-gold/10'
-          : 'hover:border-gold/20 hover:bg-gold/10',
+          ? 'bg-white/[0.03] hover:border-gold hover:bg-gold/[0.08]'
+          : 'hover:border-gold hover:bg-white/[0.04]',
       )}
     >
-      <span className="mt-0.5 rounded-2xl border border-gold/25 bg-gold/10 p-2.5 text-gold transition group-hover:shadow-[0_0_20px_rgba(245,196,0,0.16)]">
+      <span className="mt-0.5 border border-gold/35 bg-gold/[0.08] p-2 text-gold transition group-hover:bg-gold group-hover:text-black">
         <Icon size={16} />
       </span>
       <span className="min-w-0">
         <span className="block text-sm font-semibold uppercase tracking-[0.16em] text-white group-hover:text-gold">
           {item.label}
         </span>
-        <span className="mt-1 block text-sm leading-6 text-white/[0.58] group-hover:text-white/[0.74]">
-          {item.description}
-        </span>
+        {mobile ? <span className="mt-1 block text-sm leading-6 text-white/[0.58] group-hover:text-white/[0.74]">{item.description}</span> : null}
       </span>
     </TransitionLink>
   )
@@ -73,21 +71,21 @@ export default function ConditionsDropdown({
 
   const desktopButtonClass = clsx(
     integrated
-      ? 'group relative inline-flex h-11 items-center gap-2 rounded-full px-4 text-[0.76rem] font-medium uppercase tracking-[0.24em] transition duration-300'
-      : 'inline-flex h-11 items-center gap-2 rounded-full border px-4 text-sm font-medium uppercase tracking-[0.18em] transition-[transform,background-color,border-color,box-shadow] duration-300 hover:-translate-y-0.5',
+      ? 'group relative inline-flex h-12 items-center gap-2 px-3 text-[0.68rem] font-semibold uppercase tracking-[0.2em] transition duration-200 xl:px-4 xl:text-[0.72rem]'
+      : 'inline-flex h-10 items-center gap-2 border px-4 text-sm font-medium uppercase tracking-[0.18em] transition-[transform,background-color,border-color,box-shadow] duration-200',
     integrated
       ? isLegalPage || open
         ? 'text-white'
-        : 'text-white/[0.58] hover:bg-white/[0.03] hover:text-white'
+        : 'text-white/[0.56] hover:bg-white/[0.04] hover:text-white'
       : scrolled
-        ? 'border-white/[0.12] bg-white/[0.04] text-white hover:border-gold/30 hover:bg-gold/10 hover:text-gold'
-        : 'border-white/10 bg-white/[0.03] text-white hover:border-gold/30 hover:bg-gold/10 hover:text-gold',
-    !integrated && open && 'border-gold/30 bg-gold/10 text-gold shadow-[0_0_30px_rgba(245,196,0,0.12)]',
+        ? 'border-white/[0.18] bg-white/[0.04] text-white hover:border-gold hover:bg-gold hover:text-black'
+        : 'border-white/[0.16] bg-white/[0.03] text-white hover:border-gold hover:bg-gold hover:text-black',
+    !integrated && open && 'border-gold bg-gold text-black shadow-none',
   )
 
   const mobileButtonClass = clsx(
-    'flex w-full items-center justify-between rounded-[20px] border border-white/10 bg-white/[0.03] px-4 py-3.5 text-left text-sm font-medium uppercase tracking-[0.16em] text-white transition duration-300 active:scale-[0.98] hover:border-gold/25 hover:bg-gold/10 hover:text-gold',
-    open && 'border-gold/30 bg-gold/10 text-gold',
+    'flex w-full items-center justify-between border border-white/[0.14] bg-white/[0.03] px-4 py-3.5 text-left text-sm font-medium uppercase tracking-[0.16em] text-white transition duration-200 active:translate-y-px hover:border-gold hover:bg-gold hover:text-black',
+    open && 'border-gold bg-gold text-black',
   )
 
   return (
@@ -97,27 +95,6 @@ export default function ConditionsDropdown({
         onClick={() => setOpen((value) => !value)}
         aria-haspopup="menu"
         aria-expanded={open}
-        animate={
-          mobile || !integrated || useLiteMotion
-            ? undefined
-            : {
-                y: [0, -1.5, 0],
-                boxShadow: [
-                  '0 0 0 1px rgba(245,196,0,0.08), 0 0 18px rgba(245,196,0,0.04)',
-                  '0 0 0 1px rgba(245,196,0,0.14), 0 0 24px rgba(245,196,0,0.08)',
-                  '0 0 0 1px rgba(245,196,0,0.08), 0 0 18px rgba(245,196,0,0.04)',
-                ],
-              }
-        }
-        transition={
-          mobile || !integrated || useLiteMotion
-            ? undefined
-            : {
-                duration: 2.4,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }
-        }
         className={mobile ? mobileButtonClass : desktopButtonClass}
       >
         <span className="flex items-center gap-2">
@@ -137,10 +114,10 @@ export default function ConditionsDropdown({
         {integrated ? (
           <span
             className={clsx(
-              'absolute -bottom-1 left-1/2 h-px -translate-x-1/2 bg-gold transition-all duration-300',
+              'absolute bottom-0 left-0 h-[2px] bg-gold transition-all duration-200',
               isLegalPage || open
-                ? 'w-[calc(100%-0.15rem)] opacity-100'
-                : 'w-0 opacity-0 group-hover:w-[calc(100%-0.15rem)] group-hover:opacity-100',
+                ? 'w-full opacity-100'
+                : 'w-0 opacity-0 group-hover:w-full group-hover:opacity-100',
             )}
           />
         ) : null}
@@ -154,23 +131,21 @@ export default function ConditionsDropdown({
             exit={useLiteMotion ? { opacity: 0 } : { opacity: 0, y: mobile ? -4 : -8, scale: 0.98 }}
             transition={{ duration: useLiteMotion ? 0.14 : 0.22, ease: [0.22, 1, 0.36, 1] }}
             className={clsx(
-              'z-40 overflow-hidden rounded-[24px] border border-white/10 bg-black/[0.88] shadow-[0_26px_80px_rgba(0,0,0,0.42)] backdrop-blur-2xl',
+              'z-40 overflow-hidden border border-white/[0.16] bg-[#0a0a0a] shadow-[0_18px_42px_rgba(0,0,0,0.38)]',
               mobile
                 ? 'mt-3 p-2'
                 : integrated
-                  ? 'absolute left-1/2 top-[calc(100%+0.8rem)] w-[24rem] -translate-x-1/2 p-2'
-                  : 'absolute right-0 top-[calc(100%+0.85rem)] w-[24rem] p-2',
+                  ? 'absolute left-1/2 top-[calc(100%+0.6rem)] w-[20rem] -translate-x-1/2 p-1.5'
+                  : 'absolute right-0 top-[calc(100%+0.65rem)] w-[20rem] p-1.5',
             )}
             role="menu"
             aria-label="Conditii legale"
           >
-            <div className="rounded-[20px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] p-4">
+            <div className="border-b border-white/[0.1] px-3 py-3">
               <div className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-gold">
                 Documente Legale
               </div>
-              <p className="mt-2 text-sm leading-6 text-white/[0.62]">
-                Acces rapid la politicile esentiale pentru platforma, cont si ticketing online.
-              </p>
+              <p className="mt-1 text-xs leading-5 text-white/[0.5]">Politici pentru platformă, cont și ticketing.</p>
             </div>
 
             <div className="mt-2 space-y-1">

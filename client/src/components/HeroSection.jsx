@@ -9,7 +9,7 @@ export default function HeroSection() {
   const { useLiteMotion, useReducedEffects } = useAdaptiveMotion()
 
   return (
-    <section className="relative flex min-h-[100dvh] items-center overflow-hidden pt-24 pb-10 sm:pt-28 sm:pb-14 lg:pt-24 lg:pb-10">
+    <section className="relative flex min-h-[100svh] min-h-[100dvh] items-center overflow-hidden pt-[max(6.5rem,calc(env(safe-area-inset-top)_+_5rem))] pb-[max(2.5rem,env(safe-area-inset-bottom))] sm:pt-28 sm:pb-14 lg:pt-24 lg:pb-10">
       <div className="container-shell grid items-center gap-8 sm:gap-10 lg:grid-cols-[minmax(0,0.68fr)_minmax(0,1.04fr)] lg:gap-16 xl:grid-cols-[minmax(0,0.64fr)_minmax(0,1.08fr)] xl:gap-24">
         <div className="relative z-10 mx-auto max-w-[34rem] text-center lg:-translate-y-8 lg:mx-0 lg:pr-4 lg:text-left xl:max-w-[31rem] xl:pr-8">
           <motion.div
@@ -64,7 +64,7 @@ export default function HeroSection() {
               alt={heroContent.media.alt}
               loading="eager"
               fetchPriority="high"
-              sizes="(max-width: 640px) 92vw, (max-width: 1024px) 86vw, 46rem"
+              sizes="(max-width: 640px) 94vw, (max-width: 1024px) 86vw, 46rem"
               wrapperClassName="aspect-[16/11] rounded-[20px] sm:aspect-[16/10] sm:rounded-[24px]"
               className="h-full w-full rounded-[20px] object-cover object-center sm:rounded-[24px]"
             />

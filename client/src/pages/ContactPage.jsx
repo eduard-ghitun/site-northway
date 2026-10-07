@@ -3,7 +3,6 @@ import ContactForm from '../components/ContactForm'
 import PageHero from '../components/PageHero'
 import Reveal from '../components/Reveal'
 import Seo from '../components/Seo'
-import TransitionLink from '../components/TransitionLink'
 import {
   contactEmail,
   contactLocation,
@@ -17,7 +16,7 @@ export default function ContactPage() {
     <div>
       <Seo
         title="Contact NorthSideCrew | Evenimente Auto Romania"
-        description="Contacteaza NorthSideCrew pentru evenimente auto, colaborari, inscrieri si informatii despre comunitatea auto din Romania."
+        description="Contacteaza NorthSideCrew pentru evenimente auto, colaborari si informatii despre comunitatea auto din Romania."
         path="/contact"
         ogTitle="Contact NorthSideCrew | Evenimente Auto Romania"
         ogDescription="Trimite un mesaj catre NorthSideCrew si intra in legatura cu comunitatea si evenimentele auto din Romania."
@@ -89,24 +88,6 @@ export default function ContactPage() {
                       />
                     </div>
                   </div>
-                </div>
-
-                <div className="rounded-[24px] border border-white/10 bg-white/[0.02] p-5 sm:rounded-[28px] sm:p-6">
-                  <div className="mb-4 inline-flex rounded-2xl border border-gold/30 bg-gold/10 p-3 text-gold">
-                    <Mail size={24} />
-                  </div>
-                  <h2 className="font-display text-lg uppercase tracking-[0.14em] text-white">
-                    Înscrieri Eveniment
-                  </h2>
-                  <p className="mt-3 text-white/[0.62]">
-                    Pentru înscrieri și detalii legate de participarea la evenimentul NorthWay.
-                  </p>
-                  <TransitionLink
-                    to="/events#event-registration-form"
-                    className="button-primary mt-5 w-full"
-                  >
-                    Mergi la formular
-                  </TransitionLink>
                 </div>
 
                 <div className="rounded-[24px] border border-white/10 bg-white/[0.02] p-5 sm:rounded-[28px] sm:p-6">

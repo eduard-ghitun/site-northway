@@ -215,7 +215,6 @@ export const privacyPage = {
         'nume si prenume',
         'adresa de email',
         'numar de telefon, atunci cand este solicitat in formulare sau fluxuri operationale',
-        'date de cont si metode de autentificare',
         'IP, identificatori de sesiune, date tehnice despre dispozitiv si browser',
         'informatii privind biletele, platile, istoricul comenzilor si interactiunea cu platforma',
         'cookie-uri si date similare de analiza sau preferinte',
@@ -225,7 +224,7 @@ export const privacyPage = {
       id: 'surse-date',
       title: '3. Cum colectam datele',
       paragraphs: [
-        'Datele pot fi colectate direct atunci cand iti creezi cont, te autentifici, completezi formulare, achizitionezi bilete, ne contactezi sau interactionezi cu paginile noastre.',
+        'Datele pot fi colectate direct atunci cand completezi formulare, achizitionezi bilete, ne contactezi sau interactionezi cu paginile noastre.',
         'O parte dintre date sunt generate automat de infrastructura tehnica a site-ului pentru securitate, performanta, logare, analiza trafic si prevenirea fraudelor.',
       ],
     },
@@ -236,7 +235,6 @@ export const privacyPage = {
         'Prelucram datele personale pentru executarea relatiei contractuale cu utilizatorul, pentru obligatii legale, pentru interesul nostru legitim de a administra platforma si, unde este cazul, pe baza consimtamantului exprimat.',
       ],
       bullets: [
-        'crearea si administrarea contului de utilizator',
         'procesarea comenzilor si emiterea biletelor',
         'confirmarea platilor si gestionarea suportului pentru cumparatori',
         'comunicari operationale privind evenimentele, accesul, schimbari de program sau probleme de securitate',
@@ -246,16 +244,8 @@ export const privacyPage = {
       ],
     },
     {
-      id: 'autentificare',
-      title: '5. Autentificare si cont de utilizator',
-      paragraphs: [
-        'Pentru autentificare putem folosi email si parola, precum si servicii de login prin furnizori terti, cum este Google Authentication, in functie de optiunile disponibile in platforma.',
-        'Datele de cont sunt folosite pentru acces securizat, identificarea utilizatorului, gestionarea sesiunii si afisarea istoricului asociat contului.',
-      ],
-    },
-    {
       id: 'plati-online',
-      title: '6. Plati online si ticketing',
+      title: '5. Plati online si ticketing',
       paragraphs: [
         'Pentru achizitia biletelor, datele necesare platii sunt procesate prin furnizori specializati. NorthSideCrew / NorthWay Event nu stocheaza integral datele cardului si nu proceseaza direct informatiile sensibile de plata in afara fluxurilor puse la dispozitie de procesatorii autorizati.',
         'Putem pastra date legate de suma, tipul biletului, statusul platii, identificatori de tranzactie si dovezi necesare contabil si operational.',
@@ -263,36 +253,34 @@ export const privacyPage = {
     },
     {
       id: 'third-party-services',
-      title: '7. Servicii third-party',
+      title: '6. Servicii third-party',
       paragraphs: [
         'Pentru furnizarea serviciilor folosim furnizori terti care actioneaza ca persoane imputernicite sau operatori independenti, in functie de natura serviciului.',
       ],
       bullets: [
-        'Supabase pentru autentificare, sesiuni, baza de date si infrastructura asociata conturilor',
         'Stripe si/sau Revolut pentru procesarea platilor si confirmarea tranzactiilor',
-        'Google Authentication pentru autentificare prin cont Google, acolo unde aceasta optiune este activata',
         'servicii de analytics, hosting, livrare email si protectie operationala, strict in limitele necesare functionarii platformei',
       ],
     },
     {
       id: 'cookies-ip',
-      title: '8. Cookie-uri, IP si date tehnice',
+      title: '7. Cookie-uri, IP si date tehnice',
       paragraphs: [
-        'Platforma poate folosi cookie-uri, local storage, loguri de acces si identificatori tehnici pentru mentinerea sesiunii, securitate, preferinte, analiza trafic si performanta.',
+        'Platforma poate folosi cookie-uri, local storage, loguri de acces si identificatori tehnici pentru securitate, preferinte, analiza trafic si performanta.',
         'Adresa IP si datele tehnice ale dispozitivului pot fi prelucrate pentru detectarea tentativelor de abuz, depanare, statistici agregate si protectia infrastructurii.',
       ],
     },
     {
       id: 'stocare',
-      title: '9. Stocarea datelor',
+      title: '8. Stocarea datelor',
       paragraphs: [
         'Pastram datele personale atat timp cat sunt necesare pentru scopurile pentru care au fost colectate, pentru indeplinirea obligatiilor legale, pentru apararea drepturilor noastre sau pentru administrarea relatiei cu utilizatorul.',
-        'Perioadele de stocare pot diferi in functie de tipul datelor, de natura contului, de istoricul platilor si de obligatiile fiscale sau de arhivare aplicabile.',
+        'Perioadele de stocare pot diferi in functie de tipul datelor, de istoricul platilor si de obligatiile fiscale sau de arhivare aplicabile.',
       ],
     },
     {
       id: 'securitate',
-      title: '10. Securitatea datelor',
+      title: '9. Securitatea datelor',
       paragraphs: [
         'Aplicam masuri tehnice si organizatorice rezonabile pentru a proteja datele personale impotriva accesului neautorizat, distrugerii, pierderii, alterarii sau divulgarii nepermise.',
         'Nicio infrastructura online nu poate garanta securitate absoluta, insa monitorizam riscurile si folosim controale adecvate nivelului de sensibilitate al datelor prelucrate.',

@@ -5,7 +5,7 @@ import ScrollToTop from '../components/ScrollToTop'
 
 export default function SiteLayout({ children }) {
   return (
-    <div className="relative min-h-screen bg-night">
+    <div className="relative min-h-[100svh] min-h-[100dvh] bg-night">
       <AmbientBackground />
       <ScrollToTop />
       <Navbar />

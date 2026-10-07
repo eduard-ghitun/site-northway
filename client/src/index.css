@@ -13,11 +13,13 @@
   color-scheme: dark;
   font-family: 'Barlow', sans-serif;
   background:
-    radial-gradient(circle at top, rgba(245, 196, 0, 0.14), transparent 32%),
-    radial-gradient(circle at 80% 20%, rgba(255, 215, 76, 0.1), transparent 18%),
-    linear-gradient(180deg, #050505 0%, #090a0d 40%, #050505 100%);
-  background-color: #050505;
+    linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+    linear-gradient(180deg, #090909 0%, #060606 42%, #090909 100%);
+  background-size: 72px 72px, auto;
+  background-color: #080808;
   color: #f5f5f5;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 html {
@@ -26,19 +28,26 @@ html {
   scrollbar-width: none;
   -ms-overflow-style: none;
   overflow-x: clip;
+  min-height: 100%;
+  min-height: -webkit-fill-available;
   -webkit-text-size-adjust: 100%;
 }
 
 body {
   min-width: 320px;
+  min-height: 100svh;
   min-height: 100dvh;
+  min-height: -webkit-fill-available;
   margin: 0;
   overflow-x: clip;
   overscroll-behavior-x: none;
+  -webkit-overflow-scrolling: touch;
 }
 
 #root {
+  min-height: 100svh;
   min-height: 100dvh;
+  min-height: -webkit-fill-available;
 }
 
 html::-webkit-scrollbar,
@@ -81,6 +90,24 @@ body::-webkit-scrollbar {
     touch-action: manipulation;
   }
 
+  button,
+  [role='button'] {
+    min-height: 44px;
+  }
+
+  input,
+  textarea,
+  select {
+    font-size: 16px;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0;
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
   img,
   video,
   iframe,
@@ -110,7 +137,7 @@ body::-webkit-scrollbar {
   }
 
   .panel {
-    @apply rounded-[24px] border border-white/10 bg-white/[0.04] shadow-panel backdrop-blur-xl sm:rounded-[28px];
+    @apply rounded-[10px] border border-white/10 bg-[#0c0c0c] shadow-[0_16px_38px_rgba(0,0,0,0.24)];
     transform: translateZ(0);
   }
 
@@ -121,15 +148,15 @@ body::-webkit-scrollbar {
   }
 
   .eyebrow {
-    @apply mb-4 inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-3 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.26em] text-gold sm:text-[0.7rem] sm:tracking-[0.35em];
+    @apply mb-4 inline-flex items-center gap-2 border-l-2 border-gold bg-gold/[0.06] px-3 py-1.5 text-[0.62rem] font-semibold uppercase tracking-[0.26em] text-gold sm:text-[0.7rem] sm:tracking-[0.35em];
   }
 
   .button-primary {
-    @apply inline-flex min-h-[52px] items-center justify-center gap-2 rounded-full border border-gold/50 bg-gold px-5 py-3 text-center text-[0.76rem] font-semibold uppercase tracking-[0.18em] text-black transition-[transform,background-color,border-color,box-shadow] duration-300 active:scale-[0.98] hover:-translate-y-0.5 hover:bg-amber hover:shadow-glow sm:px-6 sm:text-sm sm:tracking-[0.24em];
+    @apply inline-flex min-h-[50px] items-center justify-center gap-2 rounded-[3px] border border-gold bg-gold px-5 py-3 text-center text-[0.72rem] font-bold uppercase tracking-[0.18em] text-black shadow-[inset_-3px_-3px_0_rgba(0,0,0,0.15)] transition-[transform,background-color,border-color,box-shadow] duration-200 active:translate-y-px active:shadow-none hover:-translate-y-px hover:bg-amber hover:shadow-[4px_4px_0_rgba(245,196,0,0.22)] sm:px-6 sm:text-sm sm:tracking-[0.22em];
   }
 
   .button-secondary {
-    @apply inline-flex min-h-[52px] items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-5 py-3 text-center text-[0.76rem] font-semibold uppercase tracking-[0.18em] text-white transition-[transform,background-color,border-color,box-shadow] duration-300 active:scale-[0.98] hover:-translate-y-0.5 hover:border-gold/50 hover:bg-gold/10 hover:text-gold sm:px-6 sm:text-sm sm:tracking-[0.24em];
+    @apply inline-flex min-h-[50px] items-center justify-center gap-2 rounded-[3px] border border-white/30 bg-transparent px-5 py-3 text-center text-[0.72rem] font-bold uppercase tracking-[0.18em] text-white transition-[transform,background-color,border-color,box-shadow] duration-200 active:translate-y-px hover:-translate-y-px hover:border-gold hover:bg-gold hover:text-black hover:shadow-[4px_4px_0_rgba(245,196,0,0.18)] sm:px-6 sm:text-sm sm:tracking-[0.22em];
   }
 
   .title-xl {
@@ -270,6 +297,10 @@ body::-webkit-scrollbar {
     @apply mx-auto mt-8 grid max-w-3xl gap-5 sm:mt-10 sm:gap-6 lg:max-w-6xl lg:grid-cols-2;
     align-items: start;
   }
+
+  .safe-bottom {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
 }
 
 .ambient-grid {
@@ -316,8 +347,12 @@ body::-webkit-scrollbar {
   }
 
   .panel {
-    border-radius: 22px;
-    backdrop-filter: blur(10px);
+    border-radius: 8px;
+  }
+
+  .title-xl,
+  .title-lg {
+    hyphens: auto;
   }
 
   .eyebrow {
@@ -328,6 +363,13 @@ body::-webkit-scrollbar {
     padding-top: 3.5rem;
     padding-bottom: 3.5rem;
     contain-intrinsic-size: 1px 720px;
+  }
+
+  .button-primary,
+  .button-secondary {
+    min-height: 52px;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
   .text-muted {
@@ -356,6 +398,32 @@ body::-webkit-scrollbar {
   .member-card-toggle {
     width: 100%;
     justify-content: center;
+  }
+}
+
+@media (max-width: 390px) {
+  .eyebrow {
+    padding-left: 0.65rem;
+    padding-right: 0.65rem;
+    letter-spacing: 0.2em;
+  }
+
+  .button-primary,
+  .button-secondary {
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .member-card-media-image-hover {
+    transform: none;
+  }
+
+  .button-primary:hover,
+  .button-secondary:hover {
+    transform: none;
+    box-shadow: none;
   }
 }
 

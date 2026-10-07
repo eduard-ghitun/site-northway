@@ -1,4 +1,4 @@
-import { eventImages, sharedImages } from '../assets/images'
+import { eventImages } from '../assets/images'
 
 export const featuredEvent = {
   slug: 'northway-editia-1',
@@ -17,40 +17,7 @@ export const featuredEvent = {
   gallery: [...eventImages.gallery],
 }
 
-export const upcomingEvents = [
-  {
-    slug: 'sunset-rolling-session',
-    title: 'Sunset Rolling Session',
-    date: '11 octombrie 2026',
-    location: 'Urban Ring Route',
-    description:
-      'O sesiune de cruising de seară, gândită pentru mașini bine pregătite, cadre dinamice și o atmosferă relaxată.',
-    image: sharedImages.galleryRun,
-    imageAlt: 'Session automotive la apus',
-  },
-  {
-    slug: 'midnight-details-meet',
-    title: 'Midnight Details Meet',
-    date: '7 noiembrie 2026',
-    location: 'Warehouse Quarter',
-    description:
-      'Un format concentrat pe detalii, prezență și mașini care impresionează prin stil, finish și personalitate.',
-    image: sharedImages.galleryLights,
-    imageAlt: 'Întâlnire auto cu lumini premium',
-  },
-  {
-    slug: 'northside-season-closing',
-    title: 'NorthSide Season Closing',
-    date: '5 decembrie 2026',
-    location: 'Locatie privata TBA',
-    description:
-      'O închidere de sezon pentru comunitate, cu invitați, mașini selectate și o atmosferă construită în jurul pasiunii auto.',
-    image: sharedImages.galleryNightdrive,
-    imageAlt: 'Nightdrive NorthSideCrew',
-  },
-]
-
-export const nextEventHighlight = {
+const featuredEdition = {
   title: 'NorthWay - Edition II',
   subtitle: 'Trei zile de atmosferă premium, build-uri speciale și energie NorthSideCrew autentică.',
   description:
@@ -65,108 +32,10 @@ export const nextEventHighlight = {
   gallery: [...eventImages.gallery],
 }
 
-export const upcomingEventAnnouncement = {
-  title: 'NORTHway',
-  subtitle: 'Northside Automotive Crew anunță al 2-lea eveniment oficial ce va avea loc în Botoșani!',
-  intro:
-    'Cu această ocazie deschidem înscrierile pentru evenimentul auto NORTHway - Second Edition, eveniment ce se va desfășura în perioada 20-21 Iunie, în aceeași locație inedită, Complex Imperia Cucorani. Pentru această ediție avem alocate un număr de 120 locuri.',
-  participantFee: {
-    title: 'Taxa pentru participanți',
-    items: [
-      'Acces în cadrul evenimentului (2 persoane)',
-      'Acces la piscină (2 persoane)',
-      'Acces la Pool Party (2 persoane)',
-      'Reducere 50% mâncare (2 persoane)',
-      'Northside Goodie Bag',
-    ],
-    note:
-      'Pentru fiecare mașină acceptată se va plăti anticipat, pentru rezervarea locului, prin transfer bancar, o taxă de 150 de lei.',
-  },
-  visitorFees: {
-    title: 'Taxe pentru vizitatori',
-    items: [
-      'Taxa de acces pentru vizitatori va fi în valoare de 10 lei / zi, accesul fiind permis în intervalul orar 10:00 - 20:00.',
-      'Taxa de acces Pool Party va fi în valoare de 50 lei / persoană, accesul fiind permis în intervalul orar 21:00 - 05:00.',
-      'În cadrul evenimentului vor avea acces în locație doar participanții și spectatorii care dețin brățară la mână.',
-    ],
-  },
-  registration: {
-    title: 'Înscrierea în cadrul evenimentului',
-    intro: 'Înscrierea se realizează cu formularul de înscriere de pe site.',
-    requirements: [
-      'Număr înmatriculare',
-      'Nume / Prenume',
-      'Username Instagram',
-      'Minim 5 poze calitative din unghiuri diferite (poze clare pentru a scoate în evidență detaliile mașinii)',
-      'Minim 1 poză mod portret',
-      'Scurtă descriere cu modificările aduse sau informații elocvente',
-    ],
-    warning: 'Ultima zi de înscriere este 01.06.2026',
-  },
-  minimumRequirements: {
-    title: 'Cerințe minime de accept',
-    items: ['Jante', 'Suspensie', 'Fitment', 'Fără defecte optice (rugină, îndoituri, elemente lipsă)'],
-  },
-  regulations: {
-    title: 'Regulament',
-    items: [
-      'Accesul în cadrul evenimentului se va face vineri între 18:00-23:00 și sâmbătă între 8:00-13:00. Vă rugăm să respectați cu strictețe programul de acces.',
-      'Nu există accept la poartă, acceptul mașinilor în locație se va face pe baza unei liste de la care nu se vor face excepții sub nicio formă.',
-      'Este complet interzisă mutarea mașinilor pe durata evenimentului.',
-      'Fiecare participant este direct răspunzător de bunurile sale și eventualele pagube produse în cadrul locației.',
-      'Se vor respecta doar indicațiile date de către organizatori și staff. Nerespectarea lor va duce la excluderea din cadrul evenimentului.',
-      'Este interzisă orice activitate și comportament agresiv. EXCLUS: burnout / drift. Nerespectarea lor va duce la excluderea din cadrul evenimentului.',
-      'În incinta locației NU SE ACCEPTĂ CAMPING / FOC DESCHIS.',
-      'Interzis accesul cu trotinete, biciclete, role sau alte articole ce ar putea pune în pericol.',
-      'Accesul în piscină este permis doar participanților, exclus publicului. Vă rugăm acordați atenție consumului de băuturi alcoolice dacă doriți să intrați în piscină.',
-      'Se va permite comercializarea de produse exclusiv destinate domeniului auto doar cu acordul organizatorilor, cu cel puțin 30 zile înaintea evenimentului.',
-    ],
-  },
-  stays: {
-    title: 'Recomandări cazări',
-    items: ['Popas Cucorani', 'Pensiunea Casa Boema', 'Hotel Premier', 'Hotel Rapsodia'],
-  },
-  schedule: {
-    title: 'Program',
-    dayOne: {
-      title: 'Ziua I – sâmbătă',
-      items: [
-        '08:00-13:00 Meet & Greet',
-        '17:00 Loudest Exhaust',
-        '18:00 Powerful Exhaust',
-        '22:00 Biggest Flame',
-        '22:30 Pool Party',
-      ],
-    },
-    dayTwo: {
-      title: 'Ziua II – duminică',
-      items: ['13:00 Premierea', '16:00 Închiderea evenimentului'],
-    },
-  },
-  awards: {
-    title: 'Categorii de premii',
-    items: [
-      'Best car of the show',
-      'TOP 10',
-      'Best paint',
-      'Best wheels',
-      'Best interior',
-      'Best exterior',
-      'Lowest static',
-      'Lowest airride',
-      'Best loudest exhaust',
-      'Best biggest flame',
-      'Best powerful exhaust',
-      'Best OEM',
-      'Best Retro',
-      'Best Club Display',
-    ],
-  },
-}
-
 export const completedEventHighlight = {
   title: 'NorthWay - Ediția I',
   status: 'Eveniment încheiat',
+  featuredEdition,
   description:
     'NorthWay - Ediția I a reprezentat primul pas în construirea unei experiențe autentice NorthSideCrew. Evenimentul a adus împreună pasiunea pentru mașini, comunitatea și atmosfera specifică unui meet auto memorabil.',
   summary:

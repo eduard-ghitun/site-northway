@@ -16,7 +16,7 @@ export default function PageHero({ eyebrow, title, description }) {
   )
 
   return (
-    <section className="relative overflow-hidden pt-20 sm:pt-24 md:pt-28 lg:pt-32">
+    <section className="relative overflow-hidden pt-[max(5.5rem,calc(env(safe-area-inset-top)_+_4.5rem))] sm:pt-24 md:pt-28 lg:pt-32">
       <div className="container-shell">
         {useReducedEffects ? (
           content
