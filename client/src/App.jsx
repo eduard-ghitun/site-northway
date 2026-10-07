@@ -1,6 +1,7 @@
 import { lazy, Suspense, useMemo, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Route, Routes, useLocation } from 'react-router-dom'
+import { Analytics } from '@vercel/analytics/react'
 import IntroLoader from './components/IntroLoader'
 import SiteLayout from './layout/SiteLayout'
 import useAdaptiveMotion from './hooks/useAdaptiveMotion'
@@ -85,6 +86,7 @@ export default function App() {
         </SiteLayout>
       </RouteTransitionProvider>
       {shouldShowIntro ? <IntroLoader onComplete={handleIntroComplete} /> : null}
+      <Analytics />
     </>
   )
 }
