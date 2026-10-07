@@ -19,11 +19,7 @@ const repoRoot = path.resolve(serverRoot, '..')
 export const env = {
   port: Number(process.env.PORT) || 5000,
   clientUrl: process.env.CLIENT_URL || 'http://localhost:5173',
-  adminEmail: process.env.ADMIN_EMAIL || '',
   emailUser: process.env.EMAIL_USER || '',
   emailPass: process.env.EMAIL_PASS || '',
   eventReceiverEmail: process.env.EVENT_RECEIVER_EMAIL || '',
-  supabaseUrl: process.env.VITE_SUPABASE_URL || '',
-  supabaseAnonKey: process.env.VITE_SUPABASE_ANON_KEY || '',
-  supabaseServiceRoleKey: process.env.SUPABASE_SERVICE_ROLE_KEY || '',
 }

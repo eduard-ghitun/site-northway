@@ -94,7 +94,7 @@ export default function Navbar() {
         <div className={shellClass}>
           <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/75 to-transparent" />
 
-          <div className="relative flex min-h-[3.25rem] items-center justify-between gap-3 lg:grid lg:grid-cols-[minmax(0,0.9fr)_auto_minmax(0,0.9fr)] lg:gap-5">
+          <div className="relative flex min-h-[3.25rem] items-center justify-between gap-3 lg:gap-5">
             <TransitionLink
               to="/"
               className="inline-flex min-h-11 shrink-0 items-center whitespace-nowrap border-l-2 border-gold px-3 py-1 font-display text-[0.7rem] uppercase tracking-[0.17em] text-white transition duration-200 hover:text-gold sm:text-[0.88rem] sm:tracking-[0.24em]"
@@ -102,7 +102,7 @@ export default function Navbar() {
               NorthSideCrew
             </TransitionLink>
 
-            <div className="hidden justify-center lg:flex">
+            <div className="hidden flex-1 justify-end lg:flex">
               <DesktopNavigation currentPath={currentPath} location={location} />
             </div>
 
