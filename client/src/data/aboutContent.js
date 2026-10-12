@@ -49,4 +49,8 @@ export const aboutMission = {
     'Organizăm evenimente gândite să ofere atmosferă, stil și experiențe reale.',
     'Punem accent pe comunitate, respect și cultura auto în toate formele ei.',
   ],
+  media: {
+    image: '/about/northside-mission-crew-ride.jpg',
+    alt: 'BMW și Audi NorthSideCrew parcate împreună',
+  },
 }

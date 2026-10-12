@@ -73,18 +73,32 @@ export default function AboutPage() {
 
       <section className="section-space pt-0">
         <div className="container-shell">
-          <Reveal className="panel overflow-hidden px-5 py-8 sm:px-8 sm:py-10 lg:px-14 lg:py-14">
-            <SectionTitle
-              eyebrow={aboutMission.eyebrow}
-              title={aboutMission.title}
-              description={aboutMission.description}
-            />
-            <div className="mt-7 grid gap-4 md:mt-8 md:grid-cols-3 md:gap-5">
-              {aboutMission.points.map((point) => (
-                <div key={point} className="rounded-[24px] border border-white/10 bg-white/[0.03] p-5 text-sm leading-6 text-white/[0.68] sm:text-base sm:leading-7">
-                  {point}
+          <Reveal className="panel overflow-hidden p-4 sm:p-6 lg:p-8 xl:p-10">
+            <div className="grid items-stretch gap-7 lg:grid-cols-[minmax(0,1.08fr)_minmax(22rem,0.92fr)] lg:gap-10 xl:gap-12">
+              <div className="flex min-w-0 flex-col">
+                <SectionTitle
+                  eyebrow={aboutMission.eyebrow}
+                  title={aboutMission.title}
+                  description={aboutMission.description}
+                />
+                <div className="mt-7 grid gap-4 md:mt-8 md:grid-cols-3 md:gap-5">
+                  {aboutMission.points.map((point) => (
+                    <div key={point} className="rounded-[20px] border border-white/10 bg-white/[0.03] p-5 text-sm leading-6 text-white/[0.68] sm:rounded-[24px] sm:text-base sm:leading-7">
+                      {point}
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
+
+              <div className="flex min-w-0 items-center">
+                <AppImage
+                  src={aboutMission.media.image}
+                  alt={aboutMission.media.alt}
+                  wrapperClassName="aspect-[16/10] w-full overflow-hidden rounded-[18px] border border-white/10 bg-black sm:rounded-[24px] lg:aspect-auto lg:h-full lg:min-h-[25rem]"
+                  className="h-full w-full object-cover object-center"
+                  sizes="(max-width: 1023px) 100vw, 42vw"
+                />
+              </div>
             </div>
           </Reveal>
         </div>

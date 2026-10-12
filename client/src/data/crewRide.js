@@ -1,0 +1,16 @@
+export const crewRidePhotos = [
+  { src: '/crew-ride/crew-ride-01.jpg', alt: 'Detaliu cu BMW albastru după ploaie' },
+  { src: '/crew-ride/crew-ride-02.jpg', alt: 'Fotografii instant din interiorul mașinii' },
+  { src: '/crew-ride/crew-ride-03.jpg', alt: 'Mașinile Crew Ride pe un drum de toamnă' },
+  { src: '/crew-ride/crew-ride-04.jpg', alt: 'BMW și Audi opriți pe drumul prin pădure' },
+  { src: '/crew-ride/crew-ride-05.jpg', alt: 'Audi A8 într-un cadru de toamnă' },
+  { src: '/crew-ride/crew-ride-06.jpg', alt: 'BMW pe drumul mărginit de frunze' },
+  { src: '/crew-ride/crew-ride-07.jpg', alt: 'Două BMW-uri în lumina caldă a toamnei' },
+  { src: '/crew-ride/crew-ride-08.jpg', alt: 'BMW albastru pe fundal de frunze arămii' },
+  { src: '/crew-ride/crew-ride-09.jpg', alt: 'Audi și BMW împreună la Crew Ride' },
+  { src: '/crew-ride/crew-ride-10.jpg', alt: 'Audi A8 pe șoseaua de toamnă' },
+  { src: '/crew-ride/crew-ride-11.jpg', alt: 'BMW pe un viraj printre culorile toamnei' },
+  { src: '/crew-ride/crew-ride-12.jpg', alt: 'Line-up Crew Ride în decor de toamnă' },
+  { src: '/crew-ride/crew-ride-13.jpg', alt: 'Audi și BMW în parcarea de la finalul ride-ului' },
+  { src: '/crew-ride/crew-ride-14.jpg', alt: 'BMW în mișcare pe drumul forestier' },
+]

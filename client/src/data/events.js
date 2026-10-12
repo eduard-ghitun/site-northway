@@ -17,6 +17,24 @@ export const featuredEvent = {
   gallery: [...eventImages.gallery],
 }
 
+const editionTwoGallery = [
+  { image: '/events/northway-edition-2-gallery-01.jpg', title: 'Mercedes-Benz CLK (W208)' },
+  { image: '/events/northway-edition-2-gallery-02.jpg', title: 'BMW Seria 5 (E34)' },
+  { image: '/events/northway-edition-2-gallery-03.jpg', title: 'BMW Seria 3 Touring' },
+  { image: '/events/northway-edition-2-gallery-04.jpg', title: 'Audi A4' },
+  { image: '/events/northway-edition-2-gallery-05.jpg', title: 'Mazda MX-5' },
+  { image: '/events/northway-edition-2-gallery-06.jpg', title: 'Show & Shine Line-up' },
+  { image: '/events/northway-edition-2-gallery-07.jpg', title: 'Volkswagen Golf III Cabriolet' },
+  { image: '/events/northway-edition-2-gallery-08.jpg', title: 'BMW Seria 3 Coupé (E46)' },
+  { image: '/events/northway-edition-2-gallery-09.jpg', title: 'Volkswagen Golf' },
+  { image: '/events/northway-edition-2-gallery-10.jpg', title: 'Volkswagen Golf II' },
+  { image: '/events/northway-edition-2-gallery-11.jpg', title: 'BMW Seria 5 E34' },
+  { image: '/events/northway-edition-2-gallery-12.jpg', title: 'BMW Line-up' },
+  { image: '/events/northway-edition-2-gallery-13.jpg', title: 'BMW E30 DriftCar' },
+  { image: '/events/northway-edition-2-gallery-14.jpg', title: 'Volkswagen Golf' },
+  { image: '/events/northway-edition-2-gallery-15.jpg', title: 'Mazda MX-5' },
+]
+
 const featuredEdition = {
   title: 'NorthWay - Edition II',
   subtitle: 'Trei zile de atmosferă premium, build-uri speciale și energie NorthSideCrew autentică.',
@@ -26,10 +44,11 @@ const featuredEdition = {
   startDate: '19 Iunie',
   endDate: '21 Iunie',
   openingHour: '15:00',
-  image: '/events/northway-edition-2-upcoming-card.jpg',
-  imageAlt: 'NorthWay - Edition II, vizual principal',
+  image: '/events/northway-edition-2-detail.jpg',
+  imageAlt: 'NorthWay - Edition II, moment nocturn cu scântei',
+  editionNote: 'Adrenalină, pasiune și energie NorthSide la maximum!',
   banner: eventImages.northwayEdition2Banner,
-  gallery: [...eventImages.gallery],
+  gallery: editionTwoGallery,
 }
 
 export const completedEventHighlight = {
@@ -191,3 +210,24 @@ export const completedEventHighlight = {
     },
   ],
 }
+
+export const eventEditions = [
+  {
+    slug: 'edition-1',
+    category: 'Eveniment finalizat',
+    ...completedEventHighlight,
+    gallery: completedEventHighlight.galleryPlaceholders,
+  },
+  {
+    slug: 'edition-2',
+    category: 'Ediție documentată',
+    status: 'NorthWay Archive',
+    ...featuredEdition,
+    summary:
+      'O ediție construită în jurul pasiunii pentru mașini, a comunității și a experienței NorthSideCrew.',
+    gallery: featuredEdition.gallery.map((item, index) => ({
+      ...item,
+      imageAlt: `Cadru din NorthWay - Edition II: ${item.title || `galerie ${index + 1}`}`,
+    })),
+  },
+]

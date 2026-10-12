@@ -12,6 +12,10 @@ const siteUrl = 'https://northside.ro'
 const routes = [
   { path: '/', changefreq: 'weekly', priority: '1.0' },
   { path: '/events', changefreq: 'weekly', priority: '0.9' },
+  { path: '/events/edition-1', changefreq: 'monthly', priority: '0.8' },
+  { path: '/events/edition-2', changefreq: 'monthly', priority: '0.8' },
+  { path: '/events/last-call-2026', changefreq: 'weekly', priority: '0.8' },
+  { path: '/crew-ride', changefreq: 'monthly', priority: '0.8' },
   { path: '/members', changefreq: 'monthly', priority: '0.8' },
   { path: '/about', changefreq: 'monthly', priority: '0.8' },
   { path: '/contact', changefreq: 'monthly', priority: '0.7' },

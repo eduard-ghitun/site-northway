@@ -1,8 +1,7 @@
-import { lazy, Suspense, useMemo, useState } from 'react'
+import { lazy, Suspense, useMemo } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import { Analytics } from '@vercel/analytics/react'
-import IntroLoader from './components/IntroLoader'
 import SiteLayout from './layout/SiteLayout'
 import useAdaptiveMotion from './hooks/useAdaptiveMotion'
 import { RouteTransitionProvider } from './providers/RouteTransitionProvider'
@@ -10,6 +9,9 @@ import { RouteTransitionProvider } from './providers/RouteTransitionProvider'
 const HomePage = lazy(() => import('./pages/HomePage'))
 const AboutPage = lazy(() => import('./pages/AboutPage'))
 const EventsPage = lazy(() => import('./pages/EventsPage'))
+const EventDetailPage = lazy(() => import('./pages/EventDetailPage'))
+const LastCallPage = lazy(() => import('./pages/LastCallPage'))
+const CrewRidePage = lazy(() => import('./pages/CrewRidePage'))
 const MembersPage = lazy(() => import('./pages/MembersPage'))
 const ContactPage = lazy(() => import('./pages/ContactPage'))
 const TermsPage = lazy(() => import('./pages/Terms'))
@@ -20,6 +22,9 @@ const pages = [
   { path: '/', element: <HomePage /> },
   { path: '/about', element: <AboutPage /> },
   { path: '/events', element: <EventsPage /> },
+  { path: '/events/last-call-2026', element: <LastCallPage /> },
+  { path: '/crew-ride', element: <CrewRidePage /> },
+  { path: '/events/:eventSlug', element: <EventDetailPage /> },
   { path: '/members', element: <MembersPage /> },
   { path: '/contact', element: <ContactPage /> },
   { path: '/terms', element: <TermsPage /> },
@@ -29,14 +34,7 @@ const pages = [
 
 export default function App() {
   const location = useLocation()
-  const { useLiteMotion, useReducedEffects, isIOS } = useAdaptiveMotion()
-  const [showIntro, setShowIntro] = useState(() => {
-    if (typeof window === 'undefined') {
-      return false
-    }
-
-    return !window.sessionStorage.getItem('northsidecrew:intro-seen')
-  })
+  const { useLiteMotion, useReducedEffects } = useAdaptiveMotion()
   const pageTransition = useMemo(
     () => ({
       initial: useLiteMotion ? { opacity: 0 } : { opacity: 0, y: 12 },
@@ -49,16 +47,6 @@ export default function App() {
     }),
     [useLiteMotion],
   )
-
-  const shouldShowIntro = showIntro && !useReducedEffects && !isIOS
-
-  const handleIntroComplete = () => {
-    if (typeof window !== 'undefined') {
-      window.sessionStorage.setItem('northsidecrew:intro-seen', 'true')
-    }
-
-    setShowIntro(false)
-  }
 
   return (
     <>
@@ -85,7 +73,6 @@ export default function App() {
           </Suspense>
         </SiteLayout>
       </RouteTransitionProvider>
-      {shouldShowIntro ? <IntroLoader onComplete={handleIntroComplete} /> : null}
       <Analytics />
     </>
   )

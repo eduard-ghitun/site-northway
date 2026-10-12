@@ -399,6 +399,7 @@ body::-webkit-scrollbar {
     width: 100%;
     justify-content: center;
   }
+
 }
 
 @media (max-width: 390px) {
@@ -450,4 +451,5 @@ body::-webkit-scrollbar {
   .member-card-instagram {
     transition-duration: 0.01ms;
   }
+
 }

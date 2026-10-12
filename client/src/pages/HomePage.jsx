@@ -91,7 +91,7 @@ export default function HomePage() {
                 </div>
                 <p className="mt-6 text-sm leading-6 text-white/[0.58] sm:text-base sm:leading-7">{homeFeaturedEvent.secondary}</p>
                 <p className="mt-4 text-sm leading-6 text-white/[0.58] sm:text-base sm:leading-7">{homeFeaturedEvent.tertiary}</p>
-                <TransitionLink to="/events#completed-events" className="button-primary mt-7 w-full sm:mt-8 sm:w-auto">
+                <TransitionLink to="/events/edition-1" className="button-primary mt-7 w-full sm:mt-8 sm:w-auto">
                   Vezi Evenimentul
                   <ArrowUpRight size={16} />
                 </TransitionLink>
