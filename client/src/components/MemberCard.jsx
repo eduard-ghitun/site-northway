@@ -72,7 +72,7 @@ export default function MemberCard({ member }) {
 
   return (
     <motion.article
-      layout
+      layout={!useLiteMotion}
       whileHover={canHover && !useLiteMotion ? { y: -4 } : undefined}
       transition={{
         duration: 0.3,
@@ -128,7 +128,7 @@ export default function MemberCard({ member }) {
         ) : null}
         <div className="member-card-copy">
           <p className="member-card-car">{member.car}</p>
-          <motion.div layout ref={descriptionShellRef} className="member-card-description-shell">
+          <motion.div layout={!useLiteMotion} ref={descriptionShellRef} className="member-card-description-shell">
             <p
               ref={descriptionMeasureRef}
               aria-hidden="true"
@@ -144,7 +144,7 @@ export default function MemberCard({ member }) {
           </motion.div>
           {canToggleDescription ? (
             <motion.button
-              layout
+              layout={!useLiteMotion}
               type="button"
               aria-expanded={isDescriptionExpanded}
               className="member-card-toggle"

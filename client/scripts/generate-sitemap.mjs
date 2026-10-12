@@ -18,6 +18,7 @@ const routes = [
   { path: '/crew-ride', changefreq: 'monthly', priority: '0.8' },
   { path: '/members', changefreq: 'monthly', priority: '0.8' },
   { path: '/about', changefreq: 'monthly', priority: '0.8' },
+  { path: '/sponsori', changefreq: 'monthly', priority: '0.8' },
   { path: '/contact', changefreq: 'monthly', priority: '0.7' },
 ]
 

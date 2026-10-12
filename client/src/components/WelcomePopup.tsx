@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useMemo, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { X } from 'lucide-react'
 import useAdaptiveMotion from '../hooks/useAdaptiveMotion'
@@ -26,7 +26,7 @@ export default function WelcomePopup({
   const overlayClassName = useMemo(
     () =>
       [
-        'fixed inset-0 z-[150] flex min-h-[100svh] items-center justify-center overflow-hidden bg-black/78 px-3 sm:px-6',
+        'fixed inset-0 z-[150] flex min-h-[100dvh] items-center justify-center overflow-hidden bg-black/78 px-3 sm:px-6',
         shouldUseLightEffects ? 'backdrop-blur-[2px]' : 'backdrop-blur-md',
       ].join(' '),
     [shouldUseLightEffects],
@@ -95,39 +95,49 @@ export default function WelcomePopup({
     return () => window.clearTimeout(openTimer)
   }, [openDelay, storageKey])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!isOpen || typeof window === 'undefined') {
       return undefined
     }
 
-    const scrollY = window.scrollY
-    const previousBodyOverflow = document.body.style.overflow
-    const previousBodyPosition = document.body.style.position
-    const previousBodyTop = document.body.style.top
-    const previousBodyWidth = document.body.style.width
-    const previousHtmlOverflow = document.documentElement.style.overflow
+    const scrollY = Math.max(window.scrollY, document.documentElement.scrollTop, document.body.scrollTop)
+    const previousStyles = {
+      bodyOverflow: document.body.style.overflow,
+      bodyOverscrollBehavior: document.body.style.overscrollBehavior,
+      bodyTouchAction: document.body.style.touchAction,
+      htmlOverflow: document.documentElement.style.overflow,
+      htmlOverscrollBehavior: document.documentElement.style.overscrollBehavior,
+    }
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         closePopup()
       }
     }
+    const preventPageScroll = (event: Event) => event.preventDefault()
 
     document.body.style.overflow = 'hidden'
-    document.body.style.position = 'fixed'
-    document.body.style.top = `-${scrollY}px`
-    document.body.style.width = '100%'
+    document.body.style.overscrollBehavior = 'none'
+    document.body.style.touchAction = 'none'
     document.documentElement.style.overflow = 'hidden'
+    document.documentElement.style.overscrollBehavior = 'none'
     window.addEventListener('keydown', handleKeyDown)
+    document.addEventListener('wheel', preventPageScroll, { passive: false })
+    document.addEventListener('touchmove', preventPageScroll, { passive: false })
 
     return () => {
-      document.body.style.overflow = previousBodyOverflow
-      document.body.style.position = previousBodyPosition
-      document.body.style.top = previousBodyTop
-      document.body.style.width = previousBodyWidth
-      document.documentElement.style.overflow = previousHtmlOverflow
-      window.scrollTo(0, scrollY)
       window.removeEventListener('keydown', handleKeyDown)
+      document.removeEventListener('wheel', preventPageScroll)
+      document.removeEventListener('touchmove', preventPageScroll)
+      window.scrollTo({ left: 0, top: scrollY, behavior: 'auto' })
+      document.documentElement.scrollTop = scrollY
+      document.body.scrollTop = scrollY
+      document.body.style.overflow = previousStyles.bodyOverflow
+      document.body.style.overscrollBehavior = previousStyles.bodyOverscrollBehavior
+      document.body.style.touchAction = previousStyles.bodyTouchAction
+      document.documentElement.style.overflow = previousStyles.htmlOverflow
+      document.documentElement.style.overscrollBehavior = previousStyles.htmlOverscrollBehavior
+      window.scrollTo({ left: 0, top: scrollY, behavior: 'auto' })
     }
   }, [closePopup, isOpen])
 
@@ -177,7 +187,7 @@ export default function WelcomePopup({
               alt={imageAlt}
               className="h-auto w-full select-none object-contain"
               style={{
-                maxHeight: 'calc(100svh - 2.5rem - env(safe-area-inset-top) - env(safe-area-inset-bottom))',
+                maxHeight: 'calc(100dvh - 2.5rem - env(safe-area-inset-top) - env(safe-area-inset-bottom))',
               }}
               decoding="async"
               draggable="false"

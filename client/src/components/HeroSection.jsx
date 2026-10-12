@@ -7,15 +7,25 @@ import TransitionLink from './TransitionLink'
 
 export default function HeroSection() {
   const { useLiteMotion, useReducedEffects } = useAdaptiveMotion()
+  const textEntrance = useReducedEffects ? false : useLiteMotion ? { opacity: 0 } : { opacity: 0, y: 24 }
+  const visualEntrance = useReducedEffects
+    ? false
+    : useLiteMotion
+      ? { opacity: 0 }
+      : { opacity: 0, scale: 0.95, x: 28 }
+  const entranceTransition = {
+    duration: useReducedEffects ? 0 : useLiteMotion ? 0.3 : 0.75,
+    ease: [0.22, 1, 0.36, 1],
+  }
 
   return (
     <section className="relative flex min-h-[100svh] min-h-[100dvh] items-center overflow-hidden pt-[max(6.5rem,calc(env(safe-area-inset-top)_+_5rem))] pb-[max(2.5rem,env(safe-area-inset-bottom))] sm:pt-28 sm:pb-14 lg:pt-24 lg:pb-10">
       <div className="container-shell grid items-center gap-8 sm:gap-10 lg:grid-cols-[minmax(0,0.68fr)_minmax(0,1.04fr)] lg:gap-16 xl:grid-cols-[minmax(0,0.64fr)_minmax(0,1.08fr)] xl:gap-24">
         <div className="relative z-10 mx-auto max-w-[34rem] text-center lg:-translate-y-8 lg:mx-0 lg:pr-4 lg:text-left xl:max-w-[31rem] xl:pr-8">
           <motion.div
-            initial={useLiteMotion ? { opacity: 0 } : { opacity: 0, y: 24 }}
+            initial={textEntrance}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: useLiteMotion ? 0.3 : 0.75, ease: [0.22, 1, 0.36, 1] }}
+            transition={entranceTransition}
           >
             <span className="eyebrow mx-auto lg:mx-0">{heroContent.eyebrow}</span>
             <h1 className="mx-auto max-w-[12ch] text-balance font-display text-[clamp(2.1rem,9vw,4.2rem)] uppercase leading-[0.92] tracking-[0.04em] text-white sm:max-w-[12ch] sm:tracking-[0.08em] lg:mx-0 lg:max-w-none lg:text-[3.75rem] xl:text-[4.2rem]">
@@ -30,11 +40,11 @@ export default function HeroSection() {
           </motion.div>
 
           <motion.div
-            initial={useLiteMotion ? { opacity: 0 } : { opacity: 0, y: 24 }}
+            initial={textEntrance}
             animate={{ opacity: 1, y: 0 }}
             transition={{
-              delay: useLiteMotion ? 0 : 0.15,
-              duration: useLiteMotion ? 0.28 : 0.8,
+              delay: useReducedEffects || useLiteMotion ? 0 : 0.15,
+              duration: useReducedEffects ? 0 : useLiteMotion ? 0.28 : 0.8,
               ease: [0.22, 1, 0.36, 1],
             }}
             className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-4 lg:justify-start"
@@ -50,9 +60,9 @@ export default function HeroSection() {
         </div>
 
         <motion.div
-          initial={useLiteMotion ? { opacity: 0 } : { opacity: 0, scale: 0.95, x: 28 }}
+          initial={visualEntrance}
           animate={{ opacity: 1, scale: 1, x: 0 }}
-          transition={{ duration: useLiteMotion ? 0.32 : 0.95, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ ...entranceTransition, duration: useReducedEffects ? 0 : useLiteMotion ? 0.32 : 0.95 }}
           className="relative mx-auto w-full max-w-[38rem] lg:ml-auto lg:max-w-[46rem]"
         >
           {!useReducedEffects ? (

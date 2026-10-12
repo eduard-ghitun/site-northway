@@ -28,6 +28,7 @@ html {
   scrollbar-width: none;
   -ms-overflow-style: none;
   overflow-x: clip;
+  overscroll-behavior-y: none;
   min-height: 100%;
   min-height: -webkit-fill-available;
   -webkit-text-size-adjust: 100%;
@@ -41,6 +42,7 @@ body {
   margin: 0;
   overflow-x: clip;
   overscroll-behavior-x: none;
+  overscroll-behavior-y: none;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -191,7 +193,7 @@ body::-webkit-scrollbar {
 
   .member-card-media-image {
     @apply h-full w-full object-cover object-center transition-transform duration-300 ease-out;
-    will-change: transform;
+    will-change: auto;
   }
 
   .member-card-media-image-hover {
@@ -400,6 +402,12 @@ body::-webkit-scrollbar {
     justify-content: center;
   }
 
+  /* Transparent blur layers are expensive on mobile Safari and mid-range Android. */
+  [class*='backdrop-blur'] {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
 }
 
 @media (max-width: 390px) {
@@ -417,6 +425,10 @@ body::-webkit-scrollbar {
 }
 
 @media (hover: none) and (pointer: coarse) {
+  html {
+    scroll-behavior: auto;
+  }
+
   .member-card-media-image-hover {
     transform: none;
   }
@@ -425,6 +437,20 @@ body::-webkit-scrollbar {
   .button-secondary:hover {
     transform: none;
     box-shadow: none;
+  }
+
+  .member-card-media-image,
+  .member-card-toggle,
+  .member-card-instagram,
+  .button-primary,
+  .button-secondary {
+    transition-duration: 0ms;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .member-card-media-image-hover {
+    will-change: transform;
   }
 }
 
@@ -441,6 +467,15 @@ body::-webkit-scrollbar {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
   }
 
   .member-card-media-image {

@@ -1,5 +1,6 @@
 import { BellRing, CalendarDays, ChevronLeft, Flag, MapPin, Ticket } from 'lucide-react'
 import AppImage from '../components/AppImage'
+import EventPhotoGallery from '../components/EventPhotoGallery'
 import Seo from '../components/Seo'
 import TransitionLink from '../components/TransitionLink'
 
@@ -14,7 +15,7 @@ const gallery = [
   { image: '/events/last-call-2026-gallery-02.jpg', title: 'BMW Seria 5 (E34)' },
   { image: '/events/last-call-2026-gallery-03.jpg', title: 'Volkswagen Golf GTI' },
   { image: '/events/last-call-2026-gallery-04.jpg', title: 'BMW Seria 3 (E36)' },
-  { image: '/events/last-call-2026-gallery-05.jpg', title: 'BMW E46 & Mercedes-Benz CLK' },
+  { image: '/events/last-call-2026-gallery-05.jpg', title: 'BMW E39 & Mercedes-Benz CLK' },
 ]
 
 export default function LastCallPage() {
@@ -113,19 +114,7 @@ export default function LastCallPage() {
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">Galerie</p>
               <h2 className="mt-3 font-display text-3xl uppercase tracking-[0.08em] text-[#F5F1E8] sm:text-5xl">Momente din Ediția Tomnatică</h2>
             </div>
-            <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {gallery.map((item) => (
-                <figure key={item.image} className="overflow-hidden rounded-[16px] border border-white/10 bg-white/[0.03] p-2.5 sm:rounded-[20px] sm:p-3">
-                  <AppImage
-                    src={item.image}
-                    alt={item.title}
-                    wrapperClassName="aspect-[4/3] overflow-hidden rounded-[10px] bg-black/40 sm:rounded-[12px]"
-                    className="h-full w-full object-cover"
-                  />
-                  <figcaption className="px-1 pb-1 pt-3 text-sm font-semibold uppercase tracking-[0.1em] text-white">{item.title}</figcaption>
-                </figure>
-              ))}
-            </div>
+            <EventPhotoGallery photos={gallery} galleryId="last-call-2026" />
           </section>
         </div>
       </section>

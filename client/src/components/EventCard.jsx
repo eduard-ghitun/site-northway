@@ -1,20 +1,19 @@
 import { CalendarDays, MapPin } from 'lucide-react'
 import { motion } from 'framer-motion'
 import AppImage from './AppImage'
+import useAdaptiveMotion from '../hooks/useAdaptiveMotion'
 
 export default function EventCard({ event }) {
-  return (
-    <motion.article
-      whileHover={{ y: -6 }}
-      transition={{ duration: 0.25, ease: 'easeOut' }}
-      className="panel overflow-hidden"
-    >
+  const { canHover, useReducedEffects } = useAdaptiveMotion()
+
+  const content = (
+    <>
       <div className="overflow-hidden border-b border-white/10">
         <AppImage
           src={event.image}
           alt={event.imageAlt || event.title}
           wrapperClassName="h-56"
-          className="h-56 w-full object-cover transition duration-500 hover:scale-[1.03]"
+          className={`h-56 w-full object-cover ${canHover ? 'transition duration-500 hover:scale-[1.03]' : ''}`}
         />
       </div>
       <div className="space-y-4 p-6">
@@ -35,6 +34,20 @@ export default function EventCard({ event }) {
           </div>
         </div>
       </div>
+    </>
+  )
+
+  if (useReducedEffects) {
+    return <article className="panel overflow-hidden">{content}</article>
+  }
+
+  return (
+    <motion.article
+      whileHover={{ y: -6 }}
+      transition={{ duration: 0.25, ease: 'easeOut' }}
+      className="panel overflow-hidden"
+    >
+      {content}
     </motion.article>
   )
 }

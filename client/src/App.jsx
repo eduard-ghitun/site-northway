@@ -12,6 +12,7 @@ const EventsPage = lazy(() => import('./pages/EventsPage'))
 const EventDetailPage = lazy(() => import('./pages/EventDetailPage'))
 const LastCallPage = lazy(() => import('./pages/LastCallPage'))
 const CrewRidePage = lazy(() => import('./pages/CrewRidePage'))
+const SponsorsPage = lazy(() => import('./pages/SponsorsPage'))
 const MembersPage = lazy(() => import('./pages/MembersPage'))
 const ContactPage = lazy(() => import('./pages/ContactPage'))
 const TermsPage = lazy(() => import('./pages/Terms'))
@@ -24,6 +25,7 @@ const pages = [
   { path: '/events', element: <EventsPage /> },
   { path: '/events/last-call-2026', element: <LastCallPage /> },
   { path: '/crew-ride', element: <CrewRidePage /> },
+  { path: '/sponsori', element: <SponsorsPage /> },
   { path: '/events/:eventSlug', element: <EventDetailPage /> },
   { path: '/members', element: <MembersPage /> },
   { path: '/contact', element: <ContactPage /> },

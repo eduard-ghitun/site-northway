@@ -39,6 +39,11 @@ export const aboutValues = [
   },
 ]
 
+export const aboutValuesMedia = {
+  image: '/about/northway-values-community.jpg',
+  alt: 'Membru NorthSideCrew la evenimentul NorthWay 2026',
+}
+
 export const aboutMission = {
   eyebrow: 'Misiunea noastră',
   title: 'Construim o comunitate auto puternică și evenimente memorabile.',

@@ -27,6 +27,11 @@ export const homeIntro = {
 
 export const homeSlogan = '× The cars we drive say a lot about us! ×'
 
+export const homeDefiningMedia = {
+  image: '/home/northsidecrew-home-defining-moments.jpg',
+  alt: 'Membri NorthSideCrew împreună la eveniment',
+}
+
 export const highlights = [
   {
     title: 'Comunitate',

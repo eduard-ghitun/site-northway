@@ -1,7 +1,27 @@
 import { motion } from 'framer-motion'
+import useAdaptiveMotion from '../hooks/useAdaptiveMotion'
 
 export default function HighlightCard({ item, index }) {
   const Icon = item.icon
+  const { useReducedEffects } = useAdaptiveMotion()
+
+  const content = (
+    <>
+      <div className="mb-4 inline-flex rounded-2xl border border-gold/30 bg-gold/10 p-3 text-gold sm:mb-5">
+        <Icon size={24} />
+      </div>
+      <h3 className="font-display text-base uppercase tracking-[0.12em] text-white sm:text-lg sm:tracking-[0.14em]">
+        {item.title}
+      </h3>
+      <p className="mt-3 max-w-[28rem] text-sm leading-6 text-white/[0.66] sm:mt-4 sm:text-base">
+        {item.text}
+      </p>
+    </>
+  )
+
+  if (useReducedEffects) {
+    return <article className="panel h-full p-5 sm:p-6">{content}</article>
+  }
 
   return (
     <motion.article
@@ -12,15 +32,7 @@ export default function HighlightCard({ item, index }) {
       whileHover={{ y: -8 }}
       className="panel h-full p-5 sm:p-6"
     >
-      <div className="mb-4 inline-flex rounded-2xl border border-gold/30 bg-gold/10 p-3 text-gold sm:mb-5">
-        <Icon size={24} />
-      </div>
-      <h3 className="font-display text-base uppercase tracking-[0.12em] text-white sm:text-lg sm:tracking-[0.14em]">
-        {item.title}
-      </h3>
-      <p className="mt-3 max-w-[28rem] text-sm leading-6 text-white/[0.66] sm:mt-4 sm:text-base">
-        {item.text}
-      </p>
+      {content}
     </motion.article>
   )
 }

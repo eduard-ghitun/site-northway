@@ -15,7 +15,7 @@ const WORD_ANIMATION_DURATION = 0.65
 const RESTART_DELAY_MS = 10000
 
 export default function SloganPuzzle() {
-  const { useLiteMotion } = useAdaptiveMotion()
+  const { useLiteMotion, useReducedEffects } = useAdaptiveMotion()
   const [animationKey, setAnimationKey] = useState(0)
 
   useEffect(() => {
@@ -40,13 +40,17 @@ export default function SloganPuzzle() {
         <div className="panel relative overflow-hidden px-4 py-7 sm:px-8 sm:py-12 lg:px-12 lg:py-14">
           <div className="ambient-grid absolute inset-0 opacity-60" />
           <div className="absolute inset-x-12 top-0 h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
-          <div className="absolute inset-y-8 left-0 w-24 bg-gold/10 blur-3xl" />
-          <div className="absolute inset-y-8 right-0 w-24 bg-gold/10 blur-3xl" />
+          {!useReducedEffects ? (
+            <>
+              <div className="absolute inset-y-8 left-0 w-24 bg-gold/10 blur-3xl" />
+              <div className="absolute inset-y-8 right-0 w-24 bg-gold/10 blur-3xl" />
+            </>
+          ) : null}
 
           <motion.div
             key={animationKey}
-            initial="hidden"
-            animate="visible"
+            initial={useReducedEffects ? false : 'hidden'}
+            animate={useReducedEffects ? false : 'visible'}
             className="relative flex flex-wrap items-center justify-center gap-2 text-center sm:gap-3 lg:gap-4"
           >
             {tokens.map((token, index) => (
@@ -73,7 +77,7 @@ export default function SloganPuzzle() {
                     },
                   },
                 }}
-                whileHover={useLiteMotion ? undefined : { y: -2, scale: 1.015 }}
+                whileHover={useReducedEffects || useLiteMotion ? undefined : { y: -2, scale: 1.015 }}
                 className={`rounded-[18px] border px-2.5 py-2 text-center font-display text-[1.05rem] uppercase leading-none tracking-[0.05em] shadow-panel sm:rounded-[22px] sm:px-3 sm:text-3xl sm:tracking-[0.1em] lg:px-4 lg:py-3 lg:text-5xl xl:text-[3.75rem] ${
                   token.accent
                     ? 'border-gold/40 bg-gold/10 text-gold shadow-glow'

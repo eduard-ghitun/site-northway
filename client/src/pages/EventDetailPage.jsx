@@ -1,6 +1,7 @@
 import { CalendarRange, ChevronLeft, Clock3, MapPin, Sparkles, Trophy } from 'lucide-react'
 import { Navigate, useParams } from 'react-router-dom'
 import AppImage from '../components/AppImage'
+import EventPhotoGallery from '../components/EventPhotoGallery'
 import PageHero from '../components/PageHero'
 import Reveal from '../components/Reveal'
 import Seo from '../components/Seo'
@@ -122,21 +123,7 @@ export default function EventDetailPage() {
                 <span className="eyebrow">Galerie</span>
                 <h2 className="title-lg">Momente din {editionLabel}</h2>
               </Reveal>
-              <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                {gallery.map((item, index) => (
-                  <Reveal key={`${event.slug}-gallery-${index}`} delay={Math.min(index * 0.025, 0.2)}>
-                    <figure className="overflow-hidden rounded-[16px] border border-white/10 bg-white/[0.03] p-2.5 sm:rounded-[20px] sm:p-3">
-                      <AppImage
-                        src={item.image}
-                        alt={item.imageAlt || item.title}
-                        wrapperClassName="aspect-[4/3] overflow-hidden rounded-[10px] bg-black/40 sm:rounded-[12px]"
-                        className="h-full w-full object-cover"
-                      />
-                      {item.title ? <figcaption className="px-1 pb-1 pt-3 text-sm font-semibold uppercase tracking-[0.1em] text-white">{item.title}</figcaption> : null}
-                    </figure>
-                  </Reveal>
-                ))}
-              </div>
+              <EventPhotoGallery photos={gallery} galleryId={event.slug} />
             </section>
           ) : null}
         </div>

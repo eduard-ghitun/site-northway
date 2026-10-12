@@ -10,7 +10,7 @@ import SloganPuzzle from '../components/SloganPuzzle'
 import ShowcaseGrid from '../components/ShowcaseGrid'
 import TransitionLink from '../components/TransitionLink'
 import { featuredEvent } from '../data/events'
-import { highlights, homeFeaturedEvent, homeIntro, showcaseItems } from '../data/homeContent'
+import { highlights, homeDefiningMedia, homeFeaturedEvent, homeIntro, showcaseItems } from '../data/homeContent'
 
 export default function HomePage() {
   return (
@@ -50,16 +50,28 @@ export default function HomePage() {
 
       <section className="section-space pt-0">
         <div className="container-shell">
-          <SectionTitle
-            eyebrow="Ce ne definește"
-            title="Pasiune, comunitate, mașini și experiențe care rămân în memorie."
-            description="Fiecare parte din NorthSideCrew este construită în jurul pasiunii pentru mașini și al unei atmosfere autentice."
-          />
-          <div className="mt-8 grid gap-4 md:mt-10 md:grid-cols-2 md:gap-5 xl:grid-cols-4">
-            {highlights.map((item, index) => (
-              <HighlightCard key={item.title} item={item} index={index} />
-            ))}
-          </div>
+          <Reveal className="panel overflow-hidden p-4 sm:p-6 lg:p-8 xl:p-10">
+            <div className="grid items-center gap-7 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,0.95fr)] lg:gap-10 xl:gap-12">
+              <SectionTitle
+                eyebrow="Ce ne definește"
+                title="Pasiune, comunitate, mașini și experiențe care rămân în memorie."
+                description="Fiecare parte din NorthSideCrew este construită în jurul pasiunii pentru mașini și al unei atmosfere autentice."
+              />
+              <AppImage
+                src={homeDefiningMedia.image}
+                alt={homeDefiningMedia.alt}
+                wrapperClassName="aspect-[3/2] w-full overflow-hidden rounded-[18px] border border-white/10 bg-black sm:rounded-[24px]"
+                className="h-full w-full object-cover object-center"
+                sizes="(max-width: 1023px) 100vw, 44vw"
+              />
+            </div>
+
+            <div className="mt-7 grid gap-4 sm:mt-8 md:grid-cols-2 md:gap-5 xl:grid-cols-4">
+              {highlights.map((item, index) => (
+                <HighlightCard key={item.title} item={item} index={index} />
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
 

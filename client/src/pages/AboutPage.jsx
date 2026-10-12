@@ -4,7 +4,7 @@ import PageHero from '../components/PageHero'
 import Reveal from '../components/Reveal'
 import Seo from '../components/Seo'
 import SectionTitle from '../components/SectionTitle'
-import { aboutHero, aboutMission, aboutStory, aboutValues } from '../data/aboutContent'
+import { aboutHero, aboutMission, aboutStory, aboutValues, aboutValuesMedia } from '../data/aboutContent'
 
 export default function AboutPage() {
   return (
@@ -53,21 +53,40 @@ export default function AboutPage() {
 
       <section className="section-space pt-0">
         <div className="container-shell">
-          <SectionTitle
-            eyebrow="Valorile noastre"
-            title="Principiile care definesc NorthSideCrew."
-            description="Construim o comunitate bazată pe pasiune, respect și o identitate auto asumată."
-          />
-          <div className="mt-8 grid gap-4 md:mt-10 md:grid-cols-2 md:gap-5 xl:grid-cols-4">
-            {aboutValues.map((value, index) => (
-              <Reveal key={value.title} delay={index * 0.08} className="panel h-full p-5 sm:p-6">
-                <h3 className="font-display text-base uppercase tracking-[0.12em] text-white sm:text-lg sm:tracking-[0.14em]">
-                  {value.title}
-                </h3>
-                <p className="mt-4 text-sm leading-6 text-white/[0.66] sm:text-base">{value.text}</p>
-              </Reveal>
-            ))}
-          </div>
+          <Reveal className="panel overflow-hidden p-4 sm:p-6 lg:p-8 xl:p-10">
+            <div className="grid items-stretch gap-7 lg:grid-cols-[minmax(0,1.06fr)_minmax(19rem,0.74fr)] lg:gap-10 xl:gap-12">
+              <div className="flex min-w-0 flex-col">
+                <SectionTitle
+                  eyebrow="Valorile noastre"
+                  title="Principiile care definesc NorthSideCrew."
+                  description="Construim o comunitate bazată pe pasiune, respect și o identitate auto asumată."
+                />
+                <div className="mt-7 grid gap-4 sm:grid-cols-2 sm:gap-5 lg:mt-8">
+                  {aboutValues.map((value) => (
+                    <article
+                      key={value.title}
+                      className="rounded-[18px] border border-white/10 bg-white/[0.03] p-5 sm:rounded-[22px] sm:p-6"
+                    >
+                      <h3 className="font-display text-base uppercase tracking-[0.12em] text-white sm:text-lg sm:tracking-[0.14em]">
+                        {value.title}
+                      </h3>
+                      <p className="mt-4 text-sm leading-6 text-white/[0.66] sm:text-base">{value.text}</p>
+                    </article>
+                  ))}
+                </div>
+              </div>
+
+              <div className="min-w-0">
+                <AppImage
+                  src={aboutValuesMedia.image}
+                  alt={aboutValuesMedia.alt}
+                  wrapperClassName="aspect-[3/4] w-full overflow-hidden rounded-[18px] border border-white/10 bg-black sm:rounded-[24px] lg:h-full lg:min-h-[31rem]"
+                  className="h-full w-full object-cover object-[center_30%]"
+                  sizes="(max-width: 1023px) 100vw, 35vw"
+                />
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
