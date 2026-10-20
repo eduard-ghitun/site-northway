@@ -16,6 +16,14 @@ const gallery = [
   { image: '/events/last-call-2026-gallery-03.jpg', title: 'Volkswagen Golf GTI' },
   { image: '/events/last-call-2026-gallery-04.jpg', title: 'BMW Seria 3 (E36)' },
   { image: '/events/last-call-2026-gallery-05.jpg', title: 'BMW E39 & Mercedes-Benz CLK' },
+  { image: '/events/last-call-2026-gallery-06.jpg', title: 'BMW Seria 1' },
+  { image: '/events/last-call-2026-gallery-07.jpg', title: 'Mercedes-Benz E-Class (W211)' },
+  { image: '/events/last-call-2026-gallery-08.jpg', title: 'BMW Seria 3', orientation: 'portrait' },
+  { image: '/events/last-call-2026-gallery-09.jpg', title: 'Volkswagen Golf II' },
+  { image: '/events/last-call-2026-gallery-10.jpg', title: 'Škoda Octavia VRS', orientation: 'portrait' },
+  { image: '/events/last-call-2026-gallery-11.jpg', title: 'Hyundai i30 N', orientation: 'portrait' },
+  { image: '/events/last-call-2026-gallery-12.jpg', title: 'Volkswagen Golf III', orientation: 'portrait' },
+  { image: '/events/last-call-2026-gallery-13.jpg', title: 'Opel Corsa B', orientation: 'portrait' },
 ]
 
 export default function LastCallPage() {

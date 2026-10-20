@@ -33,6 +33,58 @@ const editionTwoGallery = [
   { image: '/events/northway-edition-2-gallery-13.jpg', title: 'BMW E30 DriftCar' },
   { image: '/events/northway-edition-2-gallery-14.jpg', title: 'Volkswagen Golf' },
   { image: '/events/northway-edition-2-gallery-15.jpg', title: 'Mazda MX-5' },
+  {
+    image: '/events/northway-edition-2-gallery-16.jpg',
+    title: 'Intrarea în NorthWay II',
+  },
+  {
+    image: '/events/northway-edition-2-gallery-17.jpg',
+    title: 'Două roți, aceeași pasiune',
+  },
+  {
+    image: '/events/northway-edition-2-gallery-18.jpg',
+    title: 'Merch NorthSide',
+  },
+  {
+    image: '/events/northway-edition-2-gallery-19.jpg',
+    title: 'Volkswagen Golf IV',
+  },
+  {
+    image: '/events/northway-edition-2-gallery-20.jpg',
+    title: 'Oameni din comunitate',
+  },
+  {
+    image: '/events/northway-edition-2-gallery-21.jpg',
+    title: 'BMW E30 în detaliu',
+  },
+  {
+    image: '/events/northway-edition-2-gallery-22.jpg',
+    title: 'Audi 80 Avant',
+  },
+  {
+    image: '/events/northway-edition-2-gallery-23.jpg',
+    title: 'BMW E46 în lumină',
+  },
+  {
+    image: '/events/northway-edition-2-gallery-24.jpg',
+    title: 'Line-up select',
+  },
+  {
+    image: '/events/northway-edition-2-gallery-25.jpg',
+    title: 'Vibe de eveniment',
+  },
+  {
+    image: '/events/northway-edition-2-gallery-26.jpg',
+    title: 'BMW E46 Coupé',
+  },
+  {
+    image: '/events/northway-edition-2-gallery-27.jpg',
+    title: 'BMW Seria 4',
+  },
+  {
+    image: '/events/northway-edition-2-gallery-28.jpg',
+    title: 'Audi RS5 la intrare',
+  },
 ]
 
 const featuredEdition = {

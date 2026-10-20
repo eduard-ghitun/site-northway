@@ -32,6 +32,7 @@ html {
   min-height: 100%;
   min-height: -webkit-fill-available;
   -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -44,6 +45,7 @@ body {
   overscroll-behavior-x: none;
   overscroll-behavior-y: none;
   -webkit-overflow-scrolling: touch;
+  -webkit-tap-highlight-color: transparent;
 }
 
 #root {
@@ -120,6 +122,8 @@ body::-webkit-scrollbar {
 
   img {
     display: block;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
   }
 
   button:focus-visible,
@@ -408,6 +412,11 @@ body::-webkit-scrollbar {
     backdrop-filter: none !important;
   }
 
+  [data-mobile-navigation],
+  [role='dialog'] {
+    -webkit-overflow-scrolling: touch;
+  }
+
 }
 
 @media (max-width: 390px) {
@@ -455,12 +464,25 @@ body::-webkit-scrollbar {
 }
 
 @supports (-webkit-touch-callout: none) {
+  html {
+    min-height: 100%;
+    min-height: -webkit-fill-available;
+  }
+
   body {
+    min-height: 100%;
     min-height: -webkit-fill-available;
   }
 
   #root {
+    min-height: 100%;
     min-height: -webkit-fill-available;
+  }
+
+  input,
+  textarea,
+  select {
+    font-size: max(16px, 1rem);
   }
 }
 
